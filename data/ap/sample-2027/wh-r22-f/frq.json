@@ -1,0 +1,192 @@
+[
+ {
+  "id": "wh4_saq3",
+  "spec": {
+   "id": "wh4_saq3",
+   "exam": "WH4",
+   "template": "saq3",
+   "era": 2,
+   "units": [
+    4
+   ],
+   "focus": "The spread of printing and printed books in 16th-century Europe, as shown in a woodcut of a printing workshop from a 1568 book of trades (make no claims about the rest of the book beyond the single woodcut shown; keep every example to Europe; do not claim that printing was unknown elsewhere)",
+   "sources": [
+    {
+     "id": "img-printing-shop-1568",
+     "context": "This woodcut by Jost Amman was published in 1568 in a book that illustrated trades and crafts in German-speaking lands; it shows a printing workshop."
+    }
+   ],
+   "seed": 4903
+  },
+  "payload": {
+   "schema_version": "whap-frq-1",
+   "task_type": "saq",
+   "template": "saq3",
+   "era": 2,
+   "units": [
+    4
+   ],
+   "title": "Printing Workshops and the Spread of Print in Sixteenth-Century Europe",
+   "prompt": {
+    "scenario": "In the period c. 1450 to c. 1750, printing with movable type spread through many European cities, and printed books, pamphlets and broadsheets became much more common than they had been in the age of hand-copied manuscripts. The woodcut shown here, made by Jost Amman and published in Frankfurt am Main in 1568 in a book illustrating trades and crafts in German-speaking lands, shows a printing workshop.",
+    "task": "Using the image, answer (a), (b), and (c).",
+    "requirements": [
+     "Each part requires a brief response of one to three sentences.",
+     "Parts B and C must use specific historical evidence from Europe within the stated years, not only details visible in the image."
+    ],
+    "parts": [
+     {
+      "label": "A",
+      "prompt": "Briefly describe ONE feature of the printing workshop shown in the image that suggests how printed works were produced in sixteenth-century Europe.",
+      "points": 1
+     },
+     {
+      "label": "B",
+      "prompt": "Briefly explain ONE specific historical development in Europe in the period c. 1450 to c. 1600 that helps explain why workshops like the one shown in the image spread across Europe.",
+      "points": 1
+     },
+     {
+      "label": "C",
+      "prompt": "Briefly explain ONE specific effect of the spread of printing on religious OR intellectual life in Europe in the period c. 1500 to c. 1750.",
+      "points": 1
+     }
+    ]
+   },
+   "sources": [
+    {
+     "id": "A",
+     "kind": "image",
+     "title": "The Printer (woodcut of a printing workshop) from the Book of Trades (Ständebuch)",
+     "attribution": "Jost Amman, Swiss-born printmaker (with verses by Hans Sachs), 1568 (Frankfurt am Main). Wikimedia Commons (file page records the source and public-domain tag). Reuse: public domain (16th-century work). unmodified Wikimedia Commons PNG scan of the woodcut.",
+     "context": "This woodcut by Jost Amman was published in 1568 in a book that illustrated trades and crafts in German-speaking lands; it shows a printing workshop.",
+     "real_data": true,
+     "source_registry_id": "img-printing-shop-1568",
+     "source_sha256": "113885c40a7604f23a2c4ee1d0d120a7602debcf758eb2467d84f9da71a71e5a",
+     "body": "A black-and-white woodcut of a printing workshop: in the foreground two men work at the press bed, the man at left raising a hinged frame and the man at right inking the type form with two ink balls; a large wooden screw press rises at the right; stacks of paper or printed sheets lie on a bench in front; two more workers in the background work near windows, one seated at a type case.",
+     "image": {
+      "path": "ap-sources/img-printing-shop-1568/image.png",
+      "alt": "A black-and-white woodcut of a printing workshop: in the foreground two men work at the press bed, the man at left raising a hinged frame and the man at right inking the type form with two ink balls; a large wooden screw press rises at the right; stacks of paper or printed sheets lie on a bench in front; two more workers in the background work near windows, one seated at a type case.",
+      "credit": "Jost Amman, 'The Printer', from the Book of Trades, Frankfurt, 1568. Via Wikimedia Commons (public domain)."
+     },
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry img-printing-shop-1568"
+     }
+    }
+   ],
+   "rubric": {
+    "rubric_id": "whap-v1",
+    "total_points": 3,
+    "rows": [
+     {
+      "row_id": "a",
+      "name": "Part A",
+      "max": 1,
+      "descriptors": {
+       "0": "The response does not describe a feature that can be seen in the image, or only names the image's subject without saying how printing was done.",
+       "1": "The response accurately describes one feature of the woodcut and links it to how printed works were produced, for example the division of labor among several workers or the use of a mechanical press to turn out many sheets."
+      },
+      "task_specific": "Describe one visible feature of the workshop that says something about how printing was done, such as several workers doing different tasks, the large wooden screw press, the inking of the type with ink balls, a worker seated at a type case, or the stacks of paper or printed sheets."
+     },
+     {
+      "row_id": "b",
+      "name": "Part B",
+      "max": 1,
+      "descriptors": {
+       "0": "The response gives no relevant development, falls outside Europe or the stated years, or only repeats what the image shows.",
+       "1": "The response explains one accurate and specific European development from c. 1450 to c. 1600 and shows how it helps explain the spread of printing workshops."
+      },
+      "task_specific": "Explain one accurate development from Europe, c. 1450 to c. 1600, that helps account for the spread of printing workshops, such as Gutenberg's development of movable-type printing in Mainz, the quick spread of presses to cities like Venice and Paris by 1500, demand from Renaissance humanists and universities, or demand for religious texts during the Reformation."
+     },
+     {
+      "row_id": "c",
+      "name": "Part C",
+      "max": 1,
+      "descriptors": {
+       "0": "The response gives no accurate effect, names an effect without connecting it to printing, or uses evidence outside Europe or the stated years.",
+       "1": "The response explains one accurate and specific religious or intellectual effect of printing in Europe from c. 1500 to c. 1750."
+      },
+      "task_specific": "Explain one accurate effect of printing on religious or intellectual life in Europe, c. 1500 to c. 1750, such as the wide circulation of Luther's writings and vernacular Bibles, the Catholic Church's Index of Prohibited Books, or the printed spread of works by Copernicus, Vesalius, Galileo or Newton during the Scientific Revolution."
+     }
+    ],
+    "scoring_notes": [
+     "Each part earns one point on its own; a response can earn 0 to 3 points.",
+     "In part A, accept reasonable readings of what the workers are doing, such as inking the type, raising the hinged frame, setting type or handling sheets, as long as they match what is visible.",
+     "In parts B and C, do not credit claims that printing was unknown outside Europe; the question asks only about Europe.",
+     "Details from the credit line (Frankfurt, Jost Amman, Hans Sachs, 1568) do not earn the part B point by themselves.",
+     "ALTON reference — not official AP scoring"
+    ]
+   },
+   "expected_features": {
+    "defensible_theses": [],
+    "contextualization_ideas": [
+     "Before movable type, European books were mostly copied by hand, often in monasteries or by professional scribes.",
+     "Printing grew in the commercial cities of the Holy Roman Empire and Italy during the Renaissance."
+    ],
+    "outside_evidence": [
+     "Gutenberg Bible, 1450s",
+     "Ninety-Five Theses, 1517",
+     "Luther's German New Testament, 1522",
+     "Index of Prohibited Books, 1559",
+     "Copernicus and Vesalius, 1543",
+     "Newton's Principia, 1687"
+    ],
+    "reasoning_types": [
+     "Sourcing and situation of a visual source",
+     "Causation (causes of the spread of printing)",
+     "Causation (effects of printing on religion and ideas)"
+    ],
+    "doc_uses": [
+     {
+      "source_id": "Amman, The Printer, 1568",
+      "usable_for": "Evidence of the division of labor and the equipment (screw press, ink balls, type case) of a sixteenth-century print shop, and of output in multiple sheets",
+      "sourcing": "A woodcut by a professional printmaker in a 1568 Frankfurt book illustrating trades; it presents printing as a recognized craft among other trades in German-speaking lands, and it was itself produced and spread by printing."
+     }
+    ],
+    "saq_answers": {
+     "a": [
+      "Several workers do different jobs at once: one sits at a type case setting type, one inks the type with ink balls and another works the hinged frame of the press. This shows that printing was a shared, step-by-step workshop process.",
+      "A large wooden screw press stands at the right, which shows that printing relied on a mechanical press to press inked type onto paper.",
+      "Stacks of paper or printed sheets lie on the bench in front of the press, which suggests that the shop turned out many identical copies, not single hand-written books.",
+      "The man in the foreground inks the type form with two ink balls while his partner handles the frame, which shows that each sheet took coordinated manual work at the press."
+     ],
+     "b": [
+      "Gutenberg's development of movable metal type in Mainz in the mid-1400s made it possible to print many copies quickly, and printers trained in the method carried it to other cities.",
+      "By 1500 presses had spread to many cities such as Venice and Paris, because merchants and printers saw that selling printed books could make money.",
+      "Renaissance humanists and universities wanted printed editions of classical Greek and Latin texts and scholarly works, which created a steady market for printers.",
+      "During the Protestant Reformation after 1517, demand for religious pamphlets, Bibles and catechisms on all sides kept printing shops busy in German-speaking lands."
+     ],
+     "c": [
+      "Luther's Ninety-Five Theses and pamphlets were printed and spread quickly after 1517, which helped Protestant ideas reach a wide audience.",
+      "Printed vernacular Bibles, such as Luther's German New Testament of 1522, let more lay readers read scripture in their own language.",
+      "The Catholic Church answered the flood of print by issuing the Index of Prohibited Books in 1559 to stop the reading of works it judged dangerous.",
+      "During the Scientific Revolution, printed works such as Copernicus's 1543 book on a sun-centered universe and Newton's Principia of 1687 reached scholars all over Europe, who could compare and test the same exact text."
+     ]
+    },
+    "common_pitfalls": [
+     "Describing the image in general terms (for example, it shows printers) without saying how production worked.",
+     "Using the credit line details (Frankfurt, 1568, Amman) as the part B development.",
+     "Claiming Gutenberg invented printing everywhere or that printing was unknown outside Europe.",
+     "Using examples outside Europe or later than 1750, such as the Encyclopedie or nineteenth-century steam presses.",
+     "Naming the Reformation in part C without explaining how printing affected it."
+    ],
+    "facts": [
+     "Johannes Gutenberg developed printing with movable metal type in Mainz in the mid-fifteenth century; the Gutenberg Bible was printed in the 1450s.",
+     "By 1500 printing presses were working in many European cities, with Venice an important center.",
+     "Martin Luther's Ninety-Five Theses (1517) and his later pamphlets were printed and circulated widely in German-speaking lands.",
+     "Luther's German translation of the New Testament was published in 1522.",
+     "The Catholic Church issued an Index of Prohibited Books in 1559.",
+     "Copernicus's On the Revolutions of the Heavenly Spheres and Vesalius's On the Fabric of the Human Body were both printed in 1543.",
+     "Isaac Newton's Principia was published in 1687."
+    ]
+   },
+   "samples": [],
+   "provenance": {
+    "kind": "alton_authored_from_real_sources",
+    "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
+   }
+  },
+  "fact": []
+ }
+]

@@ -1,0 +1,521 @@
+[
+ {
+  "cellId": "ap_world_history-wh4_saq3",
+  "apSubjectCode": "ap_world_history",
+  "kind": "frq_bundle",
+  "calculator": "na",
+  "reserve": false,
+  "wording": "designed_from_real_source",
+  "candidateKey": "ap_world_history-wh4_saq3-k0",
+  "keywordCode": "4.1",
+  "unitCode": "4",
+  "skillPrimary": "1.B",
+  "structure": "frq_multipart",
+  "archetype": "whfrq_wh4_saq3",
+  "reviewState": "verified_by_independent_models",
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "gateOverride": "wh-r24-f-2026-10-22",
+  "run": "wh-r24-f",
+  "stockKey": "wh-r24-f:ap_world_history-wh4_saq3-k0",
+  "pipeline": "real_source_v1",
+  "validation": "auto_passed",
+  "gateVersion": "wh-r24-f-2026-10-22",
+  "expertStatus": "unreviewed",
+  "releaseTier": "candidate",
+  "renderVerified": false,
+  "screenVerified": false,
+  "reviewEnvReady": false,
+  "selectedForSample": true,
+  "legacyReserve": false,
+  "family": "ap_world_history",
+  "itemFamilyId": "fam:wh-r24-f:ap_world_history-wh4_saq3-k0",
+  "canonicalKey": "wh-r24-f:ap_world_history-wh4_saq3-k0",
+  "duplicateOf": null,
+  "duplicateReason": null,
+  "contentKey": "ap_world_history:4.1",
+  "sharedWith": [],
+  "stockCell": "ap_world_history|4.1|1.B|frq_multipart|na",
+  "history": [
+   {
+    "run": "wh-r24-f",
+    "gateVersion": "wh-r24-f-2026-10-22",
+    "outcome": "passed",
+    "reasons": null
+   }
+  ],
+  "stimulusOrigin": "real_historical_source",
+  "sourceRegistryIds": [
+   "img-printing-shop-1568"
+  ],
+  "exam": "WH4",
+  "payload": {
+   "archetype": "whfrq_wh4_saq3",
+   "template": "saq3",
+   "topic": "4.1",
+   "extra_topics": [],
+   "skill": "1.B",
+   "representative_skill": "1.B",
+   "calculator": "na",
+   "title": "The Printer's Workshop in Jost Amman's 1568 Woodcut and the Spread of Print in Europe",
+   "set_intro": "Historical source (real document)\n(print)\nThe Printer (woodcut of a printing workshop) from the Book of Trades (Ständebuch)\nJost Amman, Swiss-born printmaker (with verses by Hans Sachs), 1568 (Frankfurt am Main). Wikimedia Commons (file page records the source and public-domain tag). Reuse: public domain (16th-century work). unmodified Wikimedia Commons PNG scan of the woodcut.\nContext: This woodcut by Jost Amman was published in 1568 in a book that illustrated trades and crafts in German-speaking lands; it shows a printing workshop.\n\nThe image for this source is shown below. Select the image to open it full size.",
+   "stimulus": {
+    "kind": "image",
+    "description": "A black-and-white woodcut of a printing workshop: in the foreground two men work at the press bed, the man at left raising a hinged frame and the man at right inking the type form with two ink balls; a large wooden screw press rises at the right; stacks of paper or printed sheets lie on a bench in front; two more workers in the background work near windows, one seated at a type case.",
+    "data": {
+     "path": "ap-sources/img-printing-shop-1568/image.png",
+     "alt": "A black-and-white woodcut of a printing workshop: in the foreground two men work at the press bed, the man at left raising a hinged frame and the man at right inking the type form with two ink balls; a large wooden screw press rises at the right; stacks of paper or printed sheets lie on a bench in front; two more workers in the background work near windows, one seated at a type case.",
+     "credit": "Jost Amman, 'The Printer', from the Book of Trades, Frankfurt, 1568. Via Wikimedia Commons (public domain)."
+    }
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Briefly describe ONE feature of the woodcut that shows how printed material was produced in a sixteenth-century European workshop.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "1.B"
+     ],
+     "topic_codes": [
+      "4.1"
+     ],
+     "model_answer": "The woodcut shows a division of labor: one worker inks the type with ink balls while another handles the hinged frame of the press, and other workers do separate tasks in the background.",
+     "rubric_rows": [
+      {
+       "row_id": "a",
+       "points": 1,
+       "criterion": "Describe one visible feature of the woodcut that shows how printing was done, such as several workers doing different tasks, the large wooden screw press, a worker inking the type with ink balls, a worker handling the hinged frame of the press bed, stacks of paper or printed sheets, or a worker at a type case.",
+       "required_elements": [
+        "The woodcut shows a division of labor: one worker inks the type with ink balls while another handles the hinged frame of the press, and other workers do separate tasks in the background.",
+        "A large wooden screw press dominates the right side, showing that printing relied on a mechanical press to press inked type onto paper.",
+        "Stacks of paper or printed sheets lie on the bench in front, suggesting that the workshop produced many copies at a time.",
+        "A worker in the background sits at a type case, showing that type was set by hand before the sheets were printed."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Briefly explain ONE specific historical development in Europe in the period c. 1450 to c. 1600, not shown in the image, that helps explain why printing workshops like the one shown spread in this period.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "1.B"
+     ],
+     "topic_codes": [
+      "4.1"
+     ],
+     "model_answer": "After movable-type printing was developed in Mainz in the mid-1400s, the method was copied and printers set up shops in many European cities, such as Venice, by the late 1400s.",
+     "rubric_rows": [
+      {
+       "row_id": "b",
+       "points": 1,
+       "criterion": "Explain one specific European development from c. 1450 to c. 1600 that helps account for the spread of printing workshops, such as the development of movable-type printing in Mainz in the mid-1400s, demand created by the Protestant Reformation, Renaissance humanist demand for classical and scholarly texts, or growing urban and commercial readerships.",
+       "required_elements": [
+        "After movable-type printing was developed in Mainz in the mid-1400s, the method was copied and printers set up shops in many European cities, such as Venice, by the late 1400s.",
+        "The Protestant Reformation, starting with Luther in 1517, created huge demand for pamphlets, sermons and vernacular Bibles, which made printing profitable and led to more presses in German-speaking lands.",
+        "Renaissance humanists wanted accurate editions of classical Greek and Latin texts, and presses such as Aldus Manutius's in Venice and Froben's in Basel, which printed Erasmus's Greek New Testament in 1516, met this demand.",
+        "Growing towns with merchants, lawyers and clergy who could read created a market for printed books, almanacs and legal and commercial texts."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Briefly explain ONE specific effect of the spread of printing on religious, scientific or political life in Europe in the period c. 1500 to c. 1750.",
+     "points": 1,
+     "response_mode": "explain",
+     "skill_codes": [
+      "1.B"
+     ],
+     "topic_codes": [
+      "4.1"
+     ],
+     "model_answer": "Printing let Luther's writings and his 1522 German New Testament circulate quickly and widely, which helped Protestant ideas spread across the Holy Roman Empire.",
+     "rubric_rows": [
+      {
+       "row_id": "c",
+       "points": 1,
+       "criterion": "Explain one specific effect of printing on religious, scientific or political life in Europe from c. 1500 to c. 1750, such as the rapid circulation of Luther's writings and vernacular Bibles, Catholic efforts to control print such as the Index of Prohibited Books, wider circulation of scientific works such as those of Copernicus, Vesalius or Newton, or the spread of political pamphlets and newspapers.",
+       "required_elements": [
+        "Printing let Luther's writings and his 1522 German New Testament circulate quickly and widely, which helped Protestant ideas spread across the Holy Roman Empire.",
+        "The Catholic Church tried to control print, for example with the Index of Prohibited Books in 1559, as part of the Counter-Reformation.",
+        "Printed scientific works such as Copernicus's 1543 book on a sun-centered universe and Vesalius's illustrated anatomy reached scholars across Europe in identical copies, which supported the Scientific Revolution.",
+        "By the 1600s printed newspapers and political pamphlets circulated widely, for example in England during its civil wars in the 1640s, spreading political arguments to a broader public."
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ]
+    }
+   ],
+   "reference_text": "Scoring guide (ALTON reference — not official AP scoring). This question is worth 3 points.\nPart A (0-1): Describe one visible feature of the woodcut that shows how printing was done, such as several workers doing different tasks, the large wooden screw press, a worker inking the type with ink balls, a worker handling the hinged frame of the press bed, stacks of paper or printed sheets, or a worker at a type case.\n   - 1: The response accurately describes one visible feature of the woodcut and connects it to how printed material was produced in the workshop.\n   - 0: The response does not describe a feature that can be seen in the woodcut, or only names the image's subject without describing how work is done.\nPart B (0-1): Explain one specific European development from c. 1450 to c. 1600 that helps account for the spread of printing workshops, such as the development of movable-type printing in Mainz in the mid-1400s, demand created by the Protestant Reformation, Renaissance humanist demand for classical and scholarly texts, or growing urban and commercial readerships.\n   - 1: The response explains one specific and accurate European development from c. 1450 to c. 1600 and how it encouraged the growth or spread of printing.\n   - 0: The response gives no specific development, gives one outside Europe or outside the stated years, or only restates what the image shows.\nPart C (0-1): Explain one specific effect of printing on religious, scientific or political life in Europe from c. 1500 to c. 1750, such as the rapid circulation of Luther's writings and vernacular Bibles, Catholic efforts to control print such as the Index of Prohibited Books, wider circulation of scientific works such as those of Copernicus, Vesalius or Newton, or the spread of political pamphlets and newspapers.\n   - 1: The response explains one specific and accurate effect of printing on religious, scientific or political life in Europe from c. 1500 to c. 1750.\n   - 0: The response gives no specific effect, stays general (for example 'more people could read'), or uses evidence outside Europe or the stated years.\nNote: Each part is scored on its own; a response may earn 0, 1, 2 or 3 points.\nNote: For Part A, accept any accurate description of something visible in the woodcut, but the response must say something about the work process, not only that the image shows a print shop.\nNote: For Parts B and C, do not award a point for claims that Europeans invented printing first or that printing was unknown elsewhere; such claims are inaccurate and do not earn credit unless the rest of the answer earns it on its own.\nNote: Do not award credit for claims that the woodcut shows a specific named printer such as Gutenberg or for claims about the purpose or audience of the whole book, since the source does not support them.\nNote: A response that says printing alone caused the Reformation can still earn Part C if it accurately explains how print helped spread Reformation ideas; reward the accurate explanation, not the overstatement.\nNote: ALTON reference — not official AP scoring\nAcceptable answers for A: The woodcut shows a division of labor: one worker inks the type with ink balls while another handles the hinged frame of the press, and other workers do separate tasks in the background. / A large wooden screw press dominates the right side, showing that printing relied on a mechanical press to press inked type onto paper. / Stacks of paper or printed sheets lie on the bench in front, suggesting that the workshop produced many copies at a time. / A worker in the background sits at a type case, showing that type was set by hand before the sheets were printed.\nAcceptable answers for B: After movable-type printing was developed in Mainz in the mid-1400s, the method was copied and printers set up shops in many European cities, such as Venice, by the late 1400s. / The Protestant Reformation, starting with Luther in 1517, created huge demand for pamphlets, sermons and vernacular Bibles, which made printing profitable and led to more presses in German-speaking lands. / Renaissance humanists wanted accurate editions of classical Greek and Latin texts, and presses such as Aldus Manutius's in Venice and Froben's in Basel, which printed Erasmus's Greek New Testament in 1516, met this demand. / Growing towns with merchants, lawyers and clergy who could read created a market for printed books, almanacs and legal and commercial texts.\nAcceptable answers for C: Printing let Luther's writings and his 1522 German New Testament circulate quickly and widely, which helped Protestant ideas spread across the Holy Roman Empire. / The Catholic Church tried to control print, for example with the Index of Prohibited Books in 1559, as part of the Counter-Reformation. / Printed scientific works such as Copernicus's 1543 book on a sun-centered universe and Vesalius's illustrated anatomy reached scholars across Europe in identical copies, which supported the Scientific Revolution. / By the 1600s printed newspapers and political pamphlets circulated widely, for example in England during its civil wars in the 1640s, spreading political arguments to a broader public.\n\nSample response, high score (3/3; Part A 1, Part B 1, Part C 1):\n(A) In the woodcut, the man on the right is inking the type form with two ink balls while the man on the left lifts the hinged frame on the press bed to put in or take out a sheet of paper. This shows that printing was a step-by-step process done by several workers with separate jobs. One inked the type, another handled the paper, and then the large wooden screw press pressed the page.\n\n(B) One development that helps explain the spread of printing workshops was the Protestant Reformation, which began when Martin Luther challenged the Catholic Church in 1517. Luther and his opponents wrote large numbers of pamphlets in German, and Luther's German translation of the Bible was in high demand. Because so many people wanted these religious texts, opening a printing shop was profitable, so more workshops started up in cities across the German states and other parts of Europe.\n\n(C) Printing changed scientific life by letting new scientific ideas circulate widely and stay accurate from copy to copy. For example, Copernicus's On the Revolutions of the Heavenly Spheres (1543), which argued that the Earth goes around the sun, and Vesalius's anatomy book from the same year were printed in many identical copies. That meant scholars in different countries could read the same text and diagrams, check them, and build on them, which helped bring about the Scientific Revolution.\n   - \"the man on the right is inking the type form with two ink balls\" - Accurately describes a visible feature of the woodcut and connects it to how printing was done (inking the type before pressing).\n   - \"several workers with separate jobs\" - Connects the visible details to the work process (division of labor), which goes beyond just naming the subject.\n   - \"Martin Luther challenged the Catholic Church in 1517\" - A specific, accurate European development that falls inside c. 1450-1600 and is not shown in the image.\n   - \"opening a printing shop was profitable, so more workshops started up\" - Explains how Reformation demand led to the spread of workshops, so the development is linked to the question.\n   - \"On the Revolutions of the Heavenly Spheres (1543)\" - Specific, accurate scientific evidence from inside 1500-1750.\n   - \"scholars in different countries could read the same text and diagrams, check them, and build on them\" - Explains the effect on scientific life (standardized, widely shared texts), which goes beyond a general claim.\n\nSample response, middle score (2/3; Part A 1, Part B 0, Part C 1):\n(A) One feature of the woodcut is the man on the right who is inking the type with two ink balls. The type is locked into a form on the press bed, so the ink has to be put on the raised letters by hand before a sheet of paper is pressed onto it. This shows that printing was done in separate steps by workers, and the large screw press at the side was used to press the paper against the inked type.\n\n(B) One development that helped printing spread was that Europe was changing a lot in this time and more people wanted books. Printing got more popular because lots of people were interested in it and it was a better way to make books than before. This is why more workshops opened up in different cities in Europe.\n\n(C) One effect of printing was on religious life during the Protestant Reformation. After Martin Luther wrote his Ninety-Five Theses in 1517, printers in German cities made his pamphlets and sermons in large numbers, and they were sold quickly across the German lands. Printing his later translation of the Bible into German also let ordinary people read scripture in their own language instead of relying only on priests. This helped Luther's ideas spread much faster than they could have if everything had to be copied by hand, and it helped the Reformation become a movement that challenged the Catholic Church.\n   - \"the man on the right who is inking the type with two ink balls\" - Names a feature that is actually visible in the woodcut, so it meets the 'visible feature' requirement.\n   - \"the ink has to be put on the raised letters by hand before a sheet of paper is pressed onto it\" - Connects the feature to how the work was done in the workshop (the process), which earns the point.\n   - \"Europe was changing a lot in this time and more people wanted books\" - Too vague. No specific development is named (no Gutenberg and movable type, no humanism, no Reformation demand, no growing urban readership), so no credit.\n   - \"a better way to make books than before\" - General claim with no explanation of why or how it was better, and it does not name a development from 1450 to 1600.\n   - \"Martin Luther wrote his Ninety-Five Theses in 1517, printers in German cities made his pamphlets and sermons in large numbers\" - Specific and accurate evidence from Europe within the dates. It names Luther and his printed works.\n   - \"let ordinary people read scripture in their own language instead of relying only on priests\" - Explains the effect on religious life (vernacular Bible), which links print to a religious change and earns the point.\n   - \"Luther's ideas spread much faster than they could have if everything had to be copied by hand\" - Explicitly contrasts print with manuscript copying to explain how printing mattered.\n\nSample response, low score (1/3; Part A 1, Part B 0, Part C 0):\n(A) One feature of the woodcut is the man on the right who is inking the type with two ink balls. This shows that in the workshop the letters were set in a form and then covered with ink by hand before the paper was pressed onto them, so each page was made by workers doing separate steps.\n\n(B) One development in Europe was that more people wanted books during this time. Because lots of people wanted to buy books, printers opened more workshops in different cities to make money from selling them. This is why printing spread across Europe.\n\n(C) One effect of printing was that it changed life in Europe a lot. Books were cheaper than before so more people could read and learn things. This made people more educated and changed how people thought about religion and other parts of life.\n   - \"the man on the right who is inking the type with two ink balls\" - Accurately identifies a visible feature of the woodcut, matching the image description. Earns the Part A point.\n   - \"so each page was made by workers doing separate steps\" - Connects the feature to how the workshop produced printed material (inking the type form before pressing the paper), which is what Part A requires for the point.\n   - \"One development in Europe was that more people wanted books during this time.\" - Too general. It names no specific development such as Gutenberg's movable type in Mainz, the Reformation, or Renaissance humanism, so it earns no credit.\n   - \"printers opened more workshops in different cities to make money\" - Gives a vague profit motive without tying it to a specific, dated European development. This only restates the prompt's idea of spread, so no point.\n   - \"One effect of printing was that it changed life in Europe a lot.\" - A vague claim with no specific religious, scientific or political effect, so it earns no credit.\n   - \"so more people could read and learn things\" - This is the general 'more people could read' answer the rubric rejects. There is no named example such as Luther's writings, the Index of Prohibited Books, or Copernicus. No point.",
+   "whap_frq": {
+    "schema_version": "whap-frq-1",
+    "task_type": "saq",
+    "template": "saq3",
+    "era": 2,
+    "units": [
+     4
+    ],
+    "title": "The Printer's Workshop in Jost Amman's 1568 Woodcut and the Spread of Print in Europe",
+    "prompt": {
+     "scenario": "In the period c. 1450 to c. 1750, printing workshops using movable type and the screw press spread across many European cities, and printed books, pamphlets and broadsheets came to be produced in much greater numbers than handwritten manuscripts had been.",
+     "task": "Using the image, answer (a), (b), and (c).",
+     "requirements": [
+      "Each part requires a brief response of one or more complete sentences.",
+      "Part A must be based on something visible in the woodcut.",
+      "Parts B and C must use specific historical evidence from Europe within the years stated in each part."
+     ],
+     "parts": [
+      {
+       "label": "A",
+       "prompt": "Briefly describe ONE feature of the woodcut that shows how printed material was produced in a sixteenth-century European workshop.",
+       "points": 1
+      },
+      {
+       "label": "B",
+       "prompt": "Briefly explain ONE specific historical development in Europe in the period c. 1450 to c. 1600, not shown in the image, that helps explain why printing workshops like the one shown spread in this period.",
+       "points": 1
+      },
+      {
+       "label": "C",
+       "prompt": "Briefly explain ONE specific effect of the spread of printing on religious, scientific or political life in Europe in the period c. 1500 to c. 1750.",
+       "points": 1
+      }
+     ]
+    },
+    "sources": [
+     {
+      "id": "A",
+      "kind": "image",
+      "title": "The Printer (woodcut of a printing workshop) from the Book of Trades (Ständebuch)",
+      "attribution": "Jost Amman, Swiss-born printmaker (with verses by Hans Sachs), 1568 (Frankfurt am Main). Wikimedia Commons (file page records the source and public-domain tag). Reuse: public domain (16th-century work). unmodified Wikimedia Commons PNG scan of the woodcut.",
+      "context": "This woodcut by Jost Amman was published in 1568 in a book that illustrated trades and crafts in German-speaking lands; it shows a printing workshop.",
+      "real_data": true,
+      "source_registry_id": "img-printing-shop-1568",
+      "source_sha256": "113885c40a7604f23a2c4ee1d0d120a7602debcf758eb2467d84f9da71a71e5a",
+      "body": "A black-and-white woodcut of a printing workshop: in the foreground two men work at the press bed, the man at left raising a hinged frame and the man at right inking the type form with two ink balls; a large wooden screw press rises at the right; stacks of paper or printed sheets lie on a bench in front; two more workers in the background work near windows, one seated at a type case.",
+      "image": {
+       "path": "ap-sources/img-printing-shop-1568/image.png",
+       "alt": "A black-and-white woodcut of a printing workshop: in the foreground two men work at the press bed, the man at left raising a hinged frame and the man at right inking the type form with two ink balls; a large wooden screw press rises at the right; stacks of paper or printed sheets lie on a bench in front; two more workers in the background work near windows, one seated at a type case.",
+       "credit": "Jost Amman, 'The Printer', from the Book of Trades, Frankfurt, 1568. Via Wikimedia Commons (public domain)."
+      },
+      "provenance": {
+       "kind": "real_historical_source",
+       "real_data": true,
+       "note": "registry img-printing-shop-1568"
+      }
+     }
+    ],
+    "rubric": {
+     "rubric_id": "whap-v1",
+     "total_points": 3,
+     "rows": [
+      {
+       "row_id": "a",
+       "name": "Part A",
+       "max": 1,
+       "descriptors": {
+        "0": "The response does not describe a feature that can be seen in the woodcut, or only names the image's subject without describing how work is done.",
+        "1": "The response accurately describes one visible feature of the woodcut and connects it to how printed material was produced in the workshop."
+       },
+       "task_specific": "Describe one visible feature of the woodcut that shows how printing was done, such as several workers doing different tasks, the large wooden screw press, a worker inking the type with ink balls, a worker handling the hinged frame of the press bed, stacks of paper or printed sheets, or a worker at a type case."
+      },
+      {
+       "row_id": "b",
+       "name": "Part B",
+       "max": 1,
+       "descriptors": {
+        "0": "The response gives no specific development, gives one outside Europe or outside the stated years, or only restates what the image shows.",
+        "1": "The response explains one specific and accurate European development from c. 1450 to c. 1600 and how it encouraged the growth or spread of printing."
+       },
+       "task_specific": "Explain one specific European development from c. 1450 to c. 1600 that helps account for the spread of printing workshops, such as the development of movable-type printing in Mainz in the mid-1400s, demand created by the Protestant Reformation, Renaissance humanist demand for classical and scholarly texts, or growing urban and commercial readerships."
+      },
+      {
+       "row_id": "c",
+       "name": "Part C",
+       "max": 1,
+       "descriptors": {
+        "0": "The response gives no specific effect, stays general (for example 'more people could read'), or uses evidence outside Europe or the stated years.",
+        "1": "The response explains one specific and accurate effect of printing on religious, scientific or political life in Europe from c. 1500 to c. 1750."
+       },
+       "task_specific": "Explain one specific effect of printing on religious, scientific or political life in Europe from c. 1500 to c. 1750, such as the rapid circulation of Luther's writings and vernacular Bibles, Catholic efforts to control print such as the Index of Prohibited Books, wider circulation of scientific works such as those of Copernicus, Vesalius or Newton, or the spread of political pamphlets and newspapers."
+      }
+     ],
+     "scoring_notes": [
+      "Each part is scored on its own; a response may earn 0, 1, 2 or 3 points.",
+      "For Part A, accept any accurate description of something visible in the woodcut, but the response must say something about the work process, not only that the image shows a print shop.",
+      "For Parts B and C, do not award a point for claims that Europeans invented printing first or that printing was unknown elsewhere; such claims are inaccurate and do not earn credit unless the rest of the answer earns it on its own.",
+      "Do not award credit for claims that the woodcut shows a specific named printer such as Gutenberg or for claims about the purpose or audience of the whole book, since the source does not support them.",
+      "A response that says printing alone caused the Reformation can still earn Part C if it accurately explains how print helped spread Reformation ideas; reward the accurate explanation, not the overstatement.",
+      "ALTON reference — not official AP scoring"
+     ]
+    },
+    "expected_features": {
+     "defensible_theses": [],
+     "contextualization_ideas": [
+      "Printing spread across Europe from the 1450s through the 1500s alongside the Renaissance and the Reformation.",
+      "Frankfurt, where the book was published, was a center of the German book trade in the sixteenth century."
+     ],
+     "outside_evidence": [
+      "Gutenberg Bible, c. 1455, Mainz",
+      "Luther's Ninety-Five Theses, 1517, and German New Testament, 1522",
+      "Index of Prohibited Books, 1559",
+      "Copernicus and Vesalius, both 1543",
+      "Aldine Press in Venice, 1490s",
+      "Newton's Principia, 1687"
+     ],
+     "reasoning_types": [
+      "Sourcing and description of a visual source",
+      "Causation",
+      "Effects of a technological development"
+     ],
+     "doc_uses": [
+      {
+       "source_id": "Amman woodcut, The Printer, 1568",
+       "usable_for": "Evidence of how printing workshops were organized, with separate tasks, a screw press and production in quantity",
+       "sourcing": "A printmaker's woodcut published in a 1568 book that illustrated trades in German-speaking lands; it shows a typical workshop rather than a documented specific shop, and claims about the rest of the book should not be made."
+      }
+     ],
+     "saq_answers": {
+      "a": [
+       "The woodcut shows a division of labor: one worker inks the type with ink balls while another handles the hinged frame of the press, and other workers do separate tasks in the background.",
+       "A large wooden screw press dominates the right side, showing that printing relied on a mechanical press to press inked type onto paper.",
+       "Stacks of paper or printed sheets lie on the bench in front, suggesting that the workshop produced many copies at a time.",
+       "A worker in the background sits at a type case, showing that type was set by hand before the sheets were printed."
+      ],
+      "b": [
+       "After movable-type printing was developed in Mainz in the mid-1400s, the method was copied and printers set up shops in many European cities, such as Venice, by the late 1400s.",
+       "The Protestant Reformation, starting with Luther in 1517, created huge demand for pamphlets, sermons and vernacular Bibles, which made printing profitable and led to more presses in German-speaking lands.",
+       "Renaissance humanists wanted accurate editions of classical Greek and Latin texts, and presses such as Aldus Manutius's in Venice and Froben's in Basel, which printed Erasmus's Greek New Testament in 1516, met this demand.",
+       "Growing towns with merchants, lawyers and clergy who could read created a market for printed books, almanacs and legal and commercial texts."
+      ],
+      "c": [
+       "Printing let Luther's writings and his 1522 German New Testament circulate quickly and widely, which helped Protestant ideas spread across the Holy Roman Empire.",
+       "The Catholic Church tried to control print, for example with the Index of Prohibited Books in 1559, as part of the Counter-Reformation.",
+       "Printed scientific works such as Copernicus's 1543 book on a sun-centered universe and Vesalius's illustrated anatomy reached scholars across Europe in identical copies, which supported the Scientific Revolution.",
+       "By the 1600s printed newspapers and political pamphlets circulated widely, for example in England during its civil wars in the 1640s, spreading political arguments to a broader public."
+      ]
+     },
+     "common_pitfalls": [
+      "Describing the image only as 'a print shop' without saying what the workers or press are doing.",
+      "Claiming Europe was the first or only place with printing; woodblock and movable-type printing existed earlier in East Asia.",
+      "Identifying the scene as Gutenberg's workshop or saying Amman was recording a specific named shop.",
+      "Making claims about the purpose or audience of the whole Book of Trades.",
+      "Using evidence outside Europe or outside the stated years in Parts B and C, such as the French Revolution or the Diderot Encyclopedia.",
+      "Giving vague effects such as 'ideas spread' without a specific example.",
+      "Repeating the image's features in Part B instead of naming an outside development."
+     ],
+     "facts": [
+      "Jost Amman made the woodcut, which was published in 1568 in Frankfurt am Main in a book of trades with verses by Hans Sachs.",
+      "The woodcut shows a printing workshop: two pressmen at the press bed, one raising a hinged frame and one inking type with two ink balls, a large wooden screw press, stacks of paper or printed sheets, and two background workers, one seated at a type case.",
+      "Movable-type printing with a press was developed in Mainz by Johannes Gutenberg in the mid-1400s; the Gutenberg Bible was printed around 1455.",
+      "Martin Luther issued his Ninety-Five Theses in 1517, and his German translation of the New Testament appeared in 1522.",
+      "The papacy issued an Index of Prohibited Books in 1559.",
+      "Copernicus's On the Revolutions of the Heavenly Spheres and Vesalius's On the Fabric of the Human Body were both printed in 1543.",
+      "Erasmus published a Greek New Testament in 1516; Aldus Manutius ran an important press in Venice from the 1490s.",
+      "Isaac Newton's Principia was printed in 1687."
+     ]
+    },
+    "samples": [
+     {
+      "tier": "high",
+      "target_total": 3,
+      "essay": "(A) In the woodcut, the man on the right is inking the type form with two ink balls while the man on the left lifts the hinged frame on the press bed to put in or take out a sheet of paper. This shows that printing was a step-by-step process done by several workers with separate jobs. One inked the type, another handled the paper, and then the large wooden screw press pressed the page.\n\n(B) One development that helps explain the spread of printing workshops was the Protestant Reformation, which began when Martin Luther challenged the Catholic Church in 1517. Luther and his opponents wrote large numbers of pamphlets in German, and Luther's German translation of the Bible was in high demand. Because so many people wanted these religious texts, opening a printing shop was profitable, so more workshops started up in cities across the German states and other parts of Europe.\n\n(C) Printing changed scientific life by letting new scientific ideas circulate widely and stay accurate from copy to copy. For example, Copernicus's On the Revolutions of the Heavenly Spheres (1543), which argued that the Earth goes around the sun, and Vesalius's anatomy book from the same year were printed in many identical copies. That meant scholars in different countries could read the same text and diagrams, check them, and build on them, which helped bring about the Scientific Revolution.",
+      "word_count": 232,
+      "rubric_scores": {
+       "a": 1,
+       "b": 1,
+       "c": 1,
+       "total": 3
+      },
+      "annotations": [
+       {
+        "quote": "the man on the right is inking the type form with two ink balls",
+        "comment": "Accurately describes a visible feature of the woodcut and connects it to how printing was done (inking the type before pressing).",
+        "row_id": "a"
+       },
+       {
+        "quote": "several workers with separate jobs",
+        "comment": "Connects the visible details to the work process (division of labor), which goes beyond just naming the subject.",
+        "row_id": "a"
+       },
+       {
+        "quote": "Martin Luther challenged the Catholic Church in 1517",
+        "comment": "A specific, accurate European development that falls inside c. 1450-1600 and is not shown in the image.",
+        "row_id": "b"
+       },
+       {
+        "quote": "opening a printing shop was profitable, so more workshops started up",
+        "comment": "Explains how Reformation demand led to the spread of workshops, so the development is linked to the question.",
+        "row_id": "b"
+       },
+       {
+        "quote": "On the Revolutions of the Heavenly Spheres (1543)",
+        "comment": "Specific, accurate scientific evidence from inside 1500-1750.",
+        "row_id": "c"
+       },
+       {
+        "quote": "scholars in different countries could read the same text and diagrams, check them, and build on them",
+        "comment": "Explains the effect on scientific life (standardized, widely shared texts), which goes beyond a general claim.",
+        "row_id": "c"
+       }
+      ]
+     },
+     {
+      "tier": "mid",
+      "target_total": 2,
+      "essay": "(A) One feature of the woodcut is the man on the right who is inking the type with two ink balls. The type is locked into a form on the press bed, so the ink has to be put on the raised letters by hand before a sheet of paper is pressed onto it. This shows that printing was done in separate steps by workers, and the large screw press at the side was used to press the paper against the inked type.\n\n(B) One development that helped printing spread was that Europe was changing a lot in this time and more people wanted books. Printing got more popular because lots of people were interested in it and it was a better way to make books than before. This is why more workshops opened up in different cities in Europe.\n\n(C) One effect of printing was on religious life during the Protestant Reformation. After Martin Luther wrote his Ninety-Five Theses in 1517, printers in German cities made his pamphlets and sermons in large numbers, and they were sold quickly across the German lands. Printing his later translation of the Bible into German also let ordinary people read scripture in their own language instead of relying only on priests. This helped Luther's ideas spread much faster than they could have if everything had to be copied by hand, and it helped the Reformation become a movement that challenged the Catholic Church.",
+      "word_count": 240,
+      "rubric_scores": {
+       "a": 1,
+       "b": 0,
+       "c": 1,
+       "total": 2
+      },
+      "annotations": [
+       {
+        "quote": "the man on the right who is inking the type with two ink balls",
+        "comment": "Names a feature that is actually visible in the woodcut, so it meets the 'visible feature' requirement.",
+        "row_id": "a"
+       },
+       {
+        "quote": "the ink has to be put on the raised letters by hand before a sheet of paper is pressed onto it",
+        "comment": "Connects the feature to how the work was done in the workshop (the process), which earns the point.",
+        "row_id": "a"
+       },
+       {
+        "quote": "Europe was changing a lot in this time and more people wanted books",
+        "comment": "Too vague. No specific development is named (no Gutenberg and movable type, no humanism, no Reformation demand, no growing urban readership), so no credit.",
+        "row_id": "b"
+       },
+       {
+        "quote": "a better way to make books than before",
+        "comment": "General claim with no explanation of why or how it was better, and it does not name a development from 1450 to 1600.",
+        "row_id": "b"
+       },
+       {
+        "quote": "Martin Luther wrote his Ninety-Five Theses in 1517, printers in German cities made his pamphlets and sermons in large numbers",
+        "comment": "Specific and accurate evidence from Europe within the dates. It names Luther and his printed works.",
+        "row_id": "c"
+       },
+       {
+        "quote": "let ordinary people read scripture in their own language instead of relying only on priests",
+        "comment": "Explains the effect on religious life (vernacular Bible), which links print to a religious change and earns the point.",
+        "row_id": "c"
+       },
+       {
+        "quote": "Luther's ideas spread much faster than they could have if everything had to be copied by hand",
+        "comment": "Explicitly contrasts print with manuscript copying to explain how printing mattered.",
+        "row_id": "c"
+       }
+      ]
+     },
+     {
+      "tier": "low",
+      "target_total": 1,
+      "essay": "(A) One feature of the woodcut is the man on the right who is inking the type with two ink balls. This shows that in the workshop the letters were set in a form and then covered with ink by hand before the paper was pressed onto them, so each page was made by workers doing separate steps.\n\n(B) One development in Europe was that more people wanted books during this time. Because lots of people wanted to buy books, printers opened more workshops in different cities to make money from selling them. This is why printing spread across Europe.\n\n(C) One effect of printing was that it changed life in Europe a lot. Books were cheaper than before so more people could read and learn things. This made people more educated and changed how people thought about religion and other parts of life.",
+      "word_count": 144,
+      "rubric_scores": {
+       "a": 1,
+       "b": 0,
+       "c": 0,
+       "total": 1
+      },
+      "annotations": [
+       {
+        "quote": "the man on the right who is inking the type with two ink balls",
+        "comment": "Accurately identifies a visible feature of the woodcut, matching the image description. Earns the Part A point.",
+        "row_id": "a"
+       },
+       {
+        "quote": "so each page was made by workers doing separate steps",
+        "comment": "Connects the feature to how the workshop produced printed material (inking the type form before pressing the paper), which is what Part A requires for the point.",
+        "row_id": "a"
+       },
+       {
+        "quote": "One development in Europe was that more people wanted books during this time.",
+        "comment": "Too general. It names no specific development such as Gutenberg's movable type in Mainz, the Reformation, or Renaissance humanism, so it earns no credit.",
+        "row_id": "b"
+       },
+       {
+        "quote": "printers opened more workshops in different cities to make money",
+        "comment": "Gives a vague profit motive without tying it to a specific, dated European development. This only restates the prompt's idea of spread, so no point.",
+        "row_id": "b"
+       },
+       {
+        "quote": "One effect of printing was that it changed life in Europe a lot.",
+        "comment": "A vague claim with no specific religious, scientific or political effect, so it earns no credit.",
+        "row_id": "c"
+       },
+       {
+        "quote": "so more people could read and learn things",
+        "comment": "This is the general 'more people could read' answer the rubric rejects. There is no named example such as Luther's writings, the Index of Prohibited Books, or Copernicus. No point.",
+        "row_id": "c"
+       }
+      ]
+     }
+    ],
+    "provenance": {
+     "kind": "alton_authored_from_real_sources",
+     "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
+    }
+   },
+   "design": {
+    "source_fixed_first": true,
+    "documents_chosen_before_prompt": true
+   },
+   "verification": {
+    "fact_checker": "claude-fable-5-1",
+    "graders": [
+     "claude-opus-5-5",
+     "claude-sonnet-5-5"
+    ],
+    "fact_flags": [],
+    "sample_totals": {
+     "high": 3,
+     "mid": 2,
+     "low": 1
+    },
+    "bands": {
+     "high": [
+      3,
+      3
+     ],
+     "mid": [
+      2,
+      2
+     ],
+     "low": [
+      1,
+      1
+     ]
+    }
+   }
+  }
+ }
+]
