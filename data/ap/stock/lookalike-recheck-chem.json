@@ -1,12 +1,10 @@
 {
  "subject": "chem",
  "excluded": 121,
- "same": 102,
+ "same": 96,
  "recoverable": [
-  "chem-s2-m-b:ap_chemistry-m18-k0",
-  "chem-s2-m-b:ap_chemistry-m18-k1",
-  "chem-s2-m-b:ap_chemistry-m22-k0",
   "chem-ch3-mc:ap_chemistry-m11-k1",
+  "chem-ch3-mc:ap_chemistry-m29-k0",
   "chem-ch3-mc:ap_chemistry-m29-k1",
   "chem-ch3-mc:ap_chemistry-m32-k0",
   "chem-ch3-mc:ap_chemistry-m32-k1",
@@ -19,9 +17,17 @@
   "chem-ch3-mcr2:ap_chemistry-m07-k3",
   "chem-ch3-mcr2:ap_chemistry-m09-k1",
   "chem-ch3-mcr2:ap_chemistry-m11-k3",
+  "chem-ch3-mcr2:ap_chemistry-m14-k0",
+  "chem-ch3-mcr2:ap_chemistry-m14-k1",
+  "chem-ch3-mcr2:ap_chemistry-m15-k2",
+  "chem-ch3-mcr2:ap_chemistry-m16-k3",
   "chem-ch3-mcr2:ap_chemistry-m18-k0",
   "chem-ch3-mcr2:ap_chemistry-m18-k1",
-  "chem-ch3-mcr2:ap_chemistry-m19-k2"
+  "chem-ch3-mcr2:ap_chemistry-m19-k2",
+  "chem-s2-m-b:ap_chemistry-m18-k0",
+  "chem-s2-m-b:ap_chemistry-m18-k1",
+  "chem-s2-m-b:ap_chemistry-m22-k0",
+  "chem-s2-m-c:ap_chemistry-m03-k0"
  ],
  "needsReview": [],
  "rows": [
@@ -1477,5 +1483,18 @@
    "verdict": "same_structure",
    "_s": 1
   }
- ]
+ ],
+ "boundaryReview": {
+  "date": "2026-10-22",
+  "rule": "owner rule: material/conditions/question/required reasoning steps; family id, topic, name, string similarity alone are not evidence",
+  "recoveredByContent": [
+   "chem-s2-m-c:ap_chemistry-m03-k0",
+   "chem-ch3-mc:ap_chemistry-m29-k0",
+   "chem-ch3-mcr2:ap_chemistry-m14-k0",
+   "chem-ch3-mcr2:ap_chemistry-m14-k1",
+   "chem-ch3-mcr2:ap_chemistry-m15-k2",
+   "chem-ch3-mcr2:ap_chemistry-m16-k3"
+  ],
+  "note": "independent vs nearest published/comparator by reading; members of one number-variant group (e.g. m01-k0/k1/k2) are one structural family — use at most one per exam and per set pair"
+ }
 }

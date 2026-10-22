@@ -24,6 +24,7 @@ show("구조 동일(금지)", lookAlike); show("원형+토픽 동일(보수적 �
 // 배정
 const recov = new Set<string>((JSON.parse(readFileSync("data/ap/stock/lookalike-recheck-chem.json", "utf-8")) as { recoverable: string[] }).recoverable); // lookalike-recheck.ts: 자료·조건·과제가 달라 복구된 후보
 const blockedKeys = new Set<string>([...pub, ...lookAlike.map((c) => c.key), ...sameKey.map((c) => c.key)].filter((k) => !recov.has(k)));
+for (const k of (arg("--extra-block") ? (JSON.parse(readFileSync(arg("--extra-block"), "utf-8")) as string[]) : [])) blockedKeys.add(k); // 2026-10-22: 렌더·변환 결함 후보와 오너 판단 보류 후보를 배정에서 제외
 // 새로 쓸 칸(가상)은 라이브러리 원형을 다시 쓸 수 있다(원형 재사용은 금지가 아니다). 단 만들어진 문항이 공개 문항과 구조 look-alike 가 아니어야 하며 생성 뒤 군집 검사로 확인한다.
 void LIB_SINGLES; void LIB_SETS;
 const ids = arg("--sets", "CH4,CH5").split(",");
