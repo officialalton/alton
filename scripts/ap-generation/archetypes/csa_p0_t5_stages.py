@@ -3,3 +3,16 @@ STAGE_T5_MC = ['cs_2d_column_sum', 'cs_2d_largest', 'cs_2d_swap_rows', 'cs_abs_d
 STAGE_T5_MC2 = ['cs_account_state_trace', 'cs_alias_box_trace', 'cs_array_field_trace', 'cs_constructor_chain_trace', 'cs_param_pass_trace', 'cs_static_counter_trace', 'cs_tally_state_trace', 'cs_math_functions', 'cs_math_distance', 'cs_abs_diff_completion', 'cs_for_step_down', 'cs_while_digit_product', 'cs_while_steps_trace', 'cs_string_array_longest', 'cs_precondition_sublist']
 STAGE_T5_SETS = ['css_t5_array_set', 'css_t5_cart_set', 'css_t5_garage_set', 'css_t5_list_set']
 STAGE_T5_SETS2 = ["css_t5_cart_set", "css_t5_garage_set"]  # 1차 세트 실행에서 단원 3 세트 2개가 선택지 해설 불일치로 반려 → 변형을 고쳐 재실행
+
+# CS5 단독 5칸(가상 → 실제): csa-t5-mc3 실행 대상
+STAGE_T5_MC3 = ['cs_incr_decr', 'cs_int_double_mix', 'cs_math_functions', 'cs_precondition_sublist', 'cs_string_filter_trace']
+
+# CS5 단독 가상 5칸 대체(새 구조): csa-t5-mc4 실행 대상
+STAGE_T5_MC4 = ['cs_price_cents_round', 'cs_circular_back', 'cs_swap_halves', 'cs_valid_clock_time', 'cs_halving_steps']
+
+# CS5 가상 5칸 대체 2부: csa-t5-mc5 실행 대상
+STAGE_T5_MC5 = ['cs_fib_calls_trace', 'cs_reverse_digits_trace', 'cs_array_max_from_trace', 'cs_selection_two_passes_trace', 'cs_odd_digit_sum_trace']
+
+STAGE_T5_MC6 = ['cs_pair_count_trace', 'cs_flag_scan_trace']
+
+STAGE_T5_MC7 = ['cs_grade_chain_trace', 'cs_trim_until_char_trace']

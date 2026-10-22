@@ -1,0 +1,545 @@
+[
+ {
+  "key": "ap_computer_science_a-m01-k0",
+  "cellId": "ap_computer_science_a-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "cents = dollars*(100-pct) is the price in cents. (int)(cents+0.5) rounds to the nearest cent, and /100.0 converts back to dollars. A rounds to whole dollars, C cuts off fractional cents, and D drops the cents from dollars before calculating.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Code completion with casting and rounding; Unit 1 scope, skill 2.A fits. The topic label 1.7 is loose, but the content is in Unit 1."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique option that passes all tests per the run verification. The .5-cent boundary is fragile with doubles, but it was verified by execution."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The code is complete. Preconditions are stated (both arguments positive) and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (cast after division, truncation, early cast of dollars), and the explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, parallel options, about 100 seconds, no calculator needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is acceptable. The key is unique and verified by execution, the distractors are distinct, and the load is typical. The only reservations are the loose 1.7 topic label and floating-point fragility at exact half-cent values, which the run verification covers."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must see that dollars*(100-pct) yields cents, apply the (int)(x+0.5) rounding idiom, and track cast precedence and integer vs double division across near-miss options (A rounds to whole dollars, C truncates, D casts dollars early and loses cents). Requires several reasoning steps but little reading or arithmetic; the difficulty comes from legitimate casting and precedence subtleties.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m01-k1",
+  "cellId": "ap_computer_science_a-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "dollars*(100-pct) gives the discounted price in cents. Adding 0.5 and then casting to int rounds to the nearest cent, and dividing by 100.0 converts back to dollars. A truncates instead of rounding, C truncates dollars too early, and D rounds to whole dollars.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Item targets casting/rounding (1.5/1.3), not API and libraries (1.7). No API or library class is used. Skill 2.A code completion is fine, but the topic label does not fit."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option B is the unique correct option. Verified by code run; A truncates, C and D are wrong on prices with cents."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Code is complete, with a clear Javadoc spec and stated preconditions."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct named misconceptions (truncation, early cast, cast ordering). Each wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, about 100 seconds, no calculator needed, parallel options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and unique, and the distractors and format are sound. The item fails on scope: it assesses casting and rounding rather than topic 1.7 (APIs and libraries). Fail on topic fit."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires recognizing that dollars*(100-pct) yields cents, and that rounding needs (int)(cents + 0.5) with correct cast precedence, then division by 100.0 to return a double. Distractors are near-miss: truncation without rounding, casting dollars early (losing the fraction), and rounding to whole dollars. Few steps, minimal reading and arithmetic; difficulty comes from casting and integer-division subtleties, which are legitimate levers.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m02-k0",
+  "cellId": "ap_computer_science_a-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "return (i - k + n) % n;",
+     "brief_reasoning": "i-k+n is between 1 and 2n-1, so it is never negative and % n wraps it correctly. A moves forward. C can give a negative result in Java when i<k. D does no wrap and can return n or more.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Writing an expression using % within a method body; Unit 1 content, skill 2.A. Topic tie to 1.9 is loose but acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Only (i-k+n)%n works under stated preconditions; A, C, D each fail tests."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Code is complete, preconditions are stated in the Javadoc, wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (direction, negative remainder, no wrap), each explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no calculator, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound, with a unique key and distinct distractors. The topic tie to 1.9 is loose, but the item is in scope and suitable for the exam."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Single-concept item on circular index arithmetic. The student must recognize that i - k can be negative, that Java's % returns a negative result for a negative dividend, and that adding n before the modulo fixes this. The distractors are near misses: forward movement, a missing wrap-around, and a missing modulo. Reading and arithmetic are light, the preconditions are clearly stated, and nothing is out of scope. The difficulty comes from the negative-modulo subtlety and from choosing among near-miss completions, which is appropriate for a mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m02-k1",
+  "cellId": "ap_computer_science_a-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "return (i - k + n) % n;",
+     "brief_reasoning": "i - k + n is between 1 and 2n-1, so it is never negative and % n gives the correct wrapped index. A can return a negative number because Java's % keeps the sign of the left operand. C is not reduced mod n. D moves forward instead of backward.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Writing a method body with a given signature and the remainder operator. Fits 1.9/2.A with Unit 1 content only."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is unique: i-k+n is in [1,2n-1], so % n is correct. A is negative when i<k, C is not reduced mod n, D moves forward."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The code stub has a precondition comment, a clear stem and a complete specification."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct realistic misconceptions, and the explanation addresses each option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, with options of similar length, no arithmetic burden, and a typical AP reading load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item with a unique key, distinct distractors and a clear stub with its precondition. It fits Unit 1 and skill 2.A, and no issues were found."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires recognizing that Java's % can return negative values and that adding n before the modulo fixes the wrap-around. Distractors are near-miss completions (missing +n, missing modulo, wrong direction). Reading and computation are light, and all difficulty comes from legitimate concept depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m03-k0",
+  "cellId": "ap_computer_science_a-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "With h = 3, s.substring(3) gives \"def\" and s.substring(0,3) gives \"abc\", so the result is \"defabc\". Option A just returns s unchanged. Option C drops the character at h-1, and option D skips the character at h.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "B"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 1.15 substring and concatenation, completing code to meet a specification (2.A). Unit 1 only."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option B is the only candidate that swaps the halves for even-length strings, including the empty string (h=0). Option C's substring(0, h-1) throws for \"\" (end index -1), and for \"ab\" gives wrong output. The others are wrong for all non-empty inputs."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The method header, the precondition (even length) and an example are all given. The code is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct errors: no swap, an off-by-one at the end of the first half, and an off-by-one at the start of the second half. The explanation covers each one. The options are parallel in format and length."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A short item, well under 100 seconds, with no calculator needed. The format matches the official code-completion items."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: the key is unique, the distractors are distinct and realistic, and the stimulus is complete. It fits topic 1.15 and skill 2.A. No issues found."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single concept: substring(from, to) with an exclusive upper bound, plus concatenation. The student computes the midpoint with integer division and checks near-miss options (no swap, to-1 off-by-one, from+1 off-by-one) against the example \"abcdef\". Few steps, short code, no heavy arithmetic or reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m03-k1",
+  "cellId": "ap_computer_science_a-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "With h = length/2, s.substring(h) gives the second half and s.substring(0,h) gives the first half. For \"abcdef\", h = 3, so the result is \"def\" + \"abc\" = \"defabc\".",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "B"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Short, parallel options; about 100 seconds; no calculator load.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound, with a unique key, a complete stimulus, realistic distractors and an appropriate load."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single concept: substring(int) and substring(int,int) with an exclusive end index. The student picks the correct completion among near-miss candidates (off-by-one at h-1, h+1, and unswapped order). Checking each option against \"abcdef\" is short and mechanical. Reading and computation are minimal, and the difficulty is fair.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m04-k0",
+  "cellId": "ap_computer_science_a-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "return h >= 0 && h <= 23 && m >= 0 && m <= 59;",
+     "brief_reasoning": "All four bounds have to hold, so they must be joined with &&, and both ends of each range are inclusive. Option A uses ||, so it accepts invalid values. Option C wrongly rejects 23 and 59. Option D wrongly rejects 0.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Compound boolean range check is squarely topic 2.5; code-completion fits skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option B is the unique correct completion; A true for (24,10), C rejects 23/59, D rejects 0."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Complete code with Javadoc spec; clear wording."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct realistic misconceptions; parallel options; each wrong option explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no arithmetic, typical AP MC load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound, unique-key compound boolean completion item with good distractors; passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: build a range check with && across two variables. Distractors are standard near-misses (|| in place of &&, off-by-one upper bounds < vs <=, lower bounds > vs >=). Solving requires checking boundary values 0, 23 and 59 against each option, with no tracing, no aliasing, and no arithmetic. Reading is minimal and the specification is unambiguous, so it suits foundational practice on compound boolean expressions rather than full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m04-k1",
+  "cellId": "ap_computer_science_a-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "return h >= 0 && h <= 23 && m >= 0 && m <= 59;",
+     "brief_reasoning": "Both ends of each range are inclusive, so the check needs >= 0 and <= 23 for hours and <= 59 for minutes, all joined with &&. Option A leaves out 23 and 59. Option C leaves out 0. Option D uses || and returns true for almost any values.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 2.5 compound boolean with range checks. Skill 2.B (write code) fits a code-completion item. The dominant demand is compound boolean construction."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option B is the only one that returns true exactly for h in 0..23 and m in 0..59. A rejects 23 and 59, C rejects 0, and D has || precedence problems (e.g., h=-5, m=100 returns true). The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The code is complete with the method header, a Javadoc spec, and a clear placeholder. The stem is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors map to distinct named misconceptions: exclusive upper bound, exclusive lower bound, and mixed ||/&&. The explanation covers each one. The options are parallel in length and format."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item is short, takes about 60-100 seconds, and needs no arithmetic. It is typical of the AP exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean code-completion MC item on compound range checks. It has a unique key and three distinct misconception distractors, and it needs no calculator."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: write a compound boolean for two inclusive ranges. Distractors are plausible near-misses (off-by-one at upper bounds, off-by-one at lower bounds, || and && misuse), but each can be eliminated by checking one boundary value or the operators. There is no tracing, no representation shifts, and minimal reading. This is appropriate for foundational practice on 2.5 rather than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m05-k0",
+  "cellId": "ap_computer_science_a-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "Option B keeps looping until n equals 1, applies the stated rule on each pass and adds 1 to count every step. Option A stops when n is 2, so it misses the last step and is wrong for n = 2. Option C always sets count to 1, no matter how many steps were taken. Option D merges two steps into one, so it counts too few.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Code completion of a while loop with selection; fits 2.9 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is unique. A fails n=2, C fails n=1 and n=6, D fails n=7."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Code is complete with the precondition stated and the rule in the Javadoc; clear wording."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct realistic misconceptions: bound off-by-one, missing count increment, merged step. All are explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short reading, no arithmetic burden, about 90-120 seconds."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: the key is unique, the scope and skill fit, the distractors are distinct, and the load is appropriate."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard select-the-correct-completion item on a loop with selection (topic 2.9). The student checks the loop condition, the update rule and the counter placement against the spec, and can rule out the near-miss distractors (n > 2 boundary off-by-one, count overwritten, altered odd rule) with short traces on small inputs such as n = 2 and n = 3. The concept depth is moderate, the code is short, and the arithmetic is minimal.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m05-k1",
+  "cellId": "ap_computer_science_a-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "B applies the rule (halve if even, otherwise 3n+1) until n is 1 and adds 1 to count every step. A always returns 1. C does two operations at once on odd values, so it counts too few steps. D stops at 2, so it misses the last step and is wrong for n = 2 (it returns 0 instead of 1).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Loop and selection algorithm completion; fits 2.9/2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique correct completion; A fails n=1, C undercounts (n=6 gives 6 not 8), D fails n=2."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Code is complete, precondition n >= 1 stated, rule specified clearly."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions; explanation addresses every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short code, no calculator needed, reasonable load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound code-completion item with a unique key, distinct distractors, and a modest load; it passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Choosing the correct loop completion among near-miss candidates: the distractors involve a wrong counter placement (count = 1 after the loop), an altered odd rule ((3n+1)/2), and a boundary error (n > 2 stops early). Verification needs a short trace with a small n such as 2 or 3. The concepts are standard Unit 2 material (while loop, if/else, counter), the reading and computation load are low, and there are no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ }
+]

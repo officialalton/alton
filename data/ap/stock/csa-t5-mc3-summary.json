@@ -1,0 +1,57 @@
+{
+ "runs": [
+  "csa-t5-mc3"
+ ],
+ "rows": 10,
+ "passed": 8,
+ "rejected": 2,
+ "passRate": 0.8,
+ "mc": {
+  "rows": 10,
+  "passed": 8,
+  "passRate": 0.8
+ },
+ "frq": {
+  "rows": 0,
+  "passed": 0,
+  "passRate": 0
+ },
+ "unitsPassed": {
+  "1": 5,
+  "2": 3
+ },
+ "skillsPassed": {
+  "3.A": 7,
+  "4.B": 1
+ },
+ "figPassed": {
+  "text": 8
+ },
+ "figAll": {
+  "text": 10
+ },
+ "figPassRate": {
+  "text": "8/10"
+ },
+ "renderTypesPassed": {
+  "text": 8
+ },
+ "archetypesPassed": {
+  "cs_incr_decr": 1,
+  "cs_int_double_mix": 2,
+  "cs_math_functions": 2,
+  "cs_precondition_sublist": 1,
+  "cs_string_filter_trace": 2
+ },
+ "archetypesAll": {
+  "cs_incr_decr": 2,
+  "cs_int_double_mix": 2,
+  "cs_math_functions": 2,
+  "cs_precondition_sublist": 2,
+  "cs_string_filter_trace": 2
+ },
+ "failedArchetypes": [],
+ "costUsd": {
+  "csa-t5-mc3": 0.3661
+ }
+}
