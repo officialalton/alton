@@ -1,0 +1,650 @@
+[
+ {
+  "key": "ap_physics_1-m01-k0",
+  "cellId": "ap_physics_1-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Energy conservation: v^2 = v0^2 + 2gh = 100 + 2(9.8)(15) = 394, v ≈ 19.8 m/s",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "19.8 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "One-dimensional constant-acceleration kinematics, in Unit 1 scope. The dominant demand is choosing the governing equation and computing."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "v = sqrt(394) = 19.85 m/s, which rounds to 19.8 m/s. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clear, and air resistance is stated as negligible."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct misconceptions, and the explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of an AP MC item, the arithmetic is light, and calculator use is allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key of 19.8 m/s is correct, the distractors are distinct, and the scope and skill fit is good."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires choosing the constant-acceleration kinematic equation (or energy conservation) and handling sign and direction correctly, since the ball lands 15 m below its launch point. Computation is short and the wording is unambiguous. Distractors reflect common sign and conceptual errors. This is a standard exam-level item for skill 2.B.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_1-m01-k1",
+  "cellId": "ap_physics_1-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "v^2 = v0^2 + 2gh = 225 + 392 = 617, v ≈ 24.8 m/s",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "24.8 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Constant-acceleration 1D kinematics with a reasoning step (ball returns to launch point with the same speed). Fits topic 1.2 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "v = sqrt(617) = 24.8 m/s is the unique correct answer. The conditions are stated: negligible air resistance, g = 9.8 m/s²."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed and the wording is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (adding speeds, assuming the ball lands at the launch speed, ignoring the initial speed). All wrong options are explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 105 seconds, light arithmetic, and the calculator designation is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope, and well constructed, with a unique key and distinct distractors. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires choosing the time-independent kinematics equation (or symmetry plus a second stage) and handling sign conventions for an upward launch from a cliff. Computation is short (225 + 392, then a square root), wording is unambiguous, and there is no extra reading. Distractors reflect plausible errors, such as 15 m/s from symmetry alone, or omitting or mishandling the initial speed. This is a typical mid-level AP Physics 1 kinematics item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_1-m01-k2",
+  "cellId": "ap_physics_1-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "v^2 = v0^2 + 2gh = 144 + 294 = 438, v ≈ 20.9 m/s",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "20.9 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "1D constant-acceleration kinematics, in Unit 1 scope; law selection plus calculation fits 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "v=sqrt(144+294)=20.93 m/s; the key is unique and conditions are stated."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed; the wording is clear and the model assumptions are stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (adding the speeds, subtracting the squares, ignoring the initial speed); the explanation addresses each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical load, short arithmetic, calculator allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope, and well constructed, and its distractors each encode a distinct misconception. I recommend accepting it."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Single-concept constant-acceleration problem. The student must choose the time-independent kinematics equation v^2 = v0^2 + 2a*dy (or use the symmetry of the up-and-down path) and handle signs with dy = -15 m. Computation is short (144 + 294 = 438, sqrt = 20.9). Distractors reflect plausible errors such as adding speeds or omitting v0. Reading load is minimal and no out-of-scope knowledge is needed. This is a standard AP-style item at the easier end of exam-prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_1-m02-k0",
+  "cellId": "ap_physics_1-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The normal force equals F, so friction can be at most μF. Setting μF = mg gives F = 9.8/0.4 = 24.5 N.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "24.5 N"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Static friction balancing weight with a horizontal push as the normal force is a Unit 2 topic (Newton's first law, equilibrium, friction). The dominant demand is selecting the governing relation and computing a quantity, which fits 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "F = mg/μ = 9.8/0.4 = 24.5 N is unique. The standard g = 9.8 m/s^2 is the default model assumption. The stem asks for the minimum force, which sets up the verge-of-sliding condition."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear. A figure would be optional, but the text fully specifies the setup (horizontal force, vertical wall)."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are 3.92 (μmg), 7.00 (mg/(1+μ)) and 2.50 (m/μ), each tied to a distinct error. The 7.00 distractor is somewhat contrived but still distinct. The explanation covers every wrong option. All options have the same format and similar length, so there is no giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, about 60-100 seconds, with a light calculation. The calculator is allowed and the load is typical of the exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, unambiguous wall-press static friction item with a unique key of 24.5 N and distinct distractors. It is in scope and suitable for the exam."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must apply equilibrium (Newton's first law) to the block, set static friction equal to the weight, recognize that the normal force equals the applied horizontal force F, and solve F = mg/(mu) = 24.5 N. This needs the conceptual link between F and the normal force, plus an implicit free-body diagram. The arithmetic is simple, the wording is unambiguous, and the content is within the Unit 2 scope. The distractors match plausible errors (mu*mg, 1/mu). The difficulty is moderate and conceptual, suitable for full mocks.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_1-m02-k1",
+  "cellId": "ap_physics_1-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "N=F; mu*F >= mg -> F >= 29.4/0.5 = 58.8 N",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "58.8 N"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Equilibrium with static friction; two-step calculation; Unit 2 content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "F = mg/mu = 58.8 N is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; wording is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (F = mg, m/mu, mu*mg), each explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical load, calculator allowed, no needless arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, clear and well matched to the reference pattern. It has a unique key and distinct distractors, so it passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must apply equilibrium in two directions (friction = mg vertically, N = F horizontally), then use the static friction threshold f = μN to solve F = mg/μ. Distractors map to plausible errors (omitting μ, multiplying instead of dividing). Clear wording, simple arithmetic, no heavy reading; difficulty comes from selecting the governing relationships and linking them, which is appropriate for a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_1-m02-k2",
+  "cellId": "ap_physics_1-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Normal force N = F. Friction must hold the weight: 0.4F >= 2(9.8) = 19.6 N, so F >= 49.0 N.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "49.0 N"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Equilibrium with static friction and normal force from a horizontal push; fits Topic 2.4 and skill 2.B, all content in Unit 2."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "F = mg/mu = 49.0 N is unique and correct under the standard g = 9.8 m/s^2 assumption."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct, realistic errors (m/mu, mu*mg, mg/(mu+1)). The explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Light arithmetic, typical MC load, and the calculator designation is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, standard wall-press friction problem. The key of 49.0 N is unique, the distractors are distinct, and the item is in scope and suitable for the exam."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The student must see that the block is in equilibrium, so static friction balances weight (f = mg), that the applied horizontal force equals the normal force, and that the minimum force occurs at f = mu*N, giving F = mg/mu = 49 N. This takes a mental free-body diagram, choosing the governing law, and a simple calculation. The distractors reflect common errors such as multiplying by mu instead of dividing. The reading and arithmetic loads are minimal and the scope is within Unit 2.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_1-m03-k0",
+  "cellId": "ap_physics_1-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Symmetric ropes: 2T sin40° = mg, so T = 98/(2*0.6428) ≈ 76.2 N",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "76.2 N"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Force balance with components in equilibrium; fits Newton's second law and the calculation routine."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "T = mg/(2 sin40°) = 76.2 N, unique and correct with g = 9.8."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete: at rest, light ropes, angle measured from the horizontal, symmetric."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors 49.0, 58.4 and 152 each match a distinct, realistic error (mg/2, horizontal component, mg/sin), and the explanation addresses every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 110 s, a calculator is allowed, and the arithmetic is light."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clean. The key is verified, the distractors encode distinct misconceptions, and the stem is unambiguous. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard equilibrium problem. Student must choose Newton's second law with a=0, resolve tension into vertical components using the angle from the horizontal, account for two ropes, and solve 2T sin40 = mg. The distractors correspond to common errors (ignoring the angle, forgetting the factor of 2, mixing sin and cos). Short wording, simple arithmetic, in-scope content, no unfair difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_physics_1-m03-k1",
+  "cellId": "ap_physics_1-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "2T sin30 = mg gives T = mg = 196 N",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "196 N"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Static equilibrium with force components under Newton's second law; fits topic 2.5 and the skill of computing an unknown quantity with units."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "T = mg/(2 sin30°) = 196 N is unique and correct; the other options come from distinct errors."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No figure is needed. The verbal description is complete: at rest, light ropes, symmetric 30° angles to the horizontal."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception and the explanation addresses every wrong option. Minor weakness: 30° makes T = mg, so a guess of T = weight is also correct."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, light arithmetic, calculator allowed, typical of the exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: a standard two-rope equilibrium problem with a unique key of 196 N and distinct distractors. The only weakness is that the 30° angle makes T equal mg, which is minor."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Symmetric two-rope static equilibrium: the student must mentally build a free-body diagram, resolve tension into vertical components, set net force to zero (Newton's 2nd law with a=0), and solve 2T sin30° = mg. The wording is unambiguous, the arithmetic is short and clean (196 N), and the distractors map to common errors (cos vs sin, forgetting the factor of 2). This is a typical mid-level mock-exam item, not pure recall and not advanced.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_1-m03-k2",
+  "cellId": "ap_physics_1-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "2T sin25° = mg, so T = 117.6/(2×0.4226) ≈ 139 N",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "139 N"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Static equilibrium with force components under Newton's second law (net force zero), a Unit 2 topic. Dominant demand is resolving tensions and computing T."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "T = mg/(2 sin25°) = 139 N is the unique correct option. The stem states rest, symmetric angles and light ropes."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear and all conditions are given."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions: horizontal component, mg/2, and mg/sin. Each is explained and each value matches the computation."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, calculator allowed, one trig step. Typical load for an AP Physics 1 item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and well formed. The key is unique, the distractors are realistic and distinct, and the scope and load are appropriate."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Static equilibrium with two symmetric ropes. The student must draw or visualize a free-body diagram, resolve tension into vertical components using the angle from the horizontal (sin, not cos), apply Newton's second law with a = 0 (2T sin25° = mg), and solve. The distractors match common errors: dropping the factor of 2 (278 N), using mg/2 (58.8 N), and a trig slip (126 N). The arithmetic is short with a calculator, the wording is unambiguous, and everything is in Unit 2 scope. It is a typical full-mock item rather than a basic or advanced one.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_physics_1-m04-k0",
+  "cellId": "ap_physics_1-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Pressure is equal at the interface level in both arms: 900*12 = 1000*h, so h = 10.8 cm",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "10.8 cm"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Pressure at depth / equal pressure at same level in static fluid; fits 8.2 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "10.8 cm is the unique correct answer; conditions (open both ends, at rest, immiscible) are stated."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No figure needed; the wording is clear and the geometry is unambiguous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (inverted ratio, sum of heights, density difference); every wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-105 seconds, minimal arithmetic, calculator designation consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: the key is unique, it is in scope, the distractors are distinct, and it is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "One-step application of pressure balance in a U-tube (rho_oil*h_oil = rho_water*h_water), giving 10.8 cm. Requires recognizing that pressures are equal at the interface level, but no representation change, no multi-step linkage, and trivial arithmetic. Distractors target common errors (inverted ratio, summing heights, decimal slip). Fits the unit scope, with no out-of-scope content.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_1-m04-k1",
+  "cellId": "ap_physics_1-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Pressures are equal at the interface level: 900*20 = 1000*h, so h = 18 cm.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "18.0 cm"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Pressure at depth / equal pressure at same level in static fluid; calculation pathway fits 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "18.0 cm is unique and correct; open arms and rest stated."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions; explanation addresses each option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, simple arithmetic, calculator allowed consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound U-tube item; the key of 18.0 cm follows from equal pressure at the interface level. Distractors are distinct and the item is exam-suitable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: equate pressures at the oil-water interface level in a static U-tube, giving h = (900/1000)(20 cm) = 18.0 cm. Requires choosing the governing idea and one short proportional calculation. No representation change, light reading, simple arithmetic. Distractors reflect common errors (inverted ratio, ignoring density, adding heights).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_physics_1-m04-k2",
+  "cellId": "ap_physics_1-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Pressures are equal at the interface level: 800(12) = 1000h, so h = 9.6 cm.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "9.60 cm"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Pressure at depth and equal pressure at same level in a fluid at rest; in scope for 8.2. A short computational pathway fits skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key 9.60 cm is unique under the stated conditions: open at both ends, at rest, immiscible. The interface-level pressure balance gives h_w = 800*12/1000 = 9.6 cm."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear and complete; the oil height is measured from the interface and the stem asks for the water height above the interface."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct misconceptions (adding heights, inverting the density ratio, using the density difference). The explanation addresses each one. No length or format giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 105 seconds, one dominant skill, light arithmetic, a generic textbook scenario, and calculator use is allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, unambiguous U-tube pressure-balance problem with a correct unique key and distinct, well-explained distractors. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: equate pressures at the oil-water interface level (rho_oil*h_oil = rho_water*h_water), giving 9.6 cm. One governing-law choice and one short calculation, with plausible distractors from inverting the ratio or subtracting heights. No heavy reading or arithmetic; wording is clear.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ }
+]

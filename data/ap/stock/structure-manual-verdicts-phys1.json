@@ -1,0 +1,20 @@
+{
+  "note": "2026-10-22 오너 규칙(자료·조건·질문·필수 추론 단계를 읽고 판정)에 따른 수동 판정. 자동 비교(structure-compare)는 후보 선별용이며 템플릿 문구가 같은 질문까지 쌍둥이로 묶는 경향이 있다.",
+  "independent": {
+    "ph_t5_sym_elastic_rebound_speed": "공개 ph_sym_collision 은 완전 비탄성(붙음)의 합쳐진 속도, 이 문항은 탄성 정면충돌에서 첫 수레의 속도로 운동량+에너지 두 식을 함께 풀어야 한다(조건·질문·풀이 단계가 다름).",
+    "ph_t5_sym_block_ramp_friction_speed": "공개 ph_sym_incline_accel 은 거친 경사를 올라가는 블록의 가속도, 이 문항은 정지에서 내려오며 거리 d 뒤의 속력(일-에너지 정리, sinθ-μcosθ). 방향·질문·풀이 단계가 다름.",
+    "ph_t5_pred_shm_max_speed": "공개 ph_pred_spring_period 는 질량과 스프링 상수 변화에 따른 주기, 이 문항은 진폭과 질량 변화에 따른 최대 속력(에너지 보존 v=A·sqrt(k/m)). 구하는 양과 식이 다름."
+  },
+  "twin": {
+    "ph_t5_sym_drop_onto_spring": "공개 ph_vert_spring_compress 와 같은 장면·조건·질문(수직 스프링에 떨어진 블록의 최대 압축)이고 풀이(mg(h+x)=kx²/2 이차식)도 같다. 숫자 선택지와 기호 선택지의 차이뿐이다.",
+    "ph_t5_sym_cart_hanging_accel": "공개 ph_sym_table_hanging(탁상 블록 + 매달린 블록의 가속도)과 같은 구성이다.",
+    "ph_t5_pred_pendulum_length_gravity": "공개 ph_pred_pendulum_planet 과 같은 개념·풀이(T=2π√(L/g))이고 길이 인자 하나가 더해질 뿐이다.",
+    "ph_t5_claim_buoyancy_equal_volume": "공개 ph_claim_buoyancy(같은 부피의 두 물체, 잠긴 상태의 부력 비교)와 같다.",
+    "ph_t5_pred_pipe_speed": "공개 ph_sym_continuity_pipe 와 같은 연속 방정식(A1v1=A2v2) 적용이다.",
+    "ph_t5_rank_torque_wrench": "공개 ph_rank_torque 와 같은 과제(Frsinθ 순위)이다.",
+    "ph_t5_evid_pendulum_length_data": "공개 ph_evid_pendulum_data 와 같은 자료·질문이다.",
+    "ph_t5_evid_accel_force_data": "공개 ph_evid_force_data 와 같은 자료·질문이다.",
+    "ph_t5_evid_hooke_hanging_data": "공개 ph_evid_spring_data 와 같은 자료·질문이다.",
+    "ph_claim_momentum_system": "공개 ph_claim_momentum_system(스프링으로 밀려난 두 수레, 한쪽 속력으로 다른 쪽 속력을 주장)과 같은 구조다. 두 스케이터가 정지 상태에서 서로 밀어내는 설정과 질문·운동량 보존 풀이가 같고 대상·숫자만 다르다."
+  }
+}

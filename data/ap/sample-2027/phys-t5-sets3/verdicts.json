@@ -1,0 +1,656 @@
+[
+ {
+  "key": "ap_physics_1-m01-k0-q1",
+  "cellId": "ap_physics_1-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Slope = (-4-2)/(9-5) = -1.50 m/s",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "-1.50 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Slope of x-t segment, topic 1.3, skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Slope (-4-2)/(9-5) = -1.50 m/s; unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Axes, labels, units and vertices are complete and consistent; sign convention is stated."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct plausible misconceptions, each explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, typical load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean slope-reading question with a correct, unique key and complete graph data. The distractors are plausible and distinct. No problems found."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step item: read two vertices from a position-time graph and compute slope (-6 m / 4 s = -1.50 m/s). Only one representation read, simple arithmetic, minimal reading. Distractors reflect common slope errors but the concept depth is introductory.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_1-m01-k0-q2",
+  "cellId": "ap_physics_1-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Total distance = |−4|+|6|+|−6| = 16 m; 16/9 = 1.78 m/s",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "1.78 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 95 seconds with light arithmetic. This is a typical AP-style item, and the calculator designation is consistent.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clean: average speed is 16 m / 9 s = 1.78 m/s. The distractors are distinct and all are explained. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read a piecewise position-time graph, recognize that average speed uses total path length rather than net displacement, find the distance in each of three segments (4, 6, 6 m, including a direction reversal), sum them to 16 m, and divide by 9 s to get 1.78 m/s. The concept depth is moderate (distance vs displacement, speed vs velocity) and the arithmetic is short with clean numbers. The distractors target the common errors of using displacement or averaging segment speeds. No unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_1-m01-k1-q1",
+  "cellId": "ap_physics_1-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Slope = (0-(-10))/(8-4) = 2.50 m/s",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "2.50 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Slope reading from x-t graph fits 1.3/2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key 2.50 m/s is correct and unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data complete with labeled axes and vertices."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The 4.00 m/s rationale says 'longest segment', but the 8-11 s segment (3 s) is shorter than the 4 s segments; it is the steepest, and its velocity is -4 m/s (sign mismatch). The explanation is inaccurate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical load, ~60-95 s."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the item is in scope, but the 4.00 m/s distractor explanation misdescribes its segment ('longest' when it is steepest and has the opposite sign). Because of that, the distractor criterion fails. The blueprint also mentions a distance question that the item does not include."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step item: read two points off a linear segment of a position-time graph and compute slope = 10 m / 4 s = 2.5 m/s. The only subtlety is the sign, because the starting position is negative. Arithmetic is trivial, there is no representation translation beyond reading the graph, and the wording is unambiguous. Distractors reflect common errors (displacement alone, time interval alone, wrong interval).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_1-m01-k1-q2",
+  "cellId": "ap_physics_1-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Distance = 10+10+12+6 = 38 m; 38/15 = 2.53 m/s",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "2.53 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Distance vs displacement and average speed from x-t graph; Unit 1 topic 1.2, calculation from a representation."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Total distance 38 m over 15 s = 2.53 m/s; unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data complete: axes with labels/units, vertices given, straight segments. Wording clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors are net-displacement/time (0.40), sum of segment speeds (10.5), fastest segment speed (4.00); each distinct and explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, simple arithmetic, calculator allowed, typical load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope, and well formed. The key (2.53 m/s) is unique, and each distractor encodes a distinct misconception. No issues found."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read vertices from a position-time graph, recognize that average speed uses total distance rather than net displacement, compute four segment magnitudes (10, 10, 12, 6 m), sum to 38 m, and divide by 15 s to get about 2.53 m/s. The distractor 0.400 m/s reflects the displacement/velocity confusion. The concept is core to Unit 1 and the arithmetic is light with integers; the one calculator division is not an unfair source. The wording is clear and the graph is unambiguous.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_1-m01-k2-q1",
+  "cellId": "ap_physics_1-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Slope = (-12 - (-22))/(8-4) = 10/4 = 2.50 m/s, constant on linear segment.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "2.50 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Slope reading from x-t graph; fits 1.3 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Slope on 4-8 s is 2.5 m/s; unique answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Axes labeled with units, vertices integer, complete."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The 6.00 m/s rationale ('speed of the longest segment') is inaccurate: 6 is the speed of the first 0-2 s segment, which is not the longest. The explanation misdescribes the misconception. The other two distractors are accurate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, typical load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and well formed. It fails only on the distractor explanation: the 6.00 m/s option is described as the speed of the longest segment, but it is actually the speed of the first segment (0 to 2 s), which is not the longest."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step item: read two vertices from a position-time graph and compute the slope (10 m / 4 s = 2.50 m/s). Simple arithmetic, one representation, and a sign check are the only demands. This is a routine skill 2.B calculation suited to initial learning of topic 1.3 rather than full-mock exam prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_physics_1-m01-k2-q2",
+  "cellId": "ap_physics_1-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Total distance = 12+10+10+10 = 42 m over 12 s = 3.50 m/s",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "3.50 m/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Average speed from a position-time graph (distance vs displacement) fits topic 1.2 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Distance 12+10+10+10 = 42 m over 12 s gives 3.50 m/s; unique answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data is complete: axes with labels and units, ranges, and integer vertices. The stem is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor matches a computed value and a distinct misconception: 10.5 = 42/4, 6 = fastest segment, 4 = unweighted mean of segment speeds. Explanation covers all wrong options."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 s, simple arithmetic, calculator allowed, typical load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item. The key of 3.50 m/s is unique and the distractors encode distinct misconceptions. The graph is fully specified. The blueprint's mention of a second question (velocity from slope) is a minor mismatch that does not affect the item."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student reads the graph vertices, computes the path length of each segment (noting the direction reversal at t=4 s), sums them to get total distance 42 m, and divides by 12 s to get 3.50 m/s. The main concept is distinguishing distance and average speed from displacement and average velocity. This is a single-concept item with four short segments and easy arithmetic. There is one representation read (graph to numbers) and no hidden assumptions.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_physics_1-m02-k0-q1",
+  "cellId": "ap_physics_1-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "a=4/2.5=1.6 m/s^2; F=ma=3*1.6=4.80 N",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "4.80 N"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Graph slope then F=ma; fits 2.5/2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "4.80 N unique and correct; net force asked, so no friction coefficient needed."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data complete with labeled axes, units and endpoints; wording clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a distinct named slip and the explanation covers all three; the 2.4 rationale is slightly muddled but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 s, calculator allowed, short numeric options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean, in-scope item with a single dominant skill (read the slope, apply F=ma). It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: read the slope of a linear v-t graph to get acceleration (1.6 m/s^2), then apply F=ma to get 4.8 N. Only one representation change and one law, with trivial arithmetic and short wording. It suits early learning of Newton's Second Law rather than a full-mock exam item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_1-m02-k0-q2",
+  "cellId": "ap_physics_1-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "a = 4/2.5 = 1.6 m/s^2; mu = a/g ≈ 0.16",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "0.16"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Graph slope plus Newton's second law with kinetic friction; fits 2.7/2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "a=1.6, mu=0.163; unique correct option 0.16."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data complete (axes, labels, vertices); stem clear; g=9.8 is standard assumption."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct named errors, all explained; no format giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 s, simple arithmetic, calculator allowed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is unique, the graph data are complete, the distractors are distinct, and the load is appropriate. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the slope from a velocity-time graph to get the deceleration, select Newton's second law with f = μN and N = mg, recognize that mass cancels, and compute μ = a/g ≈ 0.16. Distractors match plausible errors (using a directly, g/a, or 19.6). Arithmetic is simple and wording is clear, so this is a typical full-mock item rather than an advanced one.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_1-m02-k1-q1",
+  "cellId": "ap_physics_1-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Slope: a = (0 − 8)/4 = −2 m/s². Net force: F = ma = 1.5 kg × 2 m/s² = 3.00 N.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "3.00 N"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Reads acceleration from a v-t graph and applies Newton's second law; in scope for 2.5 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "3.00 N is the unique correct answer; the stem states friction is the only horizontal force."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data are complete (axes with labels and units, endpoints). The x-axis step of 0.8 s is a minor oddity."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (m/a, mv, half the slope); the half-slope option is the weakest but acceptable. Every wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, light on arithmetic, and the calculator designation is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item: the key is unique, the stimulus is complete, and the distractors are distinct. Accepted."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Read slope of v-t graph (a = -2 m/s^2), then apply F = ma = 1.5 x 2 = 3.00 N. Single representation read plus one direct application of Newton's second law, with clean numbers and short reading. Distractors reflect common errors but the pathway is straightforward.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_1-m02-k1-q2",
+  "cellId": "ap_physics_1-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Slope gives a = 8/4 = 2 m/s^2. Friction is the only horizontal force, so mu = a/g = 2/9.8 ≈ 0.20.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "0.20"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The graph slope gives a = 2 m/s², and μ = a/g ≈ 0.20 is the unique correct answer. The stimulus data are complete and the distractors encode distinct errors. The load is typical of an AP Physics 1 multiple-choice item.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the slope of a v-t graph to get the deceleration (2 m/s^2), recognize that friction is the only horizontal force, apply Newton's 2nd law with f = mu*m*g, and notice that mass cancels. Few steps, simple numbers, in-scope content, unambiguous wording. A typical mock-exam multi-step routine item, not a pure one-step recall item and not advanced.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_physics_1-m02-k2-q1",
+  "cellId": "ap_physics_1-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Slope a = -8/2 = -4 m/s^2; F = ma = 2*4 = 8 N.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "8.00 N"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Newton's second law with a graph-read acceleration; fits topic 2.5 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Slope is -4 m/s^2, so F = 8 N. The no-other-force condition is stated, and the key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The graph data are complete: axes, labels, units and two vertices. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct errors (half the slope, inverted law, momentum), and all are explained. The 4 N misconception is a bit contrived but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Light load of about 95 seconds, one graph read and one multiplication. The calculator designation is consistent."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean item: it reads the acceleration from the velocity-time graph and applies F = ma to get 8 N. The key is unique, the stimulus data are complete, and the distractors are distinct and explained."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item needs two steps: find the slope of the v-t graph (a = -4 m/s^2), then apply F = ma to get 8 N. The numbers are clean and the wording is unambiguous. The distractors match common errors (forgetting the mass, using the initial velocity, inverting the calculation). It is a single-concept application of Newton's second law, which fits basic learning rather than a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_physics_1-m02-k2-q2",
+  "cellId": "ap_physics_1-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Slope gives a = 8/2 = 4 m/s^2. Friction is the only horizontal force, so mu = a/g = 4/9.8 ≈ 0.41.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "0.41"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 90 seconds, a simple graph slope, and light arithmetic. Calculator designation is consistent.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is clean and passes all criteria. The key is unique, the stimulus is complete, and one distractor is mildly artificial."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the slope of a v-t graph to get the acceleration (-4 m/s^2), recognize kinetic friction as the only horizontal force, apply Newton's second law with f = mu*N and N = mg, and see that the mass cancels to get mu = a/g ≈ 0.41. This takes a graph-to-equation translation and a short multi-step pathway, which fits a full mock. The arithmetic is minimal, the reading load is low, and the wording is unambiguous. Distractors reflect realistic errors, such as using the acceleration directly as mu.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ }
+]

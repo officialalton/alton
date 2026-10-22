@@ -1,0 +1,218 @@
+[
+ {
+  "key": "ap_physics_1-f01-k0",
+  "cellId": "ap_physics_1-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Four forces: gravity mg downward, normal force N upward, tension T at 20° above horizontal in the direction of motion, kinetic friction f horizontal opposite motion.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Arrows from dot: weight (mg, down), normal (N, up), tension (T, 20° above horizontal, forward), kinetic friction (f, horizontal, backward)"
+    },
+    {
+     "brief_reasoning": "Vertical: N + T sinθ = mg, so N = mg − T sinθ. Horizontal: T cosθ − μN = ma.",
+     "ambiguous_or_flawed": false,
+     "item": "B",
+     "final_answer": "a = [T cosθ − μ(mg − T sinθ)]/m"
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "(56.38 − 0.25(98 − 20.52))/10 = 3.70 m/s² with g = 9.8 (about 3.65 m/s² with g = 10)",
+     "ambiguous_or_flawed": false,
+     "final_answer": "a ≈ 3.7 m/s²"
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "A larger angle gives a larger vertical component T sinθ, so N = mg − T sinθ gets smaller and f = μN gets smaller (19.4 N → 17 N).",
+     "ambiguous_or_flawed": false,
+     "final_answer": "Decreases"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The bundle is correct and consistent: the parts sum to 10 points, N = 77.5 N and a = 3.70 m/s^2 check out, and the scope is Unit 2 friction. Minor note: g is not stated in the stem, so a student using g = 10 would fall outside the tolerance. The standard g = 9.8 assumption applies, so this is not disqualifying.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part fits its own skill and Unit 2 scope: free-body diagram, derivation, calculation and a qualitative friction prediction."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys and rubric rows are consistent and the dependencies are sensible. The g = 10 alternative would fall outside the stated tolerance."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete; the empty data object is fine because the student draws the diagram."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item with no options. The common errors listed per row are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of an AP FRQ and a calculator is appropriate."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ in the style of AP Physics 1 Unit 2. It requires a complete FBD with four forces, the key insight that the normal force is reduced by T sin(theta), a symbolic derivation using Newton's second law along two axes, a short numeric evaluation, and a qualitative justification of how friction changes with angle. Concepts are in scope and the arithmetic is light. Difficulty comes from legitimate levers (choosing the governing law, FBD representation, one additional reasoning step), not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 840
+  }
+ },
+ {
+  "key": "ap_physics_1-f01-k1",
+  "cellId": "ap_physics_1-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "There are four forces. Gravity mg points straight down. The normal force N points straight up. Tension T points along the rope, 30° above horizontal in the direction of motion. Kinetic friction f points horizontally, opposite the motion.",
+     "final_answer": "Four arrows starting on the dot: weight (Fg = mg) pointing down, normal force (FN) pointing up, tension (T) at 30° above horizontal toward the direction of motion, and kinetic friction (fk) pointing horizontally backward.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Vertical: N + T sinθ = mg, so N = mg − T sinθ. Horizontal: T cosθ − μN = ma.",
+     "final_answer": "a = [T cosθ − μ(mg − T sinθ)]/m = (T/m)(cosθ + μ sinθ) − μg",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "N = 117.6 − 30 = 87.6 N, so friction f = 0.2 × 87.6 = 17.52 N. T cosθ = 51.96 N, so the net force is 34.44 N. Divide by 12 kg.",
+     "final_answer": "a ≈ 2.9 m/s² (2.87 m/s² using g = 9.8 m/s²; 2.83 m/s² using g = 10 m/s²)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "At 45°, the upward part of the tension, T sinθ, grows from 30 N to about 42.4 N. Since N = mg − T sinθ, the normal force gets smaller (still positive, about 75.2 N). Friction is f = μN, so friction gets smaller too, falling from about 17.5 N to about 15.0 N.",
+     "final_answer": "The friction force decreases. The upward part of the tension (T sinθ) gets bigger, so the normal force (N = mg − T sinθ) gets smaller, and friction (fk = μN) gets smaller with it.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard angled-rope friction FRQ. Total is 10 points, consistent with the Mathematical Routines weight. The key is unique and consistent with the independent solver (a = 2.87 m/s^2 with g = 9.8). Part D is unambiguous because the normal force stays positive at 45°. The scope stays within Unit 2.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topics 2.7, 2.2 and 2.5 are in scope. Each part is judged against its own skill; Part C targets 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Rubric rows are consistent with the model answers. Dependencies (C1 on B1, C2 on B3, D2 on D1) are sensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete with all values. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The common_errors per row encode realistic misconceptions (N = mg, full tension in the horizontal equation, friction in the direction of motion)."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Load is typical for the exam, with light arithmetic and a calculator allowed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ on angled-pull friction. It needs an FBD, Newton's 2nd law in two axes, and recognition that the normal force is reduced by the vertical tension component. Then comes a numeric substitution and a qualitative follow-up on how N and friction change with angle. The concepts are in scope and typical for AP Physics 1. Arithmetic is light, wording is clear, and there is no out-of-scope content, so it fits full-mock level.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "ap_physics_1-f01-k2",
+  "cellId": "ap_physics_1-f01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "There are four forces: weight mg pointing straight down, normal force N pointing straight up, tension T along the rope at 20° above the horizontal in the direction of motion, and kinetic friction f_k pointing horizontally opposite the motion.",
+     "final_answer": "Draw four arrows starting on the dot: weight (F_g = mg) down; normal force (F_N) up; tension (T) at 20° above the horizontal toward the direction of motion; kinetic friction (f_k) horizontal, opposite the motion.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Vertical: the crate does not accelerate vertically, so N + T sinθ = mg, giving N = mg − T sinθ. Horizontal: T cosθ − μN = ma.",
+     "final_answer": "a = [T cosθ − μ(mg − T sinθ)]/m",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Using g = 9.8 m/s²: T cos20° = 46.98 N and T sin20° = 17.10 N. Then N = 98 − 17.10 = 80.9 N, friction = 0.3 × 80.9 = 24.27 N, net force = 46.98 − 24.27 = 22.71 N, so a = 22.71/10 ≈ 2.27 m/s². With g = 10 m/s² the result is about 2.2 m/s².",
+     "final_answer": "a ≈ 2.3 m/s² (2.27 m/s²)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The angle rises to 35°. The upward part of the tension grows from 17.1 N to T sin35° ≈ 28.7 N, so N = mg − T sinθ drops to about 69.3 N. Since f_k = μN, the friction force falls from about 24.3 N to about 20.8 N.",
+     "final_answer": "It decreases: a larger angle means a larger upward tension component, which lowers the normal force, and f_k = μN.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The physics and keys are correct and in scope. The weak points are the part C numeric tolerance under g = 9.8 versus 10 m/s^2, the undefined dot figure for part A, and the point weighting, where the target skill 2.B is only 2 of 10 points. I am failing it on exam suitability and pattern fit, conservatively.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topics 2.7, 2.2 and 2.5 are all in scope. Parts are tagged 1.A/1.C, 2.A, 2.B and 3.B/3.C, which is acceptable because each part is judged on its own skill. The calculation in part C targets 2.B. The bundle is dominated by the angled force and friction."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are correct and unique. Part C gives 2.27 m/s^2 with g = 9.8 m/s^2, and the standard assumption is stated in the model. Part D's claim, that friction decreases, is correct. The C2 rubric row requires 2.27 but gives no tolerance. A student using g = 10 m/s^2 gets about 2.2 m/s^2, which could be marked wrong. The tolerance should be stated."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus is complete and clear, and \"the crate speeds up\" gives the direction of motion. The data object is empty, which is fine for a text stimulus. Part A refers to \"the dot below\" but no figure is specified. The dot needs to be provided for the diagram response."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "There are no MC options. The rubric common errors are realistic and distinct, for example using N = mg and friction in the direction of motion."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The total is 10 points, which does not match the stated weights: the Mathematical Routines type should be 10, and that is met, but the part split of 3/3/2/2 has no part worth more than 3 points. Estimated time is 22 minutes. Part B (derive) is labeled 2.A inside a 2.B-targeted bundle, which is acceptable. Part C is worth only 2 points, so the targeted 2.B skill is a small share of the bundle. The load is heavy, with a free-body diagram, a derivation, a calculation and a justification, but it is plausible for AP Physics 1."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part FRQ combining a free-body diagram, Newton's second law in two dimensions, and kinetic friction with a reduced normal force from the angled pull. Part D adds a qualitative reasoning step (a larger angle reduces N, so f decreases). The arithmetic is short and the wording is unambiguous. Difficulty comes only from allowed levers: choosing the law, translating the FBD to equations, and one claim-justification step.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ }
+]
