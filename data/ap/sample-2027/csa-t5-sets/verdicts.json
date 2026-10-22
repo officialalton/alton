@@ -1,0 +1,768 @@
+[
+ {
+  "key": "ap_computer_science_a-m01-k0-q1",
+  "cellId": "ap_computer_science_a-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Counts adjacent descents: 7>1 and 4>1, so 2.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "2"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Array traversal algorithm, trace output; fits 4.5/3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Trace gives 2; unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Code complete and compilable; call fully specified in stem."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors 3 (increases) and 6 (largest drop) are distinct and realistic; 5 rationale is loosely worded (compare first element against all others gives 5) but still defensible and explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short trace, typical AP MC load, no calculator."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean array-trace item with a unique key and plausible distractors. The explanation for option 5 is a little imprecise but acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single loop over adjacent pairs counting descents; 5 simple comparisons. Loop bound a.length-1 is a mild off-by-one lever. Straightforward trace with no aliasing, casting, or representation changes; fits core learning of array algorithms rather than full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m01-k0-q2",
+  "cellId": "ap_computer_science_a-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Loop goes over each adjacent pair and adds 1 to the count whenever a[i] > a[i+1]. So it counts the positions whose value is larger than the next value. A one-element array gives 0, which is consistent with this.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "B"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 80 seconds, short code, four parallel options, no calculator.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean describe-the-code item. The key is unique and the distractors are distinct and refutable, and the item fits scope and time."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Students must describe a standard adjacent-pair comparison loop (count of descents). The loop bound a.length - 1 and the a[i + 1] access make the boundary plausible to misjudge. Distractors are near-misses: longest run vs. count, boolean flag vs. count, and the reversed comparison direction. The code is short with no arithmetic or heavy reading, so this is a typical mid-level exam item rather than a first-exposure or stretch item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m01-k1-q1",
+  "cellId": "ap_computer_science_a-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Counts adjacent descents: (7,4),(4,2),(6,3),(3,1) = 4",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "4"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Array traversal tracing, 4.5/3.B, fits."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Trace gives 4; unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Code complete and compilable; call given in stem."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor matches a verified misconception value (2 ascents, 3 max drop, 6 compare to first)."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "7-element trace, about 90 seconds, no calculator."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean item with distinct realistic distractors; passes all criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Single-loop trace over 6 adjacent pairs counting descents; the bound a.length - 1 and the pair comparison require care but there is no heavy computation or reading. Standard AP-style array-algorithm tracing with plausible near-miss distractors (3, 6, 2). Answer is 4.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m01-k1-q2",
+  "cellId": "ap_computer_science_a-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The loop runs i from 0 to length-2 and adds one to c every time a[i] > a[i+1]. So it counts the positions whose value is bigger than the next value. A one-element array returns 0.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "A"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Describes the behavior of an adjacent-pair array scan; fits 4.5 and 4.A with no later-unit content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option A is the unique correct statement. B, C and D are each false by a concrete counterexample. Wording 'positions' is slightly loose, since the last index never counts, but A is still the best answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Code is complete and compiles. The stem states a non-empty array, so the length-1 case is covered."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors reflect distinct misconceptions: reversed comparison, run length versus drop count, and boolean sortedness. The options are parallel and similar in length, and the explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 80 seconds, no calculator, low reading load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, correct description-of-code question with one unique key and distinct misconception distractors. The only blemish is the slightly loose word 'positions' in the key option. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Single loop over adjacent pairs with a counter. The student must read the a.length - 1 bound, the a[i] > a[i+1] comparison, and the counter, then choose among near-miss descriptions (reversed comparison, longest run, boolean check). It needs no long trace or heavy arithmetic. It is a standard AP-style code-behavior item on the easier end, with plausible distractors that need careful reading of the comparison direction and counting versus run-length semantics.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m02-k0-q1",
+  "cellId": "ap_computer_science_a-m02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Sum = 70; 70*20/100 = 14 (integer division); 70-14 = 56",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "56"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Method tracing with a class and ArrayList field fits 3.5/3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Sum 70, discount 14, result 56; the key is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The code is complete; the ArrayList import is omitted, which is acceptable on AP-style items."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Option 45 claims per-item discounting with integer rounding, but that gives 16+16+24 = 56, not 45, so the stated misconception does not produce the option. The explanation for 45 is false, and the distractor is implausible. The explanation for the key is also tautological (it says that tracing gives 56)."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is low and appropriate."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key 56 is correct and the scope is fine, but the distractor 45 has a mismatched misconception rationale: per-price discounting actually yields 56. The distractor explanation is therefore inaccurate and the item fails on distractor quality."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Short trace of a simple method: sum 70, discount 70*20/100=14, return 56. The only subtlety is operator order in integer arithmetic. Distractors are the discount alone or a partial sum. Little reading, simple arithmetic, a single concept (writing and tracing a method with an instance variable).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m02-k0-q2",
+  "cellId": "ap_computer_science_a-m02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "A starts best at 0 and updates it to each larger price, so it returns the maximum, or 0 for an empty cart. B returns the last price and throws an exception on an empty list. C finds the minimum, starting from 0. D returns the sum.",
+     "ambiguous_or_flawed": false,
+     "flaw_note": "A relies on prices being non-negative, which is the usual assumption for prices."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Writing a max-finding method over an ArrayList field is a Topic 3.5 and Skill 2.B task. It uses a class field, a loop and a return value. No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option A is the only one that works. Starting best at 0 is correct for an empty cart. It also assumes non-negative prices, which is reasonable for prices but is not stated in the stem."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The class is complete and compilable apart from the missing ArrayList import, which is standard in AP code. The stem is clear. The code fences inside the option text are a rendering concern only."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The distractors are distinct (last element, minimum search, sum) and each is explained. However, B and D are very weak: the sum and the last element are obviously not a maximum. The \"<\" mutation in C is the only plausible near-miss. The set lacks a realistic boundary misconception, such as starting best at a wrong initial value."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Reading load is short, the options are parallel, and it takes about 90 seconds. It is a standard AP-style method-writing item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound and the key is unique and correct. The main weakness is that the distractors are easy to rule out. The stem also does not state that prices are non-negative, though the zero-for-empty-cart requirement makes that a reasonable default. I passed it with that caveat, but the distractor-quality failure means the item is not clean."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Choose the correct max-finding method among four short candidates. Distractors are clearly wrong: last element, wrong comparison direction (<), and summation. The 0 initial value is valid because the stem implies non-negative prices and an empty cart returns 0. Only one short loop pattern to recognize, with no tracing of long loops or tricky subtleties.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m02-k1-q1",
+  "cellId": "ap_computer_science_a-m02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Sum 130; 130*50/100=65; 130-65=65",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "65"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Tracing a method with an ArrayList field and integer arithmetic fits 3.5/3.B; easy but in scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "130 - 130*50/100 = 65; the key is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Code is complete and clear; the import is omitted as is typical."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Distractor 33 is not produced by its stated misconception: discounting each price with integer division gives a total of 65 (or 90 if one sums the discounted prices), never 33. The explanation text is generic and does not compute the wrong values. The key explanation is circular ('Tracing gives 65')."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Time and load are appropriate."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key 65 is correct and the item is in scope, but distractor 33 does not follow from its claimed misconception and the explanations are generic and circular, so the distractor and explanation criterion fails."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Simple class with a for-each sum and one discount expression. The student traces four add calls, sums to 130, and evaluates 130 - 130*50/100 = 65. Integer division and precedence are present but do not truncate, so the conceptual demand is low. The item tests basic method tracing and is not a full-mock target.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m02-k1-q2",
+  "cellId": "ap_computer_science_a-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "Option A tracks the largest price and returns 0 when the cart is empty. B throws an error on an empty cart and returns the last item, not the largest. C returns the sum. D looks for the smallest value and so always returns 0 for non-negative prices.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Writing an accessor/max-finding method over an ArrayList field fits 3.5 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A is the unique correct option under non-negative prices; B, C, D each fail tests. The non-negativity of prices is not stated in the stem, but it is natural for prices."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The code is complete and clear. Minor indentation inconsistency in the options and the unused total() method add slight reading load."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct misconceptions (last element, sum, reversed comparison), and the explanation covers each."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short and typical in difficulty and length for an AP CSA MC item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A sound, simple method-writing item with a unique key and distinct distractors. The only weakness is that non-negative prices are implicit rather than stated, which is acceptable in context. Pass."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard max-finding loop in an instance method. Distractors are clearly wrong: last element, sum, and min with the comparison reversed. Only one pass over the code is needed to pick the right one. The cart class has an unused discount field and constructor, which adds minimal reading. No tricky boundary or aliasing involved, and the empty-cart case is handled naturally by initializing to 0.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m03-k0-q1",
+  "cellId": "ap_computer_science_a-m03",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Garage fills up 28, 37, 18; leave(37) frees index 1; park(17) succeeds; park(20) fails because the garage is full.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "true true false"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Tracing object state through park/leave methods fits 3.5 and skill 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Trace gives true true false, which is unique and matches the key."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Code is complete. 'Returned' with a top-level return is slightly loose but understandable."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Option 0 (false false false) has a rationale ('last free slot, nothing changes for the count') that does not produce that output and is not a coherent misconception. p2 being false is implausible with 3 slots and 3 cars. The explanation for it does not truly explain why it is wrong."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Time and load are typical for an AP CSA item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the item fits the scope and is suitable for the exam. It fails on distractor quality: option 0's stated misconception does not match its output and is not realistic. The rationale should be rewritten, or the distractor replaced with a realistic one (for example, a version where leave fails to free the slot, or where park fills from the end)."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Short trace of park/leave on a 3-element array. Requires noticing that leave() frees a middle slot, which park() then reuses, and that the final park() fails because the garage is full. Only about 6 steps, no arithmetic, and one representation. A standard topic 3.5 method-tracing item that is not tricky.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m03-k0-q2",
+  "cellId": "ap_computer_science_a-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "Count nonzero slots across the entire array; B returns capacity, C counts empty slots, D skips the last slot.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Writing a counting method over an array field fits 3.5/2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A is the only option that counts nonzero slots over the full array; B, C, D each fail tests."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Class code is complete and compilable; the stem is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (capacity, inverted condition, off-by-one), each explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, about 100 seconds, no calculator load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound, with a unique key and distinct distractors, and it is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item asks which of four short method bodies counts the nonzero slots. Option A is the straightforward count. The distractors are clear near-misses: returning the array length, counting empty slots instead, and an off-by-one loop bound that skips the last slot. The solver needs one array traversal pattern and the fact that 0 means empty, which the park method shows. There are about 3 reasoning steps, no arithmetic, and no representation changes. Reading load is low because the class is short and the preconditions are clear. This is a routine method-writing check.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m04-k0-q1",
+  "cellId": "ap_computer_science_a-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "[5, 2, 3]",
+     "brief_reasoning": "The method removes duplicates and keeps the order of first appearance: 5, 2, 3.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "ArrayList traversal with contains/add, tracing output; fits 4.9 and 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "[5, 2, 3] is the unique correct result."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Code is complete and the stem is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (sorted, only repeats, unchanged); each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short trace, no calculator, typical load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, correct trace of a dedupe method over an ArrayList, with a unique key, parallel options and adequate distractor explanations. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept trace of a short dedup method using enhanced for, contains, and add on a 6-element list. Correct answer [5, 2, 3] requires recognizing that order of first occurrence is preserved. Distractors (sorted, missing first element, no dedup) are plausible but the trace is short and has no aliasing, casting, or boundary subtleties.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m04-k0-q2",
+  "cellId": "ap_computer_science_a-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "Each element is added to the new list r only if r doesn't already contain it. contains() compares with equals, so it works correctly on Integer objects. The result keeps the order in which values first appear, and the original list is not changed.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria. It is a standard describe-the-behavior item on an ArrayList traversal using an enhanced for loop with contains and add.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "The dominant demand is describing what an ArrayList traversal builds, which fits topic 4.9 and skill 4.A. contains and add on ArrayList are in scope for Unit 4."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option A is the only correct claim. The method returns a new list of distinct values in first-appearance order and leaves the original list unchanged. contains uses equals, so Integer comparison works as expected."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The code is complete and compact. The stem is clear, and the code needs no extra data to be understood."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception: modifying the original list, sorting the result, and keeping only repeated values. The explanation addresses each wrong option with a concrete example."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 80 seconds, has a light reading load, and needs no calculator."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Item asks the student to describe the behavior of a common ArrayList traversal idiom (dedupe via contains). The student must trace that r only adds unseen values, so order of first appearance is preserved, the original list is not modified, and no sorting occurs. Distractors are plausible near-misses (mutating the input, sorted output, only duplicates), requiring genuine verification rather than recall. In scope for 4.9 and skill 4.A, with minimal reading and no computation.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m04-k1-q1",
+  "cellId": "ap_computer_science_a-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "[3, 4, 2, 6]",
+     "brief_reasoning": "The method keeps the first time each value appears, in the original order: 3, 4, 2, 6.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "ArrayList for-each traversal with contains/add; tracing output matches 4.9 / 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Trace gives [3, 4, 2, 6]; unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Complete code, clear question and a specified input list."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions (unchanged list, last occurrence, repeated values); the last one is slightly contrived but acceptable. All wrong options are explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short trace of 7 elements, about 90 seconds, parallel option format."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope, and exam-appropriate. The key [3, 4, 2, 6] is unique, and the distractors are plausible."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student traces an enhanced for loop that removes duplicates using contains/add on an ArrayList<Integer>, preserving first-occurrence order. It takes 7 short iterations, requires knowing contains uses equals semantics, and has near-miss distractors on order and on which values are kept. The item is straightforward but appropriate for a full mock; reading and computation loads are low, and no unfair difficulty sources are present.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m04-k1-q2",
+  "cellId": "ap_computer_science_a-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Loop adds each value to new list r only when it isn't already there, so the order of first appearance is kept and the original list is unchanged. r.contains(v) autoboxes v and compares with equals, so value comparison works.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "A"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Traversal of ArrayList with contains/add; describe behavior, fits 4.9/4.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option A unique correct; others are false."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Code complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained with a concrete example."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item: remove-duplicates-by-copy description; unique key, good distractors, appropriate scope."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single short method using a standard dedupe-with-contains pattern. Students only need to see that r is a new list, that values are added in traversal order if not already present, and that the input is unchanged. The distractors (duplicates only, sorted, in-place modification) are each ruled out by a direct reading of the code. No tracing with changed bounds, aliasing, or numeric subtleties. This tests basic comprehension of an ArrayList traversal and sits below full-mock exam depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ }
+]

@@ -1,0 +1,45 @@
+{
+ "run": "psych-t5-sets",
+ "subject": "ap_psychology",
+ "generatedAt": "2026-10-21T23:50:53.446Z",
+ "totalCostUsd": 0.49,
+ "newSpendSinceBaseline": 0.53,
+ "cap": 2,
+ "calls": 108,
+ "candidates": 36,
+ "mcCandidates": 36,
+ "frqCandidates": 0,
+ "passedAll": 12,
+ "adopted": 4,
+ "mcAdopted": 4,
+ "frqAdopted": 0,
+ "reserve": 0,
+ "yield": 0.111,
+ "costPerAdopted": 0.122,
+ "callsPerAdopted": 27,
+ "duplicateRejected": 0,
+ "spotChecked": 0,
+ "wording": {
+  "llm": 0,
+  "template": 36
+ },
+ "rejectionReasons": {
+  "set_item_N": 123,
+  "criterion_failed_distractor_explanation": 10,
+  "criterion_failed_exam_suitability": 10,
+  "reference_pattern_mismatch": 10,
+  "criterion_failed_scope_skill": 6,
+  "criterion_failed_key_scoring": 1,
+  "criterion_failed_stimulus_expression": 4
+ },
+ "unfilledCells": [
+  "ap_psychology-m01",
+  "ap_psychology-m02",
+  "ap_psychology-m04",
+  "ap_psychology-m06",
+  "ap_psychology-m08",
+  "ap_psychology-m09",
+  "ap_psychology-m10",
+  "ap_psychology-m12"
+ ]
+}

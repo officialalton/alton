@@ -1,0 +1,79 @@
+[
+ {
+  "key": "ap_psychology-f01-k0",
+  "cellId": "ap_psychology-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Defensible claim grounded in sleep science.",
+     "final_answer": "Yes. A district should move high school start times later, because later starts let adolescents get more sleep, and more sleep improves attention and learning.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Experimental evidence on sleep and attention.",
+     "final_answer": "Source 1: students randomly assigned to 8 hours in bed scored 85% mean accuracy on an attention task, compared with 71% for students given 6 hours. The difference was statistically significant.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Link via sleep deprivation and selective attention; random assignment gives a causal inference.",
+     "final_answer": "Source 1 used random assignment, so it shows that sleep restriction itself causes worse selective attention. Sleep deprivation impairs the ability to focus on relevant stimuli (the targets) and ignore distractors. Attention is the first step of encoding information into memory (information processing model), so sleep-deprived students would encode less of what they hear in class. A later start that allows more sleep should therefore improve attention and learning.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Survey links later start to more sleep.",
+     "final_answer": "Source 2: students in the district starting at 8:45 a.m. reported an average of 7.6 hours of sleep on school nights, compared with 6.4 hours in the district starting at 7:15 a.m.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "E",
+     "brief_reasoning": "Circadian rhythm phase delay in adolescence; note the correlational limit.",
+     "final_answer": "During puberty, adolescents' circadian rhythm shifts later (a phase delay in melatonin release), so they naturally fall asleep later. With an early start time they cannot simply go to bed earlier, and they build up a sleep debt. A later start fits their biological clock, which matches Source 2's 1.2 extra hours of sleep. The survey is correlational, since districts were not randomly assigned and may differ in things like family income, but the finding fits what circadian research predicts. More sleep also supports memory consolidation, which happens during deep sleep and REM sleep, and that benefits learning.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Original EBQ on later school start times with three consistent fictional sources and a 7-point structure (1/1/2/1/2). The content is in scope (sleep deprivation and attention, circadian rhythm). The rubric is meaning-based and the model answers use numbers readable from the sources. The independent solver reached the same answers. One minor weakness: the Part D alternatives accept the nonsignificant, confounded Source 3 result as supporting evidence without qualification, which is loose for a 4.B skill, but it is not a wrong key.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Content is within 1.5 and 2.1. Parts B and D target 4.B, and parts C and E are tagged 1.A by design."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Rubric rows are analytic and consistent. Each source supports at least two defensible claims and two different course concepts. A minor looseness is that Source 3 (p = .18, confounded) is accepted as support in D alt_solutions."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table and source text are complete and consistent, and every number in the model answers is readable from the sources."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no options. Common errors are listed for each rubric row."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The 7-point EBQ load and structure match the official task format, with no calculator needed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style argumentation FRQ. Students craft a claim, select evidence from three short sources, and explain it with two different psychological concepts (sleep deprivation effects on attention, research design strengths and limits such as random assignment, confounds, and significance). Needs multi-step reasoning and discrimination of evidence quality, but all content is in scope and the sources are brief and clear. No computation. Difficulty comes from the skill, not from unfair sources.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 8,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 900
+  }
+ }
+]

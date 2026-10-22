@@ -1,0 +1,118 @@
+[
+ {
+  "key": "ap_computer_science_a-f01-k0",
+  "cellId": "ap_computer_science_a-f01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Keep adding n % 10 to a running sum and dividing n by 10 until n reaches 0. When n is 0 the loop never runs, so the method returns 0.",
+     "final_answer": "public static int digitSum(int n) {\n    int sum = 0;\n    while (n > 0) {\n        sum += n % 10;\n        n /= 10;\n    }\n    return sum;\n}",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "Start at start and count upward until n % digitSum(n) == 0. Because start >= 1, the digit sum is never 0, so there is no divide-by-zero. The loop always stops, because every number from 1 to 9 is divisible by its own digit sum, and so is every power of 10.",
+     "final_answer": "public static int firstHarshad(int start) {\n    int n = start;\n    while (n % digitSum(n) != 0) {\n        n++;\n    }\n    return n;\n}",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The content is sound and in scope: digit extraction and a helper-method search for the first Harshad number. The independent solver matched both reference solutions. The item fails on structure and scoring: it is a 7-point, two-part bundle, but the subject's fixed free-response format is a 9-point question. The rubric also has consistency problems. Row A1 bundles two behaviors (the loop condition and n % 10) into one point, against the one-behavior-per-row rule. The stated task and the rubric do not match: part (a) is labeled 'write a method' with a row about 'ends for n = 0 without error', and part (b) is worded as if the loop and a search guard were separate behaviors but B1 merges the start value with the loop. The 22-minute estimate for 7 points is heavy next to the 9-point, roughly 15-minute standard.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Fits 2.10 and 2.A (digit extraction with % and /, helper reuse). It uses only Unit 2 constructs."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Both reference solutions are correct. Total points is 7, not the fixed 9. Rows A1 and B1 each combine two behaviors in one point, which breaks the one-behavior-per-row rule."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The class skeleton and the examples are clear. The data object is minimal but sufficient."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Common errors are listed per row. No MC distractors apply."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "A 7-point bundle departs from the fixed 9-point, four-question free-response format. The 22-minute estimate is too long for the points offered."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Two-part FRQ-style item on core Unit 2 skills. Part (a) is the standard digit-extraction loop using % 10 and / 10, with n = 0 returning 0 naturally. Part (b) is an unbounded search loop that calls digitSum and tests n % digitSum(n) == 0. The boundary is plausible but fair: start itself must be tested. The preconditions are clear, so there is no divide-by-zero case. Reading and computation are light. The difficulty comes from the algorithm design and from reusing digitSum.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "ap_computer_science_a-f02-k0",
+  "cellId": "ap_computer_science_a-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Use two private int instance variables. use() clamps the amount to the current level and returns the amount actually used.",
+     "ambiguous_or_flawed": false,
+     "final_answer": "public class Battery {\n    private int level;\n    private int cycles;\n\n    public Battery(int startLevel) {\n        level = startLevel;\n        cycles = 0;\n    }\n\n    public int use(int amount) {\n        int used = Math.min(amount, level);\n        level -= used;\n        return used;\n    }\n\n    public void recharge() {\n        level = 100;\n        cycles++;\n    }\n\n    public int getLevel() { return level; }\n\n    public int getCycles() { return cycles; }\n\n    public boolean isLow() { return level < 20; }\n}"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a complete class-writing FRQ on private state, a constructor, a clamped update that returns the amount applied, and a boundary check. It is in scope for Unit 3 topics 3.3-3.5 and matches skill 2.B, and no inheritance is involved. The specification is unambiguous, with preconditions stated and the boundary at 20 explicit. The independent solver's solution (using Math.min) is valid under the rubric. The seven 1-point rows each judge one behavior, which fits the subject's fixed rubric format. The item resembles the style of the official Class Design question but does not reproduce a known one. The load is typical for a Class Design question.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Class writing with private state, a constructor, and methods is the dominant demand. This fits 3.5 with 3.4, and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The behavior is fully specified, including the preconditions. Rubric rows are single-behavior, and the model answer plus the Math.min alternative both satisfy them. A2 and A3 share some logic, but each is a distinct point."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The skeleton lists the required signatures, and the prose spec is clear. The stimulus data is minimal but sufficient for a code-writing item."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The common_errors lists in the rubric rows are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A 7-point class-writing item is reasonable. No calculator is needed, and the reading load is modest."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard FRQ-style class-writing task covering instance variables, a constructor, accessors, and mutators. The main subtlety is use(): clamping the level at 0 and returning the amount actually used (min(amount, level)) rather than the requested amount, which requires a boundary decision and a return value that differs from the parameter. isLow uses a strict < 20 comparison. Preconditions are explicit, there is no heavy arithmetic, and nothing is out of scope. This fits the full-mock target.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ }
+]

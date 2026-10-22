@@ -1,0 +1,35 @@
+{
+ "run": "csa-t5-frq2",
+ "subject": "ap_computer_science_a",
+ "generatedAt": "2026-10-22T01:58:22.912Z",
+ "totalCostUsd": 0.14,
+ "newSpendSinceBaseline": 0.14,
+ "cap": 1.2,
+ "calls": 12,
+ "candidates": 4,
+ "mcCandidates": 0,
+ "frqCandidates": 4,
+ "passedAll": 2,
+ "adopted": 2,
+ "mcAdopted": 0,
+ "frqAdopted": 2,
+ "reserve": 0,
+ "yield": 0.5,
+ "costPerAdopted": 0.071,
+ "callsPerAdopted": 6,
+ "duplicateRejected": 0,
+ "spotChecked": 0,
+ "wording": {
+  "llm": 0,
+  "template": 4
+ },
+ "rejectionReasons": {
+  "criterion_failed_scope_skill": 1,
+  "criterion_failed_exam_suitability": 1,
+  "reference_pattern_mismatch": 2
+ },
+ "unfilledCells": [
+  "ap_computer_science_a-f01",
+  "ap_computer_science_a-f02"
+ ]
+}

@@ -1,0 +1,563 @@
+[
+ {
+  "key": "ap_psychology-m01-k0",
+  "cellId": "ap_psychology-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The researchers manipulate the verb ('smashed' vs 'bumped') across the groups. That makes it the independent variable. The broken-glass reports are the dependent variable.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "The verb used in the question about speed"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Identifying the IV in a misinformation experiment fits 2.B and topic 2.7."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The verb in the speed question is the only manipulated variable. The broken-glass reports are the DV, and the video and delay are held constant."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor targets a distinct misconception (the DV, a constant, a constant), and the explanation covers every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, about 60 seconds, four options, no calculator."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct and unambiguous IV identification in a Loftus-style misinformation design. The distractors are plausible and each is explained. The item passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step identification of the independent variable from a short, clear procedure (misinformation effect). The only discrimination needed is IV versus DV/constant, and the distractors (video, delay, broken-glass reports) are clearly constants or the outcome measure. No stimulus, no computation, and little reading. This is a core introductory research-methods skill, so it fits foundational practice better than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 35
+  }
+ },
+ {
+  "key": "ap_psychology-m01-k1",
+  "cellId": "ap_psychology-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Random assignment spreads participant differences evenly across the groups, so the wording is the most likely cause of differences in what participants later report.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "B"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "An AP item would present the study procedure in the stem. A reference to an undescribed study is unsuitable for the exam.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key (B) is correct and the distractors are reasonable, but the stem refers to \"the accident study\" without describing it. The item is missing the scenario it depends on, so it fails."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Tests one named research-design concept (random assignment) applied to a familiar memory experiment (misleading question wording). Students must discriminate it from near-miss ideas: random sampling/generalization, blinding/deception, and equalizing memory ability. Low reading and no computation, about two reasoning steps, no representation changes. Typical AP research-methods difficulty, suitable for full mocks. The stem relies on an 'accident study' not described in the item, so the scenario must be supplied in context, but the concept is clear and the key is unambiguous.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_psychology-m02-k0",
+  "cellId": "ap_psychology-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Time of day varies along with the study method, so it is a confounding variable. That makes it a different explanation for why the flashcard group scored higher.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "Time of day of studying"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Confound identification in a study-strategy scenario; fits 2.B and the Unit 2 memory context."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Time of day is the only variable that differs between groups alongside study method. The other options are the DV, a constant, and an irrelevant variable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The wording is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors are distinct and plausible, and each wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, with four options and no calculator. Timing is typical for an AP item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean confound-identification question with a unique key and distinct distractors, and it fits the topic and skill. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item asks students to identify a confounding variable from a short scenario. The scenario is clear and the answer is unambiguous: time of day differs systematically with study method, and self-selection into groups is also a flaw. It takes one concept (confound / lack of random assignment), one inference, and no representation changes. The distractors are plainly weaker: the DV is not a threat, quiz length is the same for both groups, and teacher enjoyment is irrelevant. The link to encoding is only the study-technique context. It matches skill 2.B at an introductory level, not full-mock exam_prep depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_psychology-m02-k1",
+  "cellId": "ap_psychology-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The DV is the measured outcome, which is memory: the number of words recalled. The study schedule is the IV, and the delay and list length are held constant.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "The number of words each student recalled on the test"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Spacing effect scenario fits 2.4; identifying the DV is a standard 2.B experimental-design task. The archetype label (confound) is loose, but this is a label issue only."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The DV is the number of words recalled. The schedule is the IV, and the delay and list are constant. Only A is correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and decidable from the procedure. The same list for everyone is implied."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are the IV swap and two held-constant features. They are distinct and plausible, and each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, four options, no calculator. The item is easy but typical."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound, straightforward DV-identification item with a unique key and well-explained distractors. The only flaws are the loose archetype label and the unstated same-list assumption, which do not warrant rejection."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: identify the dependent variable from a short, unambiguous experimental description. The distractors are the independent variable and two controlled constants, which are easy to eliminate. No data interpretation, computation, or multi-step reasoning is needed. This is a foundational research-methods skill, not full-mock exam depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_psychology-m03-k0",
+  "cellId": "ap_psychology-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Scores that don't match when the same test is retaken (test-retest) point to a problem with reliability.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "Reliability"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item takes about 60 seconds and has four options. No calculator is needed.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a sound, unambiguous reliability scenario with a correct key and distinct distractors. The only issue is the loose skill tag, which is not a failing fault."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept application: inconsistent scores on repeated administration indicate poor test-retest reliability. The only discrimination needed is reliability vs. validity, a standard near-miss pair. The scenario is short and unambiguous, with no computation, table, or figure. The item aligns only loosely with skill 2.C (research design), since it tests psychometric concepts, but this does not add difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_psychology-m03-k1",
+  "cellId": "ap_psychology-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Consistent scores when students retake the test show test-retest reliability. Scores that don't relate to other measures of creativity show weak criterion or construct validity.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "It appears reliable but its validity is in doubt."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Reliability and validity fall under 2.8. The skill is concept application rather than evaluating research design elements in a non-experimental method, so the 2.C label is loose, but this is acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "C is the unique correct answer. The scores are consistent, so the test is reliable, and the lack of relation to other creativity measures casts doubt on validity."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option is explained. Option A adds the unsupported term 'standardized', and option D is easy to dismiss, but the misconceptions are realistic enough."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item is short, takes about 60 seconds, needs no calculator, and has four options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the item is clean, with a short stem and a single dominant concept. The minor weaknesses are the loose fit to skill 2.C and two weak distractors (A and D). It passes."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The item asks students to apply reliability (stable retest scores) and validity (no relation to other creativity measures) to a short scenario and to discriminate between these two near-miss concepts. It takes about 3 reasoning steps with no stimulus, no computation and unambiguous wording. This is a standard AP-level application item, on the easier side of exam_prep. Alignment to skill 2.C is loose, since the item is about test properties rather than research design, but that does not make it harder.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_psychology-m04-k0",
+  "cellId": "ap_psychology-m04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Test scores correlating with a future criterion (first-year grades) = predictive validity.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "Predictive validity"
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct, but the item is a definition-restating vocabulary match with a leaked key word and an implausible distractor. It also does not fit skill 2.C.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "The dominant demand is recalling the definition of predictive validity. It does not evaluate a research design element in a non-experimental method, so it does not fit skill 2.C well."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Predictive validity is the unique correct answer. The independent solver agreed."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stem is clear and complete, and no stimulus is needed."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Standardization sample is not a test quality that a correlation finding could support, so it is trivially implausible and not parallel with the other options. The explanations only restate definitions and do not say why each option fails for this scenario."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The stem says \"predict\" and the key is \"predictive validity\", so the item is a trivial word match with very low difficulty."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item asks for one named concept (predictive validity) applied to a short, unambiguous scenario. A test score is correlated with a later outcome (first-year grades). Distractors are standard terms (reliability, standardization, content validity), and only predictive validity fits. It takes one reasoning step, with no data to read, no calculation and no representation change. It tests recognition of a core definition, so it is below typical full-mock exam_prep complexity. The skill 2.C tag is only loosely matched, since the item is about test quality rather than evaluating a research design. The item stays within Unit 2 scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 25
+  }
+ },
+ {
+  "key": "ap_psychology-m04-k1",
+  "cellId": "ap_psychology-m04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Lower scores for one cultural group with equal real ability point to cultural bias in the test, which is a validity problem.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "Possible test bias"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 2.8.B test bias/validity is in scope. The 2.C skill tag is a loose fit (this is concept application, not a research-design evaluation), but I am not failing scope for the label."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C is the unique correct answer; the scenario describes group score differences with equal ability, which is the definition of test bias."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear, apart from the slightly odd 'play instruments equally well' phrasing."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Options A and D are weak: the aptitude/intelligence contrast in A is not a real concern here, and D is oddly phrased and not tempting. The explanations are generic; only B is a good near-miss."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, with one skill and no calculation, which matches the exam format."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the item is in scope and fast to answer, but two of the three distractors are weak (A is implausible and D is oddly phrased and not tempting). I fail it on distractor quality; the skill label is only loosely matched, which I note without failing scope."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept application: recognize test bias from a norming-sample and cultural-group scenario. Short stem, one inference step, no computation or representation change. Distractors are clearly weaker (misuse of aptitude/intelligence, standardization, reliability). Difficulty is not from unfair sources. Minor note: the item fits skill 2.C only loosely, since it tests test-construction concepts rather than non-experimental research design.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_psychology-m05-k0",
+  "cellId": "ap_psychology-m05",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Defining a variable by the specific procedure used to measure or manipulate it is an operational definition.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "an operational definition"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The stem works as a definition-matching item. It says \"defines X as [procedure]\", which gives away the keyed term and does not ask the student to evaluate a design element. This is too low a demand for skill 2.B.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the stem is clear. The item is a near-definitional recall question with implausible distractors and explanations that only restate definitions, so it fails on distractor quality and exam suitability."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept application: recognizing that defining a variable by concrete measurable procedure is an operational definition. Distractors are clearly distinct research-design terms, one reasoning step, no figure or data interpretation, minimal reading, no computation. Tests recall and basic application of a core vocabulary term rather than evaluating design elements in depth.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_psychology-m05-k1",
+  "cellId": "ap_psychology-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Random assignment is what controls for confounding variables, so it is the feature that allows a cause-and-effect conclusion. The stem doesn't actually say students were randomly assigned, but this option names the feature that would justify the conclusion.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "Random assignment of students to the quiz and reread conditions"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Fits 2.B: evaluating a design element (random assignment) in an experiment, set in a 2.6 retrieval-practice context. The blueprint concept label 'operational definitions' does not match the question; this is a label issue only."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Random assignment is the unique correct feature supporting a causal conclusion. The other options are clearly wrong. The solver agreed."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stem says 'the retrieval practice study' without describing it, and it never states that assignment was random. The question is still answerable as a concept question, so this is a minor flaw."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are distinct and plausible, and each has its own explanation. Same-day testing is a reasonable control-of-confounds near miss."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, about 60 seconds, four options, no calculator. Typical of the AP exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is acceptable. Random assignment is the unique, correct key, and the distractors are sound. Minor flaws are the undefined 'the retrieval practice study' in the stem and the blueprint label 'operational definitions', which does not match the question."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept application: identify random assignment as the feature enabling causal inference in an experiment (skill 2.B). One reasoning step, no computation, short stem. Distractors (reporting format, test type, same-day testing) are clearly not the causal-inference mechanism, so there is little discrimination between near-miss concepts. Appropriate for foundational learning rather than full-mock exam prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ }
+]

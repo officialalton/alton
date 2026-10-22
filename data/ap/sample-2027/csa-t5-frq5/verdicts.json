@@ -1,0 +1,64 @@
+[
+ {
+  "key": "ap_computer_science_a-f01-k0",
+  "cellId": "ap_computer_science_a-f01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Loop: add n%10 to the sum, then divide n by 10 until n is 0. When n is 0 the loop never runs, so it returns 0.",
+     "final_answer": "public static int digitSum(int n) { int sum = 0; while (n > 0) { sum += n % 10; n /= 10; } return sum; }",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "Start at start and go up by 1 until the number is divisible by its digit sum. For n >= 1 the digit sum is at least 1, so there is no division by zero. The loop always ends because Harshad numbers keep appearing (every power of 10 is one). Check: 11 has digit sum 2 and 11%2 != 0; 12 has digit sum 3 and 12%3 == 0, so the method returns 12.",
+     "final_answer": "public static int firstHarshad(int start) { int n = start; while (n % digitSum(n) != 0) { n++; } return n; }",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Content is sound, but the bundle totals 7 points instead of the fixed 9-point FRQ format, so it fails exam suitability.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Both parts are digit extraction and iteration with a helper method, which fits topic 2.10 and skill 2.A. Reusing digitSum is a prerequisite use of 2.9/1.9 and stays within Unit 2."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The reference and the independent solver's solution are equivalent, and both match the specification and examples. The preconditions guarantee a digit sum of at least 1 for part (b), so there is no division by zero. Rubric row A1 combines two behaviors (the loop condition and n % 10), which is a minor deviation from one behavior per row. Rows are otherwise 1 point each and consistent."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The class skeleton, preconditions and examples are clear and complete. The data object is minimal but sufficient for a code stimulus."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The common_errors lists are reasonable."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The subject notes fix the free response at four questions of 9 points each. This question totals 7 points (3 + 4), which departs from that grain, and the est_minutes of 22 is also inconsistent with a 9-point question. The task load is otherwise typical."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Two-part FRQ-style code-writing item. Part (a) is the standard digit-extraction loop (% 10, / 10 accumulation). Part (b) requires an open-ended search loop that reuses digitSum and tests divisibility, with a possible trap in the zero digit sum (avoided by start >= 1). It tests loop design, helper reuse and integer arithmetic at typical AP exam level. Reading and computation loads are light, with no out-of-scope content.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ }
+]

@@ -1,0 +1,2005 @@
+[
+ {
+  "key": "ap_psychology-m01-k0-q1",
+  "cellId": "ap_psychology-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "To make the groups similar at the start so that differences are more likely due to the amount of sleep",
+     "brief_reasoning": "Random assignment spreads participant differences evenly across both groups. That controls confounding variables, so a difference in response time is more likely caused by the independent variable, which is sleep.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Sleep restriction experiment (1.5) with a Practice 2 question on the purpose of random assignment. This fits skill 2.B, evaluating design elements in experimental methodology."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the standard purpose of random assignment: it equalizes preexisting differences so that group differences are more likely due to the IV. A is wrong because sample size is separate from assignment. C is wrong because random assignment does not inform participants of their group. D is wrong because the DV is the outcome and is expected to differ. The key is unique. The blind solver agrees."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete: groups, n, and mean RT. The stem is clear and uses US English. The table is not strictly needed for the question, but it adds context."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor reflects a distinct misconception about random assignment. The explanation addresses every wrong option. The key is longer than the other options, but only slightly, so it is not a giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60 seconds and needs no calculator. It is typical of AP Psychology method items."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key (B) is unique and correct, the distractors are distinct misconceptions, and the scope and skill fit is good. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: identify the purpose of random assignment in an experiment. The scenario is short and clear, the table is simple, and no computation is needed. The distractors are plainly wrong (sample size, participant awareness, holding the DV constant), so the item mostly checks recall and one-step application of a named concept to a scenario. It fits basic learning of research design rather than exam-level discrimination.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_psychology-m01-k0-q2",
+  "cellId": "ap_psychology-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Mean response time was longer for the 5-hour group (358 ms) than for the 7-hour group (312 ms). A longer response time means slower responses on average.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "A"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Reading a table of group means in a sleep restriction context; fits 3.C and 1.5, though the skill demand is low."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "358 ms > 312 ms, so the five-hour group was slower. A is the unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete (groups, n, means) and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option is explained. Option D is somewhat implausible because it adds an unmeasured variable, and B is weak, but both are clearly wrong."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Fast, no calculator, four options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and unique, and the table is complete. The item is easy and its distractors are weak, but it is acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step table read: compare two group means (312 vs 358 ms) and pick the matching statement. Distractors are clearly wrong (no difference, reversed direction, unmeasured memory loss). No calculation, minimal reading, no multi-concept discrimination. Suitable for foundational practice of skill 3.C rather than a full-mock item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_psychology-m01-k0-q3",
+  "cellId": "ap_psychology-m01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The five-hour group had a longer mean response time (358 ms vs. 312 ms), so they responded more slowly. That fits the known effect of sleep loss: worse attention and slower reactions.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "Impaired attention and slowed reactions"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 1.5 sleep deprivation effects; applying a finding to a scenario fits 1.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key D is correct and unique; the data show slower responses in the 5-hour group."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Distractors are trivially implausible: 'improved processing speed' contradicts the data, and a daytime shift to REM is nonsensical for awake participants. Dopamine is not a realistic misconception. The explanations are thin and describe no real misconception."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Too easy. The key is the only sleep-loss effect and is also the longest option, so it can be chosen without the table. No near-miss discrimination is required."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the table is fine. The item fails because the distractors are trivially implausible and the key is a giveaway, so it is not suitable for exam use as written."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept application: connect a slower mean response time in the sleep-restricted group to the well-known effect of sleep deprivation (impaired attention and slowed reactions). The table is simple, with two rows and no computation. The distractors are clearly wrong. Improved processing speed contradicts the data. The dopamine and daytime REM options are unsupported by the stimulus and are not general effects of sleep loss. Little discrimination between near-miss concepts is required, and there are no design or ethics decisions to make.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_psychology-m02-k0-q1",
+  "cellId": "ap_psychology-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "Information from the right visual field goes to the left hemisphere, which usually controls speech.",
+     "brief_reasoning": "Right visual field projects to the left hemisphere, where language/speech (Broca's area) is usually located. With the corpus callosum cut, only the left hemisphere has the information, so patients can name the object. Left-field objects go to the right hemisphere, which controls the left hand, so patients can pick them out but can't name them.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Split-brain research is in 1.4; applying it to a scenario with a table fits 1.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The right visual field goes to the left hemisphere, which usually controls speech. B is uniquely correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and consistent with the stem. The 1/6 right-field left-hand result is plausible."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "D is a realistic misconception. A and C are weaker but clearly wrong, and each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 65 seconds, with a short table and no calculation."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is accurate, with a unique key and a clean stimulus. Two distractors are weak but acceptable, so it passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item applies one core concept (contralateral visual processing and left-hemisphere language specialization in split-brain patients) to a short scenario. The table is small and supports a single direct inference. Distractors are clearly wrong: the cerebellum, increased language ability, and the right hemisphere controlling speech. Only one step of reasoning is needed after reading the table. There are no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 50
+  }
+ },
+ {
+  "key": "ap_psychology-m02-k0-q2",
+  "cellId": "ap_psychology-m02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The sample was small (6 patients) and unusual (split-brain surgery), so the results may not generalize to everyone. The other options misdescribe the method.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "C"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": ""
+   },
+   "notes": "The timing is fine, but the item is answerable by common sense (\"only six patients\") without the table or the concept. The weak distractors and the skill mismatch make it unsuitable for the exam.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct, but the item is not a 2.A design-identification item, the table is decorative, and two or three distractors are trivially wrong. Fail."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item applies one concept, limited generalizability from a small and atypical sample, to a short scenario. The table is simple and supports the stem without needing real interpretation. The correct option is directly cued by \"small group\" and \"corpus callosum had been cut.\" The distractors are clearly wrong, since they claim experiments cannot show causation, that surveys cannot be repeated, or that self-report was used. The stem asks about a sampling limitation, which is an allowed lever but only loosely aligned with the stated skill 2.A (identifying the research design). Reading and computation loads are minimal and nothing is out of scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_psychology-m02-k0-q3",
+  "cellId": "ap_psychology-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "In the left-screen row, the left hand succeeded for 6 of 6 patients. The right hemisphere receives the left visual field and controls the left hand.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "C"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Split-brain table reading fits 1.4 and 3.C, though the demand is very low (direct cell read)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "C is uniquely correct per table; the other options are clearly contradicted."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete and clear; the stem states the procedure sufficiently."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option is explained; the distractors are weak misreadings but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Quick, no calculator, appropriate length. The item is easy, and the key nearly restates the table cell."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, clear and acceptable. It is easy, with a low-demand table read and weak distractors, but it passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Direct lookup of one cell in a small 2x2 table (left-side flash, left-hand selection = 6 of 6). Distractors are the wrong row (1), the wrong column (0), and a reversed comparison, so they are easy to eliminate. Little concept depth is required beyond reading the table, and there is no computation or trick wording.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_psychology-m03-k0-q1",
+  "cellId": "ap_psychology-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Taste aversion: saccharin taste (neutral, then paired with sickness-inducing US) becomes CS eliciting aversion.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "The saccharin taste"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Applies the CS concept to a taste aversion scenario; fits 3.7 and skill 1.A."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The saccharin taste is the CS. It is the only defensible answer and the solver agrees."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete and consistent with the stem. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are the US, the UR, and the control injection. Each is a distinct misconception and each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60 seconds, needs no calculation, and has four options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is accurate and clean. The key is unique, the distractors are distinct, and it is in scope. The table is only supplementary but harmless. I recommend passing it."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item applies one named concept (conditioned stimulus) to a clear taste-aversion scenario. The student maps saccharin to CS, the sickness injection to US, and the sickness to UR. The table only confirms that the experimental group learned an aversion and needs no calculation. Distractors are the other classical conditioning roles, which is a standard discrimination in the CED. The scenario is unambiguous and uses only in-scope terminology.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_psychology-m03-k0-q2",
+  "cellId": "ap_psychology-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Experimental rats drank 12% of their original amount and controls drank 96%. That is a much lower intake in the rats made sick after tasting saccharin, which fits a conditioned taste aversion.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "C"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Taste aversion fits 3.7; reading a table to choose the supported conclusion fits 3.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "C is uniquely correct: 12% vs 96%. A, B and D are each contradicted by the table."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and clear, and the stem describes the procedure fully."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option is explained, though briefly. The distractors are easy to rule out, and B is the only one touching a conditioning idea. This is a minor weakness."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, no calculation, one dominant skill. The item is easy but typical of a data-reading question."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: a single correct conclusion supported by a clear table, with scope matching 3.7 and 3.C. It is low in difficulty and the distractors are weak, but it is acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student reads a two-row table and picks the conclusion matching the data (12% vs 96%). Distractors are direct contradictions or reversals of the table. Minimal concept depth; the classical conditioning context (taste aversion) is helpful but not required to answer. No calculation, short reading, one reasoning step.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_psychology-m03-k0-q3",
+  "cellId": "ap_psychology-m03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Garcia's work showed that a conditioned taste aversion can form after just one trial, even when the sickness comes hours after the taste.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "Taste aversion can form after a single pairing with a long delay."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Conditioned taste aversion is within 3.7 and applies a concept to a scenario. The stem mentions a delay but does not name a conditioning-timing type, so the out-of-scope labels are avoided."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is the Garcia finding. The distractors are clearly wrong: no shaping, no extinction, no observation."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and clear, and the 12% vs 96% values support the conclusion."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option is explained. The distractors are somewhat easy, and the key option echoes the stem wording, but this is acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Four options, about 70 seconds, short reading load, and no calculator needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is accurate, in scope, and well formed. The key restates the stem, so the item is easy, but that is not disqualifying."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept application: recognize conditioned taste aversion from a short scenario. The stem gives the key cues (one pairing, hours of delay), the table is a simple two-row comparison that supports the effect, and the correct option nearly restates the stem. The distractors (shaping, spontaneous recovery, observational learning) come from clearly different learning concepts, so discrimination is easy. No computation is needed. The item does not require the out-of-scope delayed/trace conditioning terminology.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_psychology-m04-k0-q1",
+  "cellId": "ap_psychology-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Each finished book earns a sticker, so a pleasant stimulus is added after the behavior. Reading went up (1.2 to 3.5 books per week), which makes this positive reinforcement. Stickers are also secondary reinforcers, as in a token economy.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "Positive reinforcement"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Applies operant conditioning (positive reinforcement) to a scenario, which fits topic 3.8 and skill 1.A. Stickers are a token or secondary reinforcer, and this stays within CED content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A sticker (a desirable stimulus) is added after the behavior and the behavior increases (1.2 to 3.5 books per week), so positive reinforcement is the unique answer. Classical conditioning, positive punishment and negative reinforcement are each clearly wrong. The independent solver agrees."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete with two rows and clear columns. The stem wording is clear US English. The table supports the claim that behavior increased, though the stem alone would suffice."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor targets a distinct realistic confusion (classical vs operant, the punishment/reinforcement valence). The explanation addresses every wrong option. The explanations only restate definitions instead of linking them to the scenario, which is a minor weakness."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 55 seconds, no calculator needed, four options. The item is relatively easy and the table is mostly decorative, but it is acceptable for the exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a correct, unambiguous application of positive reinforcement to a token-style classroom scenario. It is easy and the table is not essential, but it passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept application: identify stickers given after a behavior that increases that behavior as positive reinforcement. The table is simple and merely confirms the behavior increased (1.2 to 3.5); no data interpretation is required beyond that. Distractors (classical conditioning, positive punishment, negative reinforcement) are clearly distinguishable from the scenario, and the scenario is unambiguous. Reading load is short, there is no computation, and the item is an entry-level operant conditioning identification.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_psychology-m04-k0-q2",
+  "cellId": "ap_psychology-m04",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Without a concurrent control group, other things that changed over time (maturation, season, history) could explain the increase, so we can't say the stickers caused it.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "No comparison group without stickers during the same weeks"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Evaluates a design flaw (no concurrent comparison group) in a pre-post classroom study with a token-reinforcement context. Loose fit to 2.C non-experimental wording but acceptable under the Practice 2 convention."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option D is the unique defensible weakness. Other options are strengths or unsupported claims. Solver agrees."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete with clear columns and rows; the stem is self-contained and in clear US English."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option is explained. Distractors are plausible enough, though A is somewhat weak."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 65 seconds, no calculation, four options, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item: the missing concurrent comparison group is the unique correct weakness, and the table and stem are clear. The scope fit to 2.C is somewhat loose but acceptable, and a couple of distractors are weak but clearly wrong."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "One-concept design evaluation: identify the missing concurrent comparison group in a baseline-versus-treatment design. The table has two values and needs no computation. The distractors are clearly weaker (behavior measurement is a strength, reporting a mean is not the key flaw, and the prize-size claim is unsupported). There is one defensible answer and no out-of-scope content.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_psychology-m04-k0-q3",
+  "cellId": "ap_psychology-m04",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_key_scoring",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "3.5/1.2 ≈ 2.9, which is about 3 times the baseline.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "About three times greater"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Dominant demand is a ratio calculation, not psychology data interpretation; no operant concept (e.g., reinforcement effect, design limitation) is assessed."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Key A is the intended answer, but 'times greater' is ambiguous (2.9 times as great vs 1.9 times greater), which makes the 'one and a half' option arguably defensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Option D is trivially implausible. Explanations only restate the arithmetic; there are no psychological misconceptions."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Division of 3.5 by 1.2 by hand with no calculator is needless arithmetic and not typical of AP Psychology."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The item is mostly a math problem. It assesses no operant conditioning concept, requires hand division, and has an ambiguous 'times greater' phrasing. Option D is trivially wrong. Fail."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item requires reading two values from a simple two-row table and estimating a ratio (3.5/1.2 ≈ 3). No operant conditioning concept is needed to answer, since the question is purely quantitative comparison. It has one reasoning step, no representation changes, and low reading and computation load. The distractors are clearly distinguishable, so it fits foundational practice rather than a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_psychology-m05-k0-q1",
+  "cellId": "ap_psychology-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Different age groups were tested once, all in the same month, so this is a cross-sectional design. The researcher did not follow the same children over time or manipulate any variable.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "Cross-sectional design"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Cross-sectional design is 3.1 content; the student decides the design from the described procedure (2.A)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Different age groups tested in one month is cross-sectional. The other three options are clearly wrong, so the key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has complete columns and rows, the values are plausible, and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception and is explained. No length or format giveaway."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short reading load, no calculation, about 55 seconds. The item is easy but appropriate."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, unambiguous identification of cross-sectional design from the procedure. The key is correct and the distractors are distinct and explained. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept application: identify cross-sectional design from a procedure where different age groups are tested at one time. The scenario is unambiguous (three separate groups, single month, no manipulation, so not longitudinal or experiment; 90 children, so not a case study). The table is simple context and requires no computation or interpretation. Distractors are standard developmental research methods from the CED. Little reading, no calculation, and one inference step.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_psychology-m05-k0-q2",
+  "cellId": "ap_psychology-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "This is a cross-sectional design, so it only shows that group means go up with age. Option A is about individual children's growth, and the ratios aren't consistently threefold anyway. Option C reverses the data. Option D is about how accurate parents are, which the data doesn't address.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "B"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Interpreting cross-sectional group data (3.1, 3.C) fits the target topic and skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique supported conclusion. A overclaims individual change, C contradicts the table, and D is not addressed by the data."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete. The stem states a single month of testing, which establishes the cross-sectional design."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor targets a distinct misconception and the explanation covers every wrong option. Option C is a bit trivially wrong."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, with no calculation. The options are parallel enough, with B slightly longer."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A sound, easy table-interpretation item on cross-sectional design. The key is correct and unique, and it passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-table read with a cross-sectional design. Students need to see that group means from different children at one time cannot show individual change, and then pick the straightforward comparison of group means. The distractors are clearly wrong (reversed direction, an unsupported claim about parent accuracy, an individual-growth claim that the design cannot support). Only one concept is applied, with no calculation or heavy reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_psychology-m05-k0-q3",
+  "cellId": "ap_psychology-m05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "This is a cross-sectional design. Each age group was made up of different children, so cohort and other group differences could be mixed up with the effect of age. The other options are false or make no sense.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "D"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Cross-sectional design limitation fits 3.1 and skill 2.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "D is the unique correct answer: different children in each group is the standard cross-sectional limitation. The other options are clearly false."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and clear. The stem states the single-month design and the 30 children per group."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are plausible enough, each is clearly wrong, and the explanation addresses each one. The explanation's mention of cohort effects is slightly weak for toddlers a few months apart, but individual differences still apply."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, with no calculation and a typical load of about 65 seconds."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item. The key (D) is correct and unique, the distractors are clearly wrong, and the load is appropriate."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Students identify a cross-sectional design from the procedure (different age groups tested at one time) and recall its core limitation, that different children and cohorts may differ in ways besides age. The table is simple and needs no calculation. Distractors are clearly wrong (placebo groups belong to experiments, vocabulary loss contradicts the data, parent report is overgeneralized). This is single-concept application with a short reasoning chain, and the difficulty does not come from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_psychology-m06-k0-q1",
+  "cellId": "ap_psychology-m06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "Self-serving bias",
+     "brief_reasoning": "Students mostly credited their own good grades to disposition (86 of 100) and mostly blamed their own poor grades on the situation (70 of 100). Taking credit for success and blaming circumstances for failure is the self-serving bias. The classmate row would point to the fundamental attribution error, but the question asks only about the student's own grades.",
+     "ambiguous_or_flawed": false,
+     "flaw_note": "The table lists 300 explanations from 200 students, so some students must have given more than one. This does not change the answer."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Self-serving bias is core 4.1 content and the item applies it to table data, which fits skill 1.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Own good grade mostly dispositional, own poor grade mostly situational, so self-serving bias is the unique answer. The stem limits the question to own grades, so the fundamental attribution error is not defensible."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete. 300 explanations from 200 students is slightly unclear, because the stem does not say students could give multiple explanations, but this does not affect the answer."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are distinct, realistic near-miss concepts, and the explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, no calculation, four options, and no format giveaway."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and the item is clean. The only flaw is a minor clarity issue: 300 explanations from 200 students is not explained in the stem. Acceptable."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read a small table, compare own-good vs own-poor grade attributions, and name the pattern as self-serving bias while rejecting the near-miss fundamental attribution error (which relates to the classmate row, not the own-grade comparison). Single defensible answer, concept squarely in CED scope, no computation or trick wording. Moderate depth: concept application plus a table-to-concept representation change and one near-miss discrimination.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_psychology-m06-k0-q2",
+  "cellId": "ap_psychology-m06",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "The fundamental attribution error is the tendency to explain other people's behavior by their dispositions and to underweight the situation. The classmate's poor grade was explained by dispositional causes 75 times and by situational causes 25 times, so B fits. A and C are false according to the table, and D does not match the data.",
+     "ambiguous_or_flawed": false,
+     "flaw_note": "Minor issue: the three rows add up to 300 explanations, but the stem says 200 students. This does not change the answer."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Applies the fundamental attribution error to table data; fits 4.1 and skill 1.B, though the demand is mostly reading one row."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique defensible answer: 75 dispositional vs 25 situational for a classmate's poor grade. The other options are contradicted by the table."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Rows sum to 300 explanations while the stem says 200 students, which is unexplained. The stem mentions a classmate's good grade but the table has no such row. Wording is otherwise clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Option D is trivially implausible. A and C are simple table misreads, not distinct conceptual misconceptions. The self-serving bias pattern in the table is not used as a near-miss distractor, and the explanations only restate cell readings."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Timing and reading load are typical for an AP item. The table is small and no calculation is needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key B is correct and unique. The item is weakened by weak distractors (D is trivial, A and C are simple misreads, no near-miss concept option) and by a data inconsistency (300 explanations vs 200 students, and no row for a classmate's good grade). Marked as fail on distractor quality and stimulus completeness."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single named concept (fundamental attribution error) applied to a small 3-row table. The student must identify the row about another person's poor outcome and see that it is mostly dispositional. Distractors draw on the near-miss self-serving bias, but the table makes the correct choice unambiguous. No computation and light reading. This fits foundational concept application rather than a full-mock exam-prep item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_psychology-m06-k0-q3",
+  "cellId": "ap_psychology-m06",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "Students may not report the true reasons for their own or others' grades.",
+     "brief_reasoning": "Self-report has limits: self-serving bias, social desirability and limited insight. The other options are absurd.",
+     "ambiguous_or_flawed": false,
+     "flaw_note": "Minor: the table totals 300 explanations but the stem says 200 students. This doesn't affect the answer."
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key (B) is correct, but the item fails on quality. The table is not needed to answer the question. The table totals 300 explanations while the stem says 200 students. The stem mentions classmates' good and poor grades, but the table only has the classmate's poor grade. Distractors A, C, and D are trivially implausible and the explanations are thin. The item barely evaluates a real non-experimental design element.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "The question is only loosely tied to evaluating a non-experimental design element. Answering it takes generic common sense, not a research-design judgment."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the only defensible answer."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The table is decorative. The totals do not match the stem (300 explanations vs. 200 students). The stem says a classmate's good or poor grade, but the table has only the classmate's poor grade."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Options A, C, and D are absurd, not realistic misconceptions. The explanations are one-line restatements."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The item is fast to answer, but the unused table adds reading load, and the distractors are too weak for the AP exam."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item asks for one well-known limitation of self-report data. The table is context only and is not needed to answer. Distractors are clearly implausible (never ask, cannot code, sample too large), so a single recall-level judgment suffices. It is fair and unambiguous, but too easy for the exam_prep target of full mocks.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_psychology-m07-k0-q1",
+  "cellId": "ap_psychology-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "This is an Asch-style line-judgment study. Volunteers changed their answers to match a group's unanimous wrong answer, and nobody ordered them to. Going along with a group to avoid standing out is conformity, specifically normative social influence.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "conformity"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Conformity (Asch-style) is 4.3.D; the task is concept application (1.A)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Conformity is the unique correct answer. There is no authority command (so not obedience), no group output (so not social loafing), and no group decision-making (so not groupthink)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete and clear. The stem's 'In the table' is slightly awkward because the table is not needed to answer, but this is minor."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors are distinct, realistic near-miss concepts from the unit. The explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 55 seconds, no calculation, four options. Easy, but acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a sound, easy concept-application item on conformity with a unique key and clearly wrong distractors. The table is mostly decorative, which is a minor issue only. Passes."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept application: identify going along with a group's wrong answers to avoid standing out as conformity. Distractors (social loafing, groupthink, obedience) are clearly distinct, and the scenario has no authority figure, so there is no near-miss ambiguity. The table is context and is not needed to answer the question. No computation, and reading is minimal.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_psychology-m07-k0-q2",
+  "cellId": "ap_psychology-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The researchers changed the number of assistants on purpose, so that is the independent variable. The percentage of answers that conformed was measured, so it is the dependent variable.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "The number of assistants giving wrong answers"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Identifying the IV in a conformity experiment fits 4.3 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Number of assistants is the manipulated variable; the key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and the stem is clear. The table title appears only in the description field."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are distinct and plausible. The explanation for B claims the stem says the line is the same for all trials, which the stem does not state. This is a minor flaw."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item is short, needs no calculation, and is quick to answer, consistent with an AP-style item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is correct and unique and the distractors are realistic. The only flaw is that the explanation for option B refers to a detail about the standard line that the stem never states."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: identify the independent variable (the manipulated number of assistants) versus the dependent variable (percentage of conforming answers) in a brief experiment description with a small table. Distractors are clearly distinct, reading and computation are minimal, and no contested findings or out-of-scope content are involved. It is a foundational research-methods identification task.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_psychology-m07-k0-q3",
+  "cellId": "ap_psychology-m07",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Conformity went from 12% with one assistant to 31% with three, then only to 33% with six, so it leveled off after three.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "D"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Table reading in a conformity context; fits 4.3 and 3.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "D is uniquely supported by the table; A, B and C are clearly false."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table has complete headers and data; the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors are distinct misreadings and each is explained. The key is the longest option, a minor cue."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 65 seconds, no calculator, typical load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: the key is unique and supported by the table, the distractors are plausible misreadings, and the load is appropriate."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single small table with four rows; the student identifies the trend (sharp rise from 1 to 3 assistants, plateau from 3 to 6) and rejects three clearly contradicted distractors. No computation, no trick wording, and the content (conformity in a group-pressure line-judgment experiment) is in scope for 4.3. It is a direct, low-step application of data interpretation, easier than typical full-mock items.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_psychology-m08-k0-q1",
+  "cellId": "ap_psychology-m08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The inactive pill is a placebo. Both groups believe they might be getting treated, so the effect of expecting to improve is controlled, and any extra improvement in the drug group can be credited to the drug.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "To control for the effect of participants' expectations of improvement"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Placebo control in a double-blind drug trial; fits 5.5 and Practice 2 design evaluation."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is correct; A, C and D are each clearly wrong given the stem and table."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete and readable; the nausea column supports rejecting option D."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors are distinct, and each wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, no calculator, typical reading load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item. The key is unique and correct, the table is complete and used by the distractors, and the explanation covers every wrong option."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: identify the purpose of a placebo control in a double-blind experiment. The stem explicitly describes random assignment and blinding, and the distractors are clearly wrong (one contradicts blinding, one is illogical since the placebo group also reported nausea). The table is simple and is not needed to answer the question. There is no near-miss ambiguity, and the task requires one reasoning step with recall of a core AP research-methods concept.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_psychology-m08-k0-q2",
+  "cellId": "ap_psychology-m08",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Both groups' scores went down (11.0 and 7.5), so both improved. The drug group improved more and had more nausea reports (22 vs 6).",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "Both groups improved; the medication group improved more but reported more nausea."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Table reading with a conclusion choice fits 3.C; the context (placebo-controlled medication trial) fits 5.5."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A is uniquely correct: 11.0 vs 7.5 decrease, 22 vs 6 nausea reports, both groups improved."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and clearly labeled; the stem gives the design conditions."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor is a distinct misreading of the table and is clearly wrong. Explanations are terse but they address each option. The key is somewhat longer than the other options."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-70 seconds, no calculator needed, a typical AP Psychology data-reading item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A sound, easy table-interpretation item. The key is correct and unique, and the distractors are clearly wrong. The only minor flaw is that the key is longer than the other options."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item asks students to read a small two-row table and pick the matching conclusion. The correct option follows from a direct comparison of the two means (11.0 vs 7.5) and the two nausea counts (22 vs 6). The distractors are plainly contradicted by the data: the placebo group improved more, nausea was equal, or only the drug group improved. No calculation, outside knowledge, or discrimination between near-miss concepts is needed. The only added concept is that a placebo group can still improve, which is a standard introductory idea. Wording is clear, reading is light, and there is a single defensible answer.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_psychology-m08-k0-q3",
+  "cellId": "ap_psychology-m08",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Nausea came up more often with the drug (22) than with the placebo (6). An unwanted physical effect like this is a side effect of biological treatment.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "Side effects"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Side effects of medication are CED 5.5 content, and the item applies the concept to a scenario."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Side effects is correct and unique. Nausea is 22 of 100 on the drug and 6 of 100 on the inactive pill."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and clear. Only the nausea column is needed, so the stimulus is mostly decorative."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The distractors (spontaneous recovery, selective attention, confirmation bias) come from other units and are trivially implausible for this scenario. The explanations only restate definitions and are not tied to the scenario."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Timing and calculator load are fine. The item fails overall because the distractors are trivially implausible and the stem restates the definition of the keyed term, which is a recall-style item in the sense of the subject notes. A scenario with a plausible near-miss such as the placebo effect would be better."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key (side effects) is correct and the item is in scope. The distractors are off-topic and trivially implausible, and the stimulus is largely unused, so the item does not meet exam quality standards."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept application: students link higher nausea reports in the drug group to the side effects of biological treatment. The table is small and the distractors (spontaneous recovery, selective attention, confirmation bias) are not near-misses for this scenario. The design details (random assignment, double-blind) are extra context not needed for the answer. There is no calculation and only one reasoning step.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_psychology-m09-k0-q1",
+  "cellId": "ap_psychology-m09",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The mean cortisol was 13.5 on the exam day and 8.0 on the ordinary day, so the mean was higher on the exam day. A mean can't show that every student's level rose, and this design can't show that exams caused the change.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "C"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is too easy for AP: two numbers are compared, and two of the three distractors are trivially wrong. The stem also does not ask for any inferential reasoning, and the table shows only means with no variability or test statistic. This is weak as a 3.C item, and the brief's guidance is to fail items whose distractors are trivially implausible.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clean, but it is trivially easy. Two distractors are implausible, and the demand is just reading which mean is larger. I fail it on exam suitability and distractor quality."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step table read: compare two means (13.5 vs 8.0) and pick the supported conclusion. Distractors include an overgeneralization (every student/cause), a 'same' claim, and a reversed direction, all easily eliminated. No computation, minimal reading, and only light link between stress and cortisol. Suits foundational learning rather than full-mock exam prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_psychology-m09-k0-q2",
+  "cellId": "ap_psychology-m09",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "The same students were measured on both days.",
+     "brief_reasoning": "This is a within-subjects (repeated measures) design, so each student acts as their own control. That takes individual differences out of the comparison between days. Cortisol is a physiological measure, not a self-report. Students were not randomly assigned to days, and stress was not manipulated.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Research design evaluation in a health psychology context; acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Same participants on both days (within-subjects) is the unique strength; the other options are contradicted by the stem."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and the wording is clear, though the table is barely needed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor is explained. They are false descriptions of the study rather than weaker strengths, so they are somewhat easy, but they are distinct misconceptions."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, no calculator, four options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and unique, and the item is a short, clear research-design question. The distractors are easy because they contradict the stem, but the item is acceptable overall."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept application: recognize that measuring the same participants under both conditions (within-subjects) controls for individual differences. The correct option restates the stem, and the distractors (self-report, random assignment, manipulation) are clearly contradicted by the scenario. The table is trivial to read and no computation is needed. No ambiguity or trick wording, so the difficulty is low for fair reasons.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_psychology-m09-k0-q3",
+  "cellId": "ap_psychology-m09",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Cortisol was higher on exam day, which fits the stress response: when the body perceives a threat (exams), it mobilizes energy to deal with it.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "The body mobilizes energy to respond to a perceived threat."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Topic 5.1 fits, but there is no real concept application. No named concept is applied; the item asks for a generic description of the stress response."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key A is defensible and no other option is correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete with units, but it is decorative. The stem already states that cortisol is released in the stress response. The wording 'matches the pattern' is vague."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The distractors (removes all arousal, shuts down all hormone release, stops responding) are trivially implausible. Each encodes an absurd claim rather than a realistic misconception. The explanations are one-line negations."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The item is a recall-style item dressed up with a table and does not discriminate between students. It is not typical of the AP stimulus-based concept application items."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct, but the item is a trivially easy generic recall question. It has no named concept to apply, a decorative table, and implausible distractors. Reject for weak skill 1.A fit and poor distractors."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single concept application: a higher cortisol level on exam day matches the body mobilizing energy in response to a perceived threat. The table has only two values and one comparison. The distractors are clearly incorrect, so no near-miss discrimination is required. This suits foundational practice rather than a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_psychology-m10-k0-q1",
+  "cellId": "ap_psychology-m10",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "The gratitude group's well-being increased more, on average, than that of either other group.",
+     "brief_reasoning": "Gratitude mean increase 6.1 > 1.2 > 0.4; other options contradict the data.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Skill 3.C asks for inferential data interpretation, but the table gives only descriptive means with no significance information. The task is simply to compare three numbers, and the positive-psychology content is minimal."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option A is correct and unique. 6.1 is greater than 1.2 and 0.4."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "All three distractors contradict the table outright (smallest group as largest, gratitude lowers well-being, identical increases). None encodes a realistic misconception. The explanations are trivial restatements."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Too trivial for AP level, since it needs only reading the largest number in a table."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct, but the item fails on skill fit and distractor quality. It requires only reading descriptive means rather than interpreting inferential data, and every distractor is trivially false."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-step table read: compare three mean increases and pick the largest. Concept (gratitude in positive psychology) is simple and the distractors are clearly contradicted by the data. No calculation, no near-miss concepts, minimal reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_psychology-m10-k0-q2",
+  "cellId": "ap_psychology-m10",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The neutral-events group is a control condition. It does the same writing as the other groups but with no emotional content, so any change in that group shows the effect of writing itself. That lets the researchers separate the effect of gratitude content from the effect of just writing.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "To provide a comparison for the effect of writing itself"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Gratitude intervention is 5.2 content; the question asks about the purpose of a control/comparison group, which fits evaluating design elements."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "D is the unique correct answer; A, B and C are each contradicted by the stem."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and consistent with the stem (3 x 40 = 120). The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct errors and each is explained. They are somewhat easy, and option B is a bit implausible."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, no calculator, and consistent with the reference pattern."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound and has a unique correct key. The distractors are weak but acceptable, so it passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: identify the purpose of a control/comparison group in a simple three-group experiment. The scenario is clear, the table is small and needs no calculation, and only one option is defensible. The distractors are plainly wrong (random assignment is already described, the pretest is given to everyone, and the neutral task is not meant to induce gratitude). This tests foundational experimental-design knowledge, not exam-level discrimination.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_psychology-m10-k0-q3",
+  "cellId": "ap_psychology-m10",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Gratitude interventions meant to raise well-being are a standard topic in positive psychology, which studies human strengths and flourishing.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "Positive psychology"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is a low-level recall or label question built on a detailed scenario. The stem effectively restates the definition-level link (gratitude and well-being point to positive psychology). The data table adds reading load without being used. Distractors are easy to eliminate, so the item does not discriminate among students.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct, but the stimulus is unnecessary, the distractors are trivially implausible with generic explanations, and the item tests only topic labeling. It fails on stimulus use, distractor quality and exam suitability."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item asks students to match a gratitude exercise to positive psychology, which is a single-concept application. The distractors (psychodynamic, psychophysics, behaviorism) are clearly distinct from positive psychology, so there is no near-miss discrimination. The table is not needed to answer and requires no interpretation. The reading load is light and no computation is required.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_psychology-m11-k0-q1",
+  "cellId": "ap_psychology-m11",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "In the immediate-therapy group, scores dropped by 24 points (62 to 38). In the waiting-list group, they dropped by 4 points (61 to 57). So symptoms decreased much more with immediate therapy.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "D"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Waiting-list trial table reading fits 5.5 and 3.C."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Drops of 24 vs 4; D unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct plausible misreadings, each explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no calculator, appropriate load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound, unambiguous table-interpretation item; key correct."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single small table; student compares pre/post change for two groups (drop of 24 vs 4) and picks the supported conclusion. Distractors are clearly wrong (misreads equal baselines, reverses direction, claims equal change). Minimal concept depth (waitlist control), no ambiguity, light reading and arithmetic.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_psychology-m11-k0-q2",
+  "cellId": "ap_psychology-m11",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Giving the waiting-list (control) group the treatment after the study is an ethical step that protects the welfare of participants who were denied treatment at first. It has nothing to do with confidentiality, deception or blinding.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "protecting the welfare of participants who did not receive treatment first"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Evaluating an ethical feature (welfare of the control group) fits 2.D; waiting-list therapy context fits 5.5."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "C is the unique defensible answer; the other options are clearly wrong."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and consistent, though not needed to answer the question. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are plausible ethics terms. The double-blind explanation only restates the definition and does not say why the option is wrong, and the correct option is the longest. Marginal pass."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, no calculator, and a typical AP format."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and unique, and the item fits skill 2.D in a 5.5 context. Weaknesses are an unnecessary table and thin distractor explanations. Acceptable overall."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept application: recognize that giving the waiting-list group the therapy after the study protects participant welfare (a standard ethical safeguard in treatment research). Distractors (confidentiality, deception, double-blind) are clearly unrelated to the scenario. The table is context only and not needed to answer. No computation, little reading, no ambiguity.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 40
+  }
+ },
+ {
+  "key": "ap_psychology-m11-k0-q3",
+  "cellId": "ap_psychology-m11",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The waiting-list group is the control group. It shows how much symptoms change over twelve weeks without therapy (61 to 57), so that change can be compared with the therapy group's drop (62 to 38).",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "To provide a comparison for changes that happen without the therapy"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Waiting-list control purpose in a randomized treatment trial fits 5.5 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "C is uniquely correct; A, B and D are clearly wrong. The independent solver agreed."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and consistent with the stem. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "All wrong options are explained, but B and D are weak, fairly implausible distractors and the explanation for B is thin. This is a minor weakness."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, no calculation, and the load is typical of the exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item with a correct, unique key. The distractors are somewhat weak but acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: identify the purpose of a control (waiting-list) group in a simple two-group experiment. The table is easy to read and not essential to answering; distractors are clearly wrong. One or two reasoning steps, low reading and no computation. This is more suited to basic learning than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_psychology-m12-k0-q1",
+  "cellId": "ap_psychology-m12",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Identical co-twins were diagnosed at 48%, compared with 17% for fraternal co-twins, so identical co-twins were diagnosed more often.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "Co-twins of identical twins were diagnosed more often than co-twins of fraternal twins."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Reading a twin concordance table fits 3.C and topic 5.3 (genetic/biological explanations)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "D is uniquely correct: 48% vs 17%."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete with columns and rows; wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor is explained. They are easy but encode realistic misreadings (reversal, overgeneralization, no difference)."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, no calculator, light reading load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a simple but valid table-reading item with a unique correct key, a complete table and plausible distractors. It is low in difficulty, and the blueprint's mention of the diathesis-stress model is not assessed. It is acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item asks students to read two percentages in a small table (48% vs. 17%) and pick the conclusion that matches the direction of the difference. It requires no knowledge of heritability calculations or the diathesis-stress model, and no calculation. The distractors are clearly wrong: the reversed comparison, an absolute claim (\"every\"), and \"same rate\". There are no trick wordings or ambiguity. This is a straightforward single-step table read that fits foundational learning more than full-mock exam prep.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 30
+  }
+ },
+ {
+  "key": "ap_psychology-m12-k0-q2",
+  "cellId": "ap_psychology-m12",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Identical twins share essentially all their genes. If genes alone caused the disorder, concordance would be close to 100%. At 48%, more than half of the co-twins were not diagnosed, so non-genetic factors must also matter.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "D"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Twin concordance and gene-environment interplay fit 5.3; applies data to a concept."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "D is uniquely correct: identical twins share ~all genes, 52% of co-twins undiagnosed."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table complete with columns, rows, and sample sizes; clear wording."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor is a distinct, clearly wrong claim and is explained. The key is slightly longer, which is a minor cue."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 70 seconds, no calculator, typical load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Accurate, unambiguous twin-study item. The key is correct and the distractors are clearly wrong. It is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single concept application: twin study logic (identical twins share 100% of genes, so concordance below 100% implies non-genetic influences). The table is small and simple, with only a comparison of two percentages. Distractors are plain misconceptions, and there is only one defensible answer. No computation, short reading, and no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_psychology-m12-k0-q3",
+  "cellId": "ap_psychology-m12",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Diathesis-stress model holds that a predisposition (diathesis), such as genetic vulnerability, interacts with environmental stress to produce a disorder.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "The diathesis-stress model"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": ""
+   },
+   "notes": "The stem restates the definition of the keyed term. The unused table makes the item look like a data item while testing only vocabulary.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct, but the stem merely restates the definition of the keyed term. The twin table is decorative and unused, and the distractor rationales are generic. Fails on scope/skill, stimulus use, distractors and exam suitability."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item asks students to match a one-sentence definition (genetic vulnerability plus life stress) to the diathesis-stress model. This is direct recall of a single named concept. The twin-study table is background and is not needed to answer. Distractors are clearly different perspectives, each stated with distinct mechanisms, so there is little discrimination between near-miss concepts. There is no computation and the reading load is light.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 1,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 25
+  }
+ }
+]

@@ -1,0 +1,326 @@
+[
+ {
+  "key": "ap_computer_science_a-m01-k0-q1",
+  "cellId": "ap_computer_science_a-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "t=80; t*pct/100 = 2800/100 = 28; 80-28 = 52",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "52"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Traces a class with ArrayList field and a method computing a discounted total; fits 3.5/3.B, no out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "80-28=52; unique correct answer; options distinct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Code is complete and compilable in context; the stem refers to the class in the stimulus. Import omitted as is typical for AP."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a named misconception (ignore discount, flat subtraction, discount only). Explanation covers every wrong option, though the key explanation is terse."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds, light arithmetic, no calculator; low-moderate difficulty, acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean trace item with a unique key and distinct misconception-based distractors. Fits topic 3.5/skill 3.B and is suitable for the exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single method trace: a for-each sum of 4 values, then one integer expression (t - t*pct/100). The only subtleties are operator order and distinguishing the discount amount (28) from the final total (52). Arithmetic is small and clean; this is standard topic 3.5 tracing, appropriate for basic learning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m01-k0-q2",
+  "cellId": "ap_computer_science_a-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "C starts best at 0, which also covers the empty cart, and replaces best whenever a larger price shows up, so it returns the maximum (assuming prices are not negative). A keeps the smaller value, so it never changes from 0. B returns the sum. D fails on an empty cart and only gives the last price.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Writing a max-finding method over an ArrayList field matches topic 3.5 and skill 2.B; no out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "C is the unique correct option. A always returns 0, B returns the sum, and D fails for an empty cart and returns only the last price. Negative prices are not addressed in the stem, but the 0 for empty cart rule and the price context make this acceptable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The class code is complete and clear. The unused pct and total are minor extra reading but are plausible context."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct misconceptions (reversed comparison, summing instead of maximum, last element only), and the explanation covers each."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, with no calculator and no arithmetic load. Time is typical for the AP exam."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item passes all five criteria. C is the unique correct implementation, and each distractor reflects a distinct misconception. The only blemish is that the stem does not state that prices are non-negative, which is minor given the empty-cart rule."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: write a max-finding method over an ArrayList field. Distractors are clear near-misses (inverted comparison, summing, last element failing on empty cart). The empty-cart requirement is a mild boundary check. Reading and computation load are minimal, with no tracing beyond a quick scan of each option.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m01-k1-q1",
+  "cellId": "ap_computer_science_a-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "t=75; 75*35/100=2625/100=26 (int division); 75-26=49",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "49"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Traces a method with a field and ArrayList, in Unit 3 scope, skill 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "75 - 26 = 49 is the unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Code is complete and the stem is clear. The ArrayList import is omitted, as is typical on the exam."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct misconception (26 is the discount only, 75 ignores the discount, 40 subtracts pct flat). The explanations are terse but cover every option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 95 seconds, no calculator needed, arithmetic is light."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean trace item with a unique key and distinct distractors. The only weakness is the thin, slightly circular key explanation, so I am passing it."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Short class trace: construct a Cart, add three prices, sum to 75, then compute 75*35/100 with integer truncation (2625/100 = 26) and subtract to get 49. The main lever is integer-division truncation and the order of operations, with distractors for the discount alone (26) and no discount (75). The reading load is low and the arithmetic is small enough to do without a calculator.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m01-k1-q2",
+  "cellId": "ap_computer_science_a-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "A starts best at 0 and keeps the largest price seen, so it returns 0 for an empty cart. B returns the last item and throws an exception on an empty cart. C returns the sum. D looks for values smaller than 0, so it never finds the maximum.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Writing a method that returns a value from an instance field (ArrayList) fits 3.5 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A is the unique correct option. B fails for non-last max and empty cart, C sums, D always returns 0."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The class code is complete and the spec is clear. The ArrayList import is omitted, as is normal for AP. Option indentation is slightly uneven but harmless."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (last element, accumulate, wrong comparison), and each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short code, about 90 seconds, no calculator needed, four parallel options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound, with a unique key, plausible distractors, and appropriate scope. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "This is a standard max-in-list method written inside a class. Only one option is a correct running-maximum loop with a 0 default. The distractors are clearly wrong: the last element, a sum, and a minimum. The solver needs one concept, no computation, and no representation changes. The empty-cart case is handled by the initial value of 0, and prices are implicitly positive, so there is no subtle boundary trap. This fits introductory practice for writing methods, not a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m02-k0-q1",
+  "cellId": "ap_computer_science_a-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "All 4 parks succeed. After leave(33), slot 0 is empty, so park(15) succeeds. The garage is then full, so park(28) fails. Result: true true false.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "true true false"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Tracing object state through method calls on an array field fits topic 3.5 and skill 3.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Trace gives true true false; the key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The code is complete and compiles. Minor wording issue: 'returned by' a bare segment containing a return statement is slightly unnatural; 'printed' would be cleaner."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a named misconception, and the explanation covers every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short trace, about 95 seconds, no calculator needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct, the item is in scope, and the distractors are distinct. The only issue is the minor wording of 'returned by' a code segment that ends in a return statement."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Short trace of park/leave on a 4-slot array; one freed slot is reused, then the garage is full. Single concept (method behavior with instance state), no tricky subtleties, minimal reading and computation.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 8,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_computer_science_a-m02-k0-q2",
+  "cellId": "ap_computer_science_a-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "Option C counts every slot with a nonzero value, so it checks the whole array and counts the filled slots. A returns the total capacity. B counts the empty slots. D skips the last slot.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Writing a counting method over an array field; fits 3.5 / 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C is the unique correct implementation; 0 is the empty sentinel in the given code. Ids being nonzero is implied, not stated, which is a minor concern."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Class code is complete and compilable; wording is clear. Minor indentation oddity in options."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (capacity, inverted condition, off-by-one); each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, no arithmetic, typical AP style."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item: the key is unique and the distractors are distinct. The only concern is that nonzero ids are implied rather than stated, which is minor. Pass."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: write a simple counting method over an array. Distractors are obvious near-misses (returns capacity, counts empty slots, off-by-one bound). Requires one short scan of the class and one check of each option; no tracing, aliasing, or arithmetic. Fits foundational method-writing practice rather than full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ }
+]
