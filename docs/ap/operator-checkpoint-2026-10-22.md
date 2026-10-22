@@ -36,3 +36,11 @@
 - **풀 모의고사 공개 수(DB)**: 71, 부분 연습 3(mc_practice 2 + frq_practice 1).
 - **원장**: 누적 $556.9358(이번 작업 유료 호출 0, 진행 중 예약 0). 상한 730/740으로 갱신(`ledger-total.ts`, `ledger-summary.json`).
 - **도구 변경**: `chem-structure-block.ts --extra-block`, `local-demo-seed.ts --skip-convert-failures`, `render-check.ts`에 chem-t5-* 추가, 배치 26개 등록(chem-t5-* 12 + 복구 1 + csa-t5-* 13) — 화면 증거 파일 `evidence-chem-t5.json`·`evidence-csa-t5.json`.
+
+## 최종 체크포인트 (2026-10-22 08:15Z, 주간 사용량 약 90%)
+- 공개(DB 검증): CH4 `856cfaad…`, CS4 `b25f8cae…`, PS3 `64b267bd…`, PS4 `3dcf297e…`, PS5 `a2e38fff…`. CS5 `7c42225c…`는 공개 25분 뒤 쌍둥이 발견으로 보관(archived_at 08:12:39Z). 풀 모의고사 73·부분 3.
+- 미공개: CH5(unit 3.4 기체 단독 1개 부족, v7 배정 파일은 CH4와 구조 쌍둥이를 막은 최종본), PH5·LT5(처리 안 함).
+- 원장 $557.9848(합집합, 이번 작업 유료 호출 0), 상한 730/740(`ledger-total.ts`·`ledger-summary.json`·`POLICY-DECISIONS.md`). 진행 중 예약 0.
+- 미반영·미커밋 변경 없음(모든 변경 integration·review에 푸시). 격리 스택 모두 정지, `config.toml` 원복.
+- 재개 절차: (1) 교체 재고를 만든 뒤 `post-publish-twin-audit` 목록으로 새 버전 초안 교체(관리자 'AP 재고 관리' → AB/AP 세트 새 버전), (2) CH5는 unit 3.4 기체 문항 1개 작성 후 `chem-structure-block.ts --extra-block data/ap/stock/blocked-chem-defects-20261022.json` + CH4 키 차단으로 재배정, (3) 공개 전 `structure-rule-scope.md`의 엄격 게이트를 먼저 수행, (4) PH5·LT5는 `ap-topup-p1-lt-wh` 병합(ledger.json 합집합·keys-file.ts 충돌 해결) 뒤에.
+- 테스트 응시 정리 대기(미제출, 테스트 계정): CH4 `5a18e9ff-18a6-4706-9870-8394258bc78c`, CS4 `04ffc137-f1ec-4bff-a6bd-aaf614a91d6e`, CS5 `be9004fc-dcb5-4395-b7b0-2a85b53f710e`, PS5 `86f54d8b-3195-402b-82c2-f49694adc20d`, 이전 실행분(PC5·BI5·EL5·LT4·PS3·PS4·SAT·US3)은 기존 목록.
