@@ -20,7 +20,7 @@
 - **준비 완료가 아닌 이유**: 화면 증거·적재·변환·최신 DB 대조 미실시. MC 묶음 일부(`englit-p1-a s05·p06·l01`, ALTON 작성 원문)는 과거 공개 v1 에 있던 재고라, 운영 단계에서 현재 공개 LT1~LT4 와 내용 중복이 없는지 확인해야 한다. 오너 구조 규칙(질문·자료·풀이 단계)으로 q2 `fa2`와 위 묶음을 읽어 판정할 것.
 - 비용: Eng Lit 합계 $0.9308(원장 $565.1648 → $566.1299 이후 q1 시도 포함 $566.1299), 한도 $10 안.
 
-## World History WH4 — 미착수(부족분 확정)
+## World History WH4 — 미착수(부족분 확정, 주간 사용량 89% 에서 보류)
 - 차단 후 남은 재고: MC 세트 10(문항 38), FRQ 2(saq2 era3, saq3 era2). 필요: 단원 U2 ≥4, U7 ≥4, U4 +2, U5 +2 문항(총 55까지 약 17문항 = 세트 5개), 자료 유형 quantitative ≥1·image +1·primary ≥4, SAQ1(시대 1 또는 4)·DBQ·LEQ 새로 필요. 모두 권리 확인된 실제 출처를 골라 사실 검증해야 하는 작업이다.
 
 ## chf_short_bonding
@@ -30,3 +30,11 @@
 1. `ledger.json` 은 합집합 병합. 통합 브랜치에 이 브랜치를 합친 뒤 운영 에이전트가 PH5 를 적재·화면 증거·변환·공개 관문 검증.
 2. LT5: q3 실행 결과(`data/ap/sample-2027/englit-t5-q3/`)를 `lt-finalize.ts` 로 재고화, q1 은 위 실행 후 `lt-assign.ts --sets LT5 --block-file …` 재확인.
 3. WH4: 위 부족분 스펙대로 출처 선정부터.
+
+## 비용 요약(중앙 원장 기준, 시각: 2026-10-22 낮)
+- 시작 $556.9358(통합 브랜치 병합본) → 현재 $566.1299, 이 작업 합계 **$9.19**(Physics 1 $8.23 · Eng Lit $0.93 · World History $0 · chf $0). 한도 $35 중 잔여 약 $25.8, 중단선 $730 까지 $163.9. 진행 중 호출 없음, 예약 $0.
+- 위 합계에는 주제 코드 오기·구조 쌍둥이 판정으로 다시 생성한 Physics 1 비용 약 $2.5가 들어 있다.
+
+## 사용량·체크포인트
+- 주간 사용량 89%(99% 중단선까지 여유 있음)이지만 WH4 는 권리 확인된 새 출처 15개 안팎을 골라 사실 검증해야 해서 이번 포크에서는 시작하지 않았다.
+- 재개: 이 문서의 WH4 부족분 스펙 → `scripts/ap-generation/wh-sources.py` 와 매니페스트(`wh-sources-manifest*.json`)에 새 출처 등록 → `wh-pipeline.ts` 실행 → `wh-assign.ts --sets WH4 --block-file data/ap/stock/blocked-db-world_history.json,data/ap/stock/blocked-lineage-wh.json`.
