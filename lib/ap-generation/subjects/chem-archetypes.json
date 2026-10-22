@@ -9,9 +9,9 @@
    "measured bond lengths and enthalpies (longest and lowest) vs the rule that bond strength falls down a group"
   ],
   "misconceptions": [
-   "HCl has a shorter (127 pm) and stronger (about 431 kJ/mol) H\u2013X bond than HI (161 pm, about 299 kJ/mol), so its bond is harder to break.",
-   "HBr has a shorter (141 pm) and stronger (about 366 kJ/mol) H\u2013X bond than HI (161 pm, about 299 kJ/mol), so its bond is harder to break.",
-   "HF has a shorter (92 pm) and stronger (about 567 kJ/mol) H\u2013X bond than HI (161 pm, about 299 kJ/mol), so its bond is harder to break. It is also the most electronegative halogen, which makes the bond strongest rather than weakest."
+   "HCl has a shorter (127 pm) and stronger (about 431 kJ/mol) H–X bond than HI (161 pm, about 299 kJ/mol), so its bond is harder to break.",
+   "HBr has a shorter (141 pm) and stronger (about 366 kJ/mol) H–X bond than HI (161 pm, about 299 kJ/mol), so its bond is harder to break.",
+   "HF has a shorter (92 pm) and stronger (about 567 kJ/mol) H–X bond than HI (161 pm, about 299 kJ/mol), so its bond is harder to break. It is also the most electronegative halogen, which makes the bond strongest rather than weakest."
   ]
  },
  {
@@ -81,7 +81,7 @@
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
-   "proportional scaling from A = \u03b5bc with sympy vs numeric recomputation of \u03b5 and the new b and c"
+   "proportional scaling from A = εbc with sympy vs numeric recomputation of ε and the new b and c"
   ],
   "misconceptions": [
    "Squares the change factor instead of applying it once.",
@@ -114,9 +114,9 @@
    "difference from a Pauling table vs argmax over the four bonds"
   ],
   "misconceptions": [
-   "The electronegativity difference of the S\u2013I bond is only 0.08, smaller than the 1.78 of the most polar bond, so its electrons are shared more evenly.",
-   "The electronegativity difference of the Br\u2013F bond is only 1.02, smaller than the 1.78 of the most polar bond, so its electrons are shared more evenly.",
-   "The electronegativity difference of the Br\u2013Si bond is only 1.06, smaller than the 1.78 of the most polar bond, so its electrons are shared more evenly."
+   "The electronegativity difference of the S–I bond is only 0.08, smaller than the 1.78 of the most polar bond, so its electrons are shared more evenly.",
+   "The electronegativity difference of the Br–F bond is only 1.02, smaller than the 1.78 of the most polar bond, so its electrons are shared more evenly.",
+   "The electronegativity difference of the Br–Si bond is only 1.06, smaller than the 1.78 of the most polar bond, so its electrons are shared more evenly."
   ]
  },
  {
@@ -141,7 +141,7 @@
   "calculator": "allowed",
   "stimulus": "table",
   "verifiedBy": [
-   "Henderson\u2013Hasselbalch pH values vs an exact charge-balance equilibrium solved by bisection; the strong-acid pH from excess hydroxide"
+   "Henderson–Hasselbalch pH values vs an exact charge-balance equilibrium solved by bisection; the strong-acid pH from excess hydroxide"
   ],
   "misconceptions": [
    "Assumes equal starting pH means equal resistance to added base.",
@@ -186,7 +186,7 @@
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
-   "sympy solve of q = -n\u0394H vs the generating enthalpy recovered within temperature rounding"
+   "sympy solve of q = -nΔH vs the generating enthalpy recovered within temperature rounding"
   ],
   "misconceptions": [
    "Reports the heat in kJ without dividing by the moles of salt.",
@@ -204,9 +204,9 @@
    "the enthalpy formula recomputed with each altered recorded value shows which errors lower the magnitude"
   ],
   "misconceptions": [
-   "A final temperature read 1.0 \u00b0C too high makes \u0394T larger than the true change, so the calculated heat and the magnitude of \u0394H are too high.",
-   "Recording 110 g of water when only 100 g is present makes the calculated heat q = mc\u0394T larger, so the magnitude of \u0394H is too high.",
-   "Recording 4.50 g when 5.00 g dissolved makes the calculated moles of salt smaller, so the heat per mole, and the magnitude of \u0394H, is too high."
+   "A final temperature read 1.0 °C too high makes ΔT larger than the true change, so the calculated heat and the magnitude of ΔH are too high.",
+   "Recording 110 g of water when only 100 g is present makes the calculated heat q = mcΔT larger, so the magnitude of ΔH is too high.",
+   "Recording 4.50 g when 5.00 g dissolved makes the calculated moles of salt smaller, so the heat per mole, and the magnitude of ΔH, is too high."
   ]
  },
  {
@@ -216,10 +216,10 @@
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
-   "exact arithmetic with sympy vs numpy evaluation of -nFE\u00b0"
+   "exact arithmetic with sympy vs numpy evaluation of -nFE°"
   ],
   "misconceptions": [
-   "Omits the negative sign in \u0394G\u00b0 = -nFE\u00b0.",
+   "Omits the negative sign in ΔG° = -nFE°.",
    "Leaves the energy in joules per mole.",
    "Does not multiply by the number of electrons transferred."
   ]
@@ -265,7 +265,7 @@
   ],
   "misconceptions": [
    "Uses trial-to-trial variation rather than the sign of the temperature change.",
-   "Reverses the link between the sign of \u0394T and the direction of energy flow.",
+   "Reverses the link between the sign of ΔT and the direction of energy flow.",
    "Dismisses consistent data from three trials."
   ]
  },
@@ -414,9 +414,9 @@
    "Z from the van der Waals equation by root finding vs the first-order estimate (b - a/RT)P; both pick the same gas"
   ],
   "misconceptions": [
-   "CH4 has a van der Waals attraction constant of a = 2.25 L\u00b2\u00b7atm/mol\u00b2, smaller than the 3.59 of CO2, so it stays closer to ideal behavior.",
-   "Ne has a van der Waals attraction constant of a = 0.211 L\u00b2\u00b7atm/mol\u00b2, smaller than the 3.59 of CO2, so it stays closer to ideal behavior.",
-   "O2 has a van der Waals attraction constant of a = 1.38 L\u00b2\u00b7atm/mol\u00b2, smaller than the 3.59 of CO2, so it stays closer to ideal behavior."
+   "CH4 has a van der Waals attraction constant of a = 2.25 L²·atm/mol², smaller than the 3.59 of CO2, so it stays closer to ideal behavior.",
+   "Ne has a van der Waals attraction constant of a = 0.211 L²·atm/mol², smaller than the 3.59 of CO2, so it stays closer to ideal behavior.",
+   "O2 has a van der Waals attraction constant of a = 1.38 L²·atm/mol², smaller than the 3.59 of CO2, so it stays closer to ideal behavior."
   ]
  },
  {
@@ -471,11 +471,11 @@
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
-   "closed-form exp(-\u0394G\u00b0/RT) with sympy vs numpy exp"
+   "closed-form exp(-ΔG°/RT) with sympy vs numpy exp"
   ],
   "misconceptions": [
    "Uses the base-ten logarithm in place of the natural logarithm.",
-   "Uses \u0394G\u00b0 as the equilibrium constant.",
+   "Uses ΔG° as the equilibrium constant.",
    "Uses kilojoules without converting to joules."
   ]
  },
@@ -486,12 +486,12 @@
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
-   "sign pattern table vs direct evaluation of the sign of \u0394G at a very low and a very high temperature"
+   "sign pattern table vs direct evaluation of the sign of ΔG at a very low and a very high temperature"
   ],
   "misconceptions": [
-   "This pattern requires \u0394H\u00b0 to be positive and \u0394S\u00b0 to be negative, but the reaction has \u0394H\u00b0 = +90 kJ/mol (positive) and \u0394S\u00b0 = +180 J/(mol\u00b7K) (positive).",
-   "This pattern requires \u0394H\u00b0 to be negative and \u0394S\u00b0 to be negative, but the reaction has \u0394H\u00b0 = +90 kJ/mol (positive) and \u0394S\u00b0 = +180 J/(mol\u00b7K) (positive).",
-   "This pattern requires \u0394H\u00b0 to be negative and \u0394S\u00b0 to be positive, but the reaction has \u0394H\u00b0 = +90 kJ/mol (positive) and \u0394S\u00b0 = +180 J/(mol\u00b7K) (positive)."
+   "This pattern requires ΔH° to be positive and ΔS° to be negative, but the reaction has ΔH° = +90 kJ/mol (positive) and ΔS° = +180 J/(mol·K) (positive).",
+   "This pattern requires ΔH° to be negative and ΔS° to be negative, but the reaction has ΔH° = +90 kJ/mol (positive) and ΔS° = +180 J/(mol·K) (positive).",
+   "This pattern requires ΔH° to be negative and ΔS° to be positive, but the reaction has ΔH° = +90 kJ/mol (positive) and ΔS° = +180 J/(mol·K) (positive)."
   ]
  },
  {
@@ -501,12 +501,12 @@
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
-   "sympy solution of \u0394H - T\u0394S = 0 vs bisection on \u0394G(T)"
+   "sympy solution of ΔH - TΔS = 0 vs bisection on ΔG(T)"
   ],
   "misconceptions": [
-   "Converts \u0394S to kJ as well as \u0394H, which makes the answer a factor of 10\u2076 too large.",
+   "Converts ΔS to kJ as well as ΔH, which makes the answer a factor of 10⁶ too large.",
    "Does not convert kilojoules to joules.",
-   "Inverts the ratio, dividing \u0394S by \u0394H instead of \u0394H by \u0394S."
+   "Inverts the ratio, dividing ΔS by ΔH instead of ΔH by ΔS."
   ]
  },
  {
@@ -579,7 +579,7 @@
    "sympy solution of the quadratic vs bisection on the equilibrium expression"
   ],
   "misconceptions": [
-   "Writes the expression with [B] instead of [B]\u00b2 (leaves out the square) and solves it exactly.",
+   "Writes the expression with [B] instead of [B]² (leaves out the square) and solves it exactly.",
    "Reports the equilibrium concentration of A.",
    "Applies the small-x approximation even though the change is not negligible compared with the initial concentration."
   ]
@@ -641,7 +641,7 @@
   "misconceptions": [
    "bromothymol blue changes color between pH 6.0 and 7.6, near pH 7, but the equivalence point is at pH 8.3, outside that range.",
    "alizarin yellow R changes color between pH 10.1 and 12.0, which does not include the equivalence-point pH of 8.3.",
-   "methyl orange (pH 3.1\u20134.4) has a range that contains the pKa-related value 3.5, but the equivalence point is at pH 8.3."
+   "methyl orange (pH 3.1–4.4) has a range that contains the pKa-related value 3.5, but the equivalence point is at pH 8.3."
   ]
  },
  {
@@ -745,8 +745,8 @@
   ],
   "misconceptions": [
    "Believes that a change in concentration or volume changes the value of K, which depends only on temperature.",
-   "For this disturbance halving the volume doubles both concentrations, so Q = [B]^2/[A]^1 is multiplied by 2^(2 \u2212 1) = 2, so Q is not smaller than K and the system does not shift toward the products.",
-   "For this disturbance halving the volume doubles both concentrations, so Q = [B]^2/[A]^1 is multiplied by 2^(2 \u2212 1) = 2, so Q is not equal to K and the system does not stay at equilibrium."
+   "For this disturbance halving the volume doubles both concentrations, so Q = [B]^2/[A]^1 is multiplied by 2^(2 − 1) = 2, so Q is not smaller than K and the system does not shift toward the products.",
+   "For this disturbance halving the volume doubles both concentrations, so Q = [B]^2/[A]^1 is multiplied by 2^(2 − 1) = 2, so Q is not equal to K and the system does not stay at equilibrium."
   ]
  },
  {
@@ -955,7 +955,7 @@
   ],
   "misconceptions": [
    "The temperature change of the solution does show the direction of the heat flow.",
-   "An endothermic process has a positive \u0394H.",
+   "An endothermic process has a positive ΔH.",
    "An exothermic process raises the temperature of the solution."
   ]
  },
@@ -1071,7 +1071,7 @@
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
-   "\u0394H \u2212 T\u0394S vs \u0394H minus the product found by root solving"
+   "ΔH − TΔS vs ΔH minus the product found by root solving"
   ],
   "misconceptions": [
    "Adds the entropy term instead of subtracting it.",
@@ -1391,7 +1391,7 @@
   "misconceptions": [
    "HF is the acid, not its conjugate base.",
    "Water acts as the base here.",
-   "H3O\u207a is the conjugate acid of water."
+   "H3O⁺ is the conjugate acid of water."
   ]
  },
  {
@@ -1404,7 +1404,7 @@
    "fixed fact bank checked against CED"
   ],
   "misconceptions": [
-   "\u0394H is a difference of the two energies and is not their sum.",
+   "ΔH is a difference of the two energies and is not their sum.",
    "The values are subtracted.",
    "The sign is reversed, because bond formation releases the larger energy."
   ]
@@ -1436,7 +1436,7 @@
   "misconceptions": [
    "This would raise the pH further.",
    "A base is neutralized by an acid and not by its conjugate base.",
-   "A\u207b does not react with a base."
+   "A⁻ does not react with a base."
   ]
  },
  {
@@ -1496,7 +1496,7 @@
   "misconceptions": [
    "The species has an incorrect formula for a conjugate.",
    "H3PO4 has two more protons.",
-   "PO4\u00b3\u207b is the conjugate base of HPO4\u00b2\u207b."
+   "PO4³⁻ is the conjugate base of HPO4²⁻."
   ]
  },
  {
@@ -1525,7 +1525,7 @@
   ],
   "misconceptions": [
    "The reverse reaction also has a barrier.",
-   "The two activation energies differ by the value of \u0394H.",
+   "The two activation energies differ by the value of ΔH.",
    "The barrier from the lower-energy side is larger."
   ]
  },
@@ -1584,7 +1584,7 @@
    "sympy quadratic solve vs bisection on the equilibrium condition"
   ],
   "misconceptions": [
-   "Ignores the loss of N2O4 and solves (2x)\u00b2 = K c\u2080.",
+   "Ignores the loss of N2O4 and solves (2x)² = K c₀.",
    "Uses the starting concentration of N2O4 as the equilibrium concentration of NO2.",
    "Uses x instead of 2x for the concentration of the product."
   ]
@@ -1600,7 +1600,7 @@
   ],
   "misconceptions": [
    "Both molecules are nonpolar, so neither has a dipole to explain the difference.",
-   "Neither contains an O\u2013H, N\u2013H or F\u2013H bond.",
+   "Neither contains an O–H, N–H or F–H bond.",
    "Both have the same molar mass."
   ]
  },
@@ -1629,7 +1629,7 @@
    "fixed fact bank checked against CED"
   ],
   "misconceptions": [
-   "A\u207b can accept a proton, so it is a base.",
+   "A⁻ can accept a proton, so it is a base.",
    "The Kb of the conjugate base depends on the Ka of its acid.",
    "The conjugate pairs have opposite trends."
   ]
@@ -1645,8 +1645,8 @@
   ],
   "misconceptions": [
    "Carbon is the central atom of the ion.",
-   "The charge of \u22122 must be shown on the atoms.",
-   "This gives 24 electrons but a formal charge distribution that does not equal the \u22122 charge of the ion."
+   "The charge of −2 must be shown on the atoms.",
+   "This gives 24 electrons but a formal charge distribution that does not equal the −2 charge of the ion."
   ]
  },
  {
@@ -1705,7 +1705,7 @@
   ],
   "misconceptions": [
    "An atom becomes an ion by gaining electrons, not by changing its protons.",
-   "S\u00b2\u207b has two more electrons than S.",
+   "S²⁻ has two more electrons than S.",
    "The nuclear charge does not change."
   ]
  },
@@ -1734,9 +1734,9 @@
    "fixed fact bank checked against CED"
   ],
   "misconceptions": [
-   "Sn\u2074\u207a is the oxidized product.",
-   "Fe\u00b2\u207a is the reduced product.",
-   "Fe\u00b3\u207a gains electrons, so it is the oxidizing agent."
+   "Sn⁴⁺ is the oxidized product.",
+   "Fe²⁺ is the reduced product.",
+   "Fe³⁺ gains electrons, so it is the oxidizing agent."
   ]
  },
  {
@@ -1764,9 +1764,9 @@
    "fixed fact bank checked against CED 9.3"
   ],
   "misconceptions": [
-   "At high T the \u2212T\u0394S term can exceed \u0394H, so \u0394G becomes negative.",
-   "At low T the positive \u0394H dominates the small \u2212T\u0394S term.",
-   "The positive \u0394H opposes spontaneity at low T, so the reaction is not spontaneous at every temperature."
+   "At high T the −TΔS term can exceed ΔH, so ΔG becomes negative.",
+   "At low T the positive ΔH dominates the small −TΔS term.",
+   "The positive ΔH opposes spontaneity at low T, so the reaction is not spontaneous at every temperature."
   ]
  },
  {
@@ -1929,9 +1929,9 @@
    "pH of each solution from the exact charge balance vs ordering by Ka; the orders agree"
   ],
   "misconceptions": [
-   "HCOOH has the second-largest Ka (1.8 \u00d7 10\u207b\u2074), not the largest (4.5 \u00d7 10\u207b\u2074 for HNO2), so it dissociates less at the same concentration and its solution has a higher pH than that of HNO2.",
-   "HOCl has the smallest Ka (3.0 \u00d7 10\u207b\u2078), so its solution has the highest pH; choosing it reverses the relationship between Ka and pH.",
-   "C6H5COOH has the third-largest Ka (6.3 \u00d7 10\u207b\u2075), not the largest (4.5 \u00d7 10\u207b\u2074 for HNO2), so it dissociates less at the same concentration and its solution has a higher pH than that of HNO2."
+   "HCOOH has the second-largest Ka (1.8 × 10⁻⁴), not the largest (4.5 × 10⁻⁴ for HNO2), so it dissociates less at the same concentration and its solution has a higher pH than that of HNO2.",
+   "HOCl has the smallest Ka (3.0 × 10⁻⁸), so its solution has the highest pH; choosing it reverses the relationship between Ka and pH.",
+   "C6H5COOH has the third-largest Ka (6.3 × 10⁻⁵), not the largest (4.5 × 10⁻⁴ for HNO2), so it dissociates less at the same concentration and its solution has a higher pH than that of HNO2."
   ]
  },
  {
@@ -1945,8 +1945,8 @@
   ],
   "misconceptions": [
    "Computes the energy of a mole of photons.",
-   "Reports the frequency c/\u03bb instead of the energy.",
-   "Omits Planck's constant (c/\u03bb in wrong units)."
+   "Reports the frequency c/λ instead of the energy.",
+   "Omits Planck's constant (c/λ in wrong units)."
   ]
  },
  {
@@ -2065,7 +2065,7 @@
   ],
   "misconceptions": [
    "HCl is ionized completely in water.",
-   "The chloride ion from the acid must be shown and the OH\u207b ions are not produced by the acid.",
+   "The chloride ion from the acid must be shown and the OH⁻ ions are not produced by the acid.",
    "That diagram shows a weak acid that is only partly ionized."
   ]
  },
@@ -2095,7 +2095,7 @@
   ],
   "misconceptions": [
    "The strong acid produces CH3COOH from acetate and does not use it up.",
-   "The buffer removes most of the added H3O\u207a by reacting it with acetate.",
+   "The buffer removes most of the added H3O⁺ by reacting it with acetate.",
    "The acetate ions are used up by the added acid and so they become fewer."
   ]
  },
@@ -2111,7 +2111,7 @@
   "misconceptions": [
    "A salt is a lattice of ions and not separate molecules.",
    "The ratio is reversed; two fluoride ions balance one calcium ion.",
-   "Equal numbers would not balance the charge of 2+ against 1\u2212."
+   "Equal numbers would not balance the charge of 2+ against 1−."
   ]
  },
  {
@@ -2280,6 +2280,1671 @@
   ]
  },
  {
+  "id": "ch_t5_atoms_from_mass",
+  "topic": "1.1",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy rational vs float"
+  ],
+  "misconceptions": [
+   "Divides Avogadro's number by the mass.",
+   "Uses the molar mass as the number of moles.",
+   "Multiplies the mass by Avogadro's number without dividing by the molar mass."
+  ]
+ },
+ {
+  "id": "ch_t5_beer_lambert_conc",
+  "topic": "3.13",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy rational vs float"
+  ],
+  "misconceptions": [
+   "Divides the absorbance by the path length only.",
+   "Multiplies the absorbance by the molar absorptivity and the path length.",
+   "Divides by the absorbance instead of by the molar absorptivity and path length."
+  ]
+ },
+ {
+  "id": "ch_t5_buffer_after_base",
+  "topic": "8.9",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact-fraction ratio vs logs of moles"
+  ],
+  "misconceptions": [
+   "Subtracts the base from the conjugate base instead of adding it.",
+   "Ignores the added strong base and uses the original ratio.",
+   "Inverts the ratio of base to acid."
+  ]
+ },
+ {
+  "id": "ch_t5_buffer_ratio_for_ph",
+  "topic": "8.9",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy power of ten vs float"
+  ],
+  "misconceptions": [
+   "Uses the difference pH − pKa as the ratio.",
+   "Uses 10^(pH) instead of 10^(pH − pKa).",
+   "Takes the ratio equal to the pH divided by the pKa."
+  ]
+ },
+ {
+  "id": "ch_t5_cell_potential_sum",
+  "topic": "9.9",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact difference vs float"
+  ],
+  "misconceptions": [
+   "Adds the magnitudes of the two potentials.",
+   "Subtracts in the wrong order (anode minus cathode), which gives the opposite sign.",
+   "Adds the two reduction potentials."
+  ]
+ },
+ {
+  "id": "ch_t5_combined_gas_volume",
+  "topic": "3.4",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact rational combined law vs float"
+  ],
+  "misconceptions": [
+   "Uses the Celsius values of both temperatures.",
+   "Inverts the temperature ratio.",
+   "Multiplies by the pressure ratio instead of dividing by it."
+  ]
+ },
+ {
+  "id": "ch_t5_common_ion_solubility",
+  "topic": "7.12",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact rational Ksp/c vs float"
+  ],
+  "misconceptions": [
+   "Takes the square root of Ksp divided by the common-ion concentration.",
+   "Divides the common-ion concentration by Ksp.",
+   "Multiplies Ksp by the common-ion concentration."
+  ]
+ },
+ {
+  "id": "ch_t5_coulomb_ratio",
+  "topic": "2.2",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact rational vs float"
+  ],
+  "misconceptions": [
+   "Adds the charges instead of multiplying them.",
+   "Treats the force as proportional to the distance.",
+   "Uses the distance instead of the square of the distance."
+  ]
+ },
+ {
+  "id": "ch_t5_dalton_partial",
+  "topic": "3.5",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact fractions vs float"
+  ],
+  "misconceptions": [
+   "Uses the moles of the gas divided by the moles of the other gases only.",
+   "Multiplies the total pressure by the total moles and divides by the moles of the gas.",
+   "Divides the moles of the gas by the total pressure instead of multiplying the mole fraction by it."
+  ]
+ },
+ {
+  "id": "ch_t5_delta_g_from_e",
+  "topic": "9.9",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy rational vs float"
+  ],
+  "misconceptions": [
+   "Forgets to convert joules to kilojoules.",
+   "Leaves out the number of electrons transferred.",
+   "Uses a positive sign, ΔG° = +nFE°."
+  ]
+ },
+ {
+  "id": "ch_t5_delta_g_from_k",
+  "topic": "9.5",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy natural log vs math.log"
+  ],
+  "misconceptions": [
+   "Forgets to convert joules to kilojoules.",
+   "Uses R in L atm/(mol K) instead of J/(mol K).",
+   "Uses log base 10 instead of the natural logarithm."
+  ]
+ },
+ {
+  "id": "ch_t5_delta_g_hs",
+  "topic": "9.3",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact rational vs float"
+  ],
+  "misconceptions": [
+   "Uses ΔG = ΔH + TΔS with the wrong sign for the entropy term.",
+   "Forgets to convert ΔS from J to kJ.",
+   "Divides the entropy change by T instead of multiplying it by T."
+  ]
+ },
+ {
+  "id": "ch_t5_faraday_mass",
+  "topic": "9.11",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact rational vs float"
+  ],
+  "misconceptions": [
+   "Multiplies by the number of electrons instead of dividing by it.",
+   "Ignores the number of electrons transferred per ion.",
+   "Forgets to multiply the moles by the molar mass."
+  ]
+ },
+ {
+  "id": "ch_t5_first_order_conc_after",
+  "topic": "5.3",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy exponential vs math.exp"
+  ],
+  "misconceptions": [
+   "Uses a positive exponent, so the concentration grows.",
+   "Subtracts the product kt from the initial concentration as in a zero-order reaction.",
+   "Divides the initial concentration by kt."
+  ]
+ },
+ {
+  "id": "ch_t5_first_order_fraction_left",
+  "topic": "5.3",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact rational (1/2)^n vs float power"
+  ],
+  "misconceptions": [
+   "Uses (1/2) times the number of half-lives.",
+   "Uses 1/n as the fraction remaining.",
+   "Subtracts the fraction decayed incorrectly, using 1 − 1/n."
+  ]
+ },
+ {
+  "id": "ch_t5_first_order_k_from_halflife",
+  "topic": "5.3",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy ln 2 / t vs math.log"
+  ],
+  "misconceptions": [
+   "Uses log10 of 2 instead of the natural logarithm.",
+   "Divides 1 by the product of the half-life and ln 2.",
+   "Multiplies the half-life by ln 2."
+  ]
+ },
+ {
+  "id": "ch_t5_first_order_time",
+  "topic": "5.3",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy log vs math.log"
+  ],
+  "misconceptions": [
+   "Divides the fraction remaining by the rate constant.",
+   "Uses log10 instead of the natural logarithm.",
+   "Uses the second-order relationship (1/frac − 1)/k."
+  ]
+ },
+ {
+  "id": "ch_t5_gas_molar_mass_density",
+  "topic": "3.4",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy solve of PM = dRT vs direct formula"
+  ],
+  "misconceptions": [
+   "Divides the density by RT and multiplies by P twice.",
+   "Inverts the relationship and uses dP/RT.",
+   "Uses 22.4 L/mol as the molar volume at any temperature and pressure."
+  ]
+ },
+ {
+  "id": "ch_t5_graham_ratio",
+  "topic": "3.5",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy square root of the molar mass ratio vs math.sqrt"
+  ],
+  "misconceptions": [
+   "Inverts the ratio, putting the heavier gas in the numerator.",
+   "Takes the ratio of the square roots but inverts it.",
+   "Uses the ratio of the molar masses without the square root."
+  ]
+ },
+ {
+  "id": "ch_t5_ice_hi_formation",
+  "topic": "7.7",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy solve of the ICE expression vs the closed form x = a r/(2 + r)"
+  ],
+  "misconceptions": [
+   "Uses K = [HI]/([H2][I2]) without squaring [HI] or using the coefficient.",
+   "Subtracts 2x from each reactant concentration but reports [H2].",
+   "Sets [HI] equal to K times the initial concentration."
+  ]
+ },
+ {
+  "id": "ch_t5_ideal_gas_moles",
+  "topic": "3.4",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy solve of PV = nRT vs direct formula"
+  ],
+  "misconceptions": [
+   "Inverts the relationship and divides RT by PV.",
+   "Uses R = 8.314 J/(mol K) with pressure in atm and volume in liters.",
+   "Multiplies pressure and volume by the gas constant instead of dividing by it."
+  ]
+ },
+ {
+  "id": "ch_t5_isotope_abundance_from_avg",
+  "topic": "1.2",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "solving the weighted-average equation vs reconstructing the average from the answer"
+  ],
+  "misconceptions": [
+   "Divides the average mass by the mass of the heavier isotope.",
+   "Assumes the two isotopes are equally abundant.",
+   "Reports the abundance of the heavier isotope instead of the lighter one."
+  ]
+ },
+ {
+  "id": "ch_t5_k_from_initial_and_one",
+  "topic": "7.4",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact rational ICE bookkeeping vs float"
+  ],
+  "misconceptions": [
+   "Does not square the product concentration.",
+   "Uses the initial concentrations of the reactants.",
+   "Uses x instead of 2x for the concentration of the product."
+  ]
+ },
+ {
+  "id": "ch_t5_k_reverse_doubled",
+  "topic": "7.6",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact power of the rational constant vs float power"
+  ],
+  "misconceptions": [
+   "Adds 2 to the constant instead of squaring it.",
+   "Reports the original constant unchanged.",
+   "Takes the reciprocal of the constant."
+  ]
+ },
+ {
+  "id": "ch_t5_ka_from_ph",
+  "topic": "8.3",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy exponent vs float"
+  ],
+  "misconceptions": [
+   "Does not square [H+] in the numerator.",
+   "Uses the pH value itself in the expression.",
+   "Uses [H+] as the equilibrium constant."
+  ]
+ },
+ {
+  "id": "ch_t5_kc_from_concentrations",
+  "topic": "7.4",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact rational vs float"
+  ],
+  "misconceptions": [
+   "Multiplies the coefficients by the concentrations instead of using them as exponents.",
+   "Inverts the expression, putting the reactants in the numerator.",
+   "Ignores the coefficients and does not use them as exponents."
+  ]
+ },
+ {
+  "id": "ch_t5_kp_from_kc",
+  "topic": "7.4",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy rational power vs float power"
+  ],
+  "misconceptions": [
+   "Uses Kp = Kc with no correction for the change in moles of gas.",
+   "Uses the opposite sign for the change in moles of gas.",
+   "Uses R = 8.314 J/(mol K) with pressures in atm."
+  ]
+ },
+ {
+  "id": "ch_t5_mass_percent_solution",
+  "topic": "3.7",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact rational vs float"
+  ],
+  "misconceptions": [
+   "Reports the fraction instead of the percent.",
+   "Divides the mass of solute by the mass of solvent and then by 10.",
+   "Divides the mass of the solvent by the mass of the solution."
+  ]
+ },
+ {
+  "id": "ch_t5_nernst_cell",
+  "topic": "9.10",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy log10 vs math.log10"
+  ],
+  "misconceptions": [
+   "Reports the standard potential unchanged.",
+   "Uses the natural logarithm of Q.",
+   "Adds the correction term instead of subtracting it."
+  ]
+ },
+ {
+  "id": "ch_t5_p1_buffer_particles",
+  "topic": "8.4",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "HA is weak and does not ionize completely.",
+   "A buffer limits the pH change by consuming the added base.",
+   "A⁻ is a base and does not react with additional base."
+  ]
+ },
+ {
+  "id": "ch_t5_p1_conjugate_pairs",
+  "topic": "8.1",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "HCN is the acid; it is not its own conjugate base.",
+   "H₂O is the base that accepts the proton, not the conjugate base of HCN.",
+   "H₃O⁺ is the conjugate acid of H₂O."
+  ]
+ },
+ {
+  "id": "ch_t5_p1_effective_charge",
+  "topic": "1.7",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "Potassium atoms are larger than sodium atoms.",
+   "Potassium has more shells than sodium.",
+   "The effective pull on the valence electron is not greater in potassium; the added shell and shielding dominate."
+  ]
+ },
+ {
+  "id": "ch_t5_p1_imf_picture",
+  "topic": "3.1",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "The isomers have the same formula and the same number of electrons.",
+   "Hydrocarbons do not have hydrogen bonds.",
+   "Both are nonpolar hydrocarbons."
+  ]
+ },
+ {
+  "id": "ch_t5_p1_ionic_lattice",
+  "topic": "2.3",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "That describes a metal rather than an ionic solid.",
+   "Greater charges strengthen the electrostatic attraction.",
+   "Both MgO and NaCl are ionic lattices."
+  ]
+ },
+ {
+  "id": "ch_t5_p1_lewis_electron_count",
+  "topic": "2.5",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "This counts only the nitrogen atom.",
+   "This adds an electron for the charge instead of removing one.",
+   "This forgets to remove one electron for the 1+ charge."
+  ]
+ },
+ {
+  "id": "ch_t5_p1_mass_spectrum_peaks",
+  "topic": "1.2",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "Peaks at different masses show atoms with different masses.",
+   "The spectrum of the element does not show compounds.",
+   "Valence electron count is not determined by a mass spectrum."
+  ]
+ },
+ {
+  "id": "ch_t5_p1_metal_particles",
+  "topic": "2.4",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "The delocalized electrons remain in an alloy.",
+   "Identical atoms would allow layers to slide as in a pure metal.",
+   "Metals in alloys are held by metallic bonding, not new covalent bonds."
+  ]
+ },
+ {
+  "id": "ch_t5_p1_mole_particles",
+  "topic": "1.1",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "The same number of atoms of different elements has different masses.",
+   "A mole is a count; the greater mass is due to the heavier atoms, not to more atoms.",
+   "A smaller molar mass does not change the number of atoms in one mole."
+  ]
+ },
+ {
+  "id": "ch_t5_p1_pes_subshell_count",
+  "topic": "1.6",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "A single electron cannot fill an s subshell, which holds two electrons.",
+   "A relative height of 1 means one electron in that subshell.",
+   "The six-electron peak is at a higher binding energy than the outermost subshell."
+  ]
+ },
+ {
+  "id": "ch_t5_p1_reaction_energy",
+  "topic": "6.1",
+  "skill": "1.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "Breaking bonds absorbs energy and forming bonds releases energy.",
+   "Breaking bonds always requires energy.",
+   "That describes an endothermic reaction."
+  ]
+ },
+ {
+  "id": "ch_t5_p1_solution_particles",
+  "topic": "3.8",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "A dissolved solute is dispersed, not a solid core.",
+   "The molecules remain intact when sugar dissolves.",
+   "Sugar does not form ions in water, so the solution would conduct if it did."
+  ]
+ },
+ {
+  "id": "ch_t5_p1_strong_acid_particles",
+  "topic": "8.1",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "All aqueous solutions are mostly water molecules.",
+   "Equal concentrations of acid do not give equal ion concentrations unless both ionize to the same extent.",
+   "Strength depends on the extent of ionization, not on the size of the molecule."
+  ]
+ },
+ {
+  "id": "ch_t5_p1_titration_particles",
+  "topic": "8.5",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "A⁻ ions have formed from the reaction and must also be present.",
+   "Hydroxide is consumed by the acid before the equivalence point.",
+   "These are present only in very small, equal amounts in a neutral solution."
+  ]
+ },
+ {
+  "id": "ch_t5_p1_vsepr_shape",
+  "topic": "2.7",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "That shape requires five bonding pairs and no lone pairs.",
+   "Tetrahedral requires four electron domains in total, not five.",
+   "Square planar requires four bonding pairs and two lone pairs."
+  ]
+ },
+ {
+  "id": "ch_t5_p1_weak_base_particles",
+  "topic": "8.3",
+  "skill": "1.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "For a weak acid the un-ionized molecules outnumber the ions.",
+   "Each A⁻ ion is accompanied by an H₃O⁺ ion, and a weak acid is mostly un-ionized.",
+   "That describes complete ionization, a strong acid."
+  ]
+ },
+ {
+  "id": "ch_t5_p2_beer_procedure",
+  "topic": "3.13",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "The pH does not give the molar absorptivity.",
+   "Absorbance at a non-absorbing wavelength is near zero and cannot be used.",
+   "These do not give absorbance, path length, or concentration."
+  ]
+ },
+ {
+  "id": "ch_t5_p2_calorimetry_error",
+  "topic": "6.4",
+  "skill": "2.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "A temperature change still gives a nonzero heat.",
+   "The mass does not cancel in $q = mc\\Delta T$.",
+   "The calculation uses the larger value, so the result is larger."
+  ]
+ },
+ {
+  "id": "ch_t5_p2_calorimetry_procedure",
+  "topic": "6.4",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "Concentrations give the moles but not the heat released.",
+   "A temperature change requires the initial temperatures as well.",
+   "These do not give the temperature change or the mass."
+  ]
+ },
+ {
+  "id": "ch_t5_p2_change_test",
+  "topic": "4.4",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "The container does not determine the kind of change.",
+   "Volume changes occur in both kinds of change.",
+   "Temperature changes occur in both kinds of change."
+  ]
+ },
+ {
+  "id": "ch_t5_p2_chromatography_predict",
+  "topic": "3.9",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "Distillation separates liquids by their boiling points.",
+   "Compounds with different boiling points are separated by distillation.",
+   "The higher-boiling component vaporizes later."
+  ]
+ },
+ {
+  "id": "ch_t5_p2_cold_pack_predict",
+  "topic": "6.1",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "The reaction still releases energy, so the temperature rises.",
+   "The temperature change depends on the ratio of energy to mass, which is unchanged.",
+   "The energy is shared by twice the mass, so the rise is the same."
+  ]
+ },
+ {
+  "id": "ch_t5_p2_density_procedure",
+  "topic": "1.4",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "The mass of the solution includes the water and does not isolate the NaCl.",
+   "A temperature does not give the composition.",
+   "Mass and volume of the mixture do not separate the two components."
+  ]
+ },
+ {
+  "id": "ch_t5_p2_empirical_procedure",
+  "topic": "1.3",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "The mass of the sample alone does not give the C:H ratio.",
+   "These do not give the masses of C and H.",
+   "These do not give the moles of C and H."
+  ]
+ },
+ {
+  "id": "ch_t5_p2_formation_procedure",
+  "topic": "6.6",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "A color change does not measure the heat released.",
+   "The volume alone does not give the heat released.",
+   "Without the amounts and the initial temperature, ΔH cannot be calculated."
+  ]
+ },
+ {
+  "id": "ch_t5_p2_gas_error",
+  "topic": "3.4",
+  "skill": "2.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "A positive Celsius value gives a positive n.",
+   "The scales have different zero points.",
+   "The Celsius value 25 is smaller than 298 K."
+  ]
+ },
+ {
+  "id": "ch_t5_p2_gas_question",
+  "topic": "3.4",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "A rigid flask has a fixed volume.",
+   "A pressure sensor and a water bath do not identify a gas.",
+   "In a sealed flask the amount of gas does not change with pressure."
+  ]
+ },
+ {
+  "id": "ch_t5_p2_heat_phase_procedure",
+  "topic": "6.5",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "The energy supplied and the mass vaporized are needed.",
+   "The mass vaporized and the power are needed.",
+   "The color does not give the mass vaporized."
+  ]
+ },
+ {
+  "id": "ch_t5_p2_hess_question",
+  "topic": "6.9",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "A final temperature rise does not give a rate.",
+   "The data do not identify individual bond strengths.",
+   "A temperature rise does not give an activation energy."
+  ]
+ },
+ {
+  "id": "ch_t5_p2_pes_predict",
+  "topic": "1.6",
+  "skill": "2.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "Both carbon and nitrogen have 2p electrons.",
+   "Peak height depends on the number of electrons, not the number of protons.",
+   "Heights depend on the number of electrons in the subshell, which differs."
+  ]
+ },
+ {
+  "id": "ch_t5_p2_redox_procedure",
+  "topic": "4.9",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "The density does not give the amount of oxalic acid.",
+   "The end-point volume is needed.",
+   "These do not give the moles used."
+  ]
+ },
+ {
+  "id": "ch_t5_p2_solubility_procedure",
+  "topic": "3.10",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "Color at one temperature does not show how solubility changes.",
+   "Changing the volume of water as well as the temperature confuses the two effects.",
+   "The temperature is not varied in this procedure."
+  ]
+ },
+ {
+  "id": "ch_t5_p2_stoich_question",
+  "topic": "4.5",
+  "skill": "2.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "The experiment does not measure heat.",
+   "The mass lost does not give a volume.",
+   "The mass data do not give the pH."
+  ]
+ },
+ {
+  "id": "ch_t5_p2_titration_procedure",
+  "topic": "4.6",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "These measurements do not give the moles of acid or base.",
+   "The end-point volume is needed to find the moles of base.",
+   "These do not give the moles of base or the volume of acid."
+  ]
+ },
+ {
+  "id": "ch_t5_p2_yield_procedure",
+  "topic": "4.5",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "A temperature does not identify the limiting reactant.",
+   "A color does not identify the limiting reactant.",
+   "Masses must be converted to moles before a comparison using the mole ratio."
+  ]
+ },
+ {
+  "id": "ch_t5_p4_acid_strength_structure",
+  "topic": "8.6",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "A higher oxidation number of chlorine goes with the stronger acid.",
+   "The number of oxygen atoms changes the acid strength.",
+   "Fewer oxygen atoms make the O–H bond less polarized."
+  ]
+ },
+ {
+  "id": "ch_t5_p4_bond_enthalpy",
+  "topic": "6.7",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "Breaking bonds absorbs energy.",
+   "Weaker bonds release less energy than the stronger bonds that were broken absorbed.",
+   "The net energy depends on the comparison of the total energy absorbed and released."
+  ]
+ },
+ {
+  "id": "ch_t5_p4_cell_direction",
+  "topic": "9.8",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "Electrons flow because the half-cells differ in reduction potential.",
+   "Mg²⁺ has the lower reduction potential and is not reduced in this cell.",
+   "Silver has the greater reduction potential and is reduced."
+  ]
+ },
+ {
+  "id": "ch_t5_p4_energy_diagram",
+  "topic": "6.2",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "Every reaction has a positive activation energy.",
+   "A shared transition state does not make the barriers equal when the reactants and products differ in energy.",
+   "The reverse reaction starts from the higher-energy products and has the smaller barrier."
+  ]
+ },
+ {
+  "id": "ch_t5_p4_entropy_sign",
+  "topic": "9.2",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "Gases are produced from a liquid, which increases the entropy.",
+   "The number of moles of gas does not change, so ΔS is small.",
+   "Two moles of gas become four moles of gas, an increase in entropy."
+  ]
+ },
+ {
+  "id": "ch_t5_p4_imf_ranking",
+  "topic": "3.1",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "Dispersion forces differ with the number of electrons.",
+   "Neon has the smallest cloud and the weakest dispersion forces.",
+   "This reverses the dependence of dispersion forces on size."
+  ]
+ },
+ {
+  "id": "ch_t5_p4_k_magnitude",
+  "topic": "7.5",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "K = 4.5 means products are favored but not that the reaction goes to completion.",
+   "Different K values show different extents.",
+   "A smaller K means less product at equilibrium."
+  ]
+ },
+ {
+  "id": "ch_t5_p4_k_temperature",
+  "topic": "7.6",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "There are fewer, less energetic collisions at a lower temperature.",
+   "Temperature changes the value of K for a reaction at equilibrium.",
+   "Removing energy favors the exothermic direction, not the endothermic one."
+  ]
+ },
+ {
+  "id": "ch_t5_p4_kinetic_control",
+  "topic": "9.4",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "The conversion is slightly exothermic and cannot be ruled out by energy alone.",
+   "Diamond and graphite are not at equilibrium at room temperature.",
+   "Graphite is the more stable form at 1 atm."
+  ]
+ },
+ {
+  "id": "ch_t5_p4_limiting_model",
+  "topic": "4.5",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "The order in the equation does not determine the limiting reactant.",
+   "The sum of the molecule counts does not show how they react.",
+   "A reactant that is present in a greater number is not limiting when the ratio is higher than required."
+  ]
+ },
+ {
+  "id": "ch_t5_p4_net_ionic",
+  "topic": "4.2",
+  "skill": "4.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "Sodium chloride is soluble and does not precipitate.",
+   "This is the complete ionic equation, including spectator ions.",
+   "This is the molecular equation, not the net ionic equation."
+  ]
+ },
+ {
+  "id": "ch_t5_p4_nonideal_gas",
+  "topic": "3.6",
+  "skill": "4.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "The amount of gas does not change with pressure.",
+   "Particles keep moving at any pressure.",
+   "Attractions would reduce the volume, not increase it."
+  ]
+ },
+ {
+  "id": "ch_t5_p4_ph_pka_species",
+  "topic": "8.7",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "One of the two forms always predominates away from the pKa.",
+   "Equal amounts occur only when pH equals the pKa.",
+   "At a pH below the pKa, the protonated form predominates."
+  ]
+ },
+ {
+  "id": "ch_t5_p4_phase_heat",
+  "topic": "6.5",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "The temperature stays constant during the phase change.",
+   "Energy is transferred even though the temperature is constant.",
+   "Condensation releases energy."
+  ]
+ },
+ {
+  "id": "ch_t5_p4_phase_particles",
+  "topic": "3.3",
+  "skill": "4.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "Gas particles move freely.",
+   "Gas particles have much weaker attractions than liquid particles.",
+   "The temperature is the same in this comparison."
+  ]
+ },
+ {
+  "id": "ch_t5_p4_reaction_type",
+  "topic": "4.7",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "The change is driven by electron transfer, not decomposition.",
+   "No protons are transferred in this reaction.",
+   "The solid is copper metal formed by electron transfer, not an insoluble ionic compound."
+  ]
+ },
+ {
+  "id": "ch_t5_p4_redox_model",
+  "topic": "4.9",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "Zn²⁺ is a product formed by oxidation of Zn.",
+   "The reducing agent is a reactant, not a product.",
+   "H⁺ is reduced, so it is the oxidizing agent."
+  ]
+ },
+ {
+  "id": "ch_t5_p4_solid_properties",
+  "topic": "3.2",
+  "skill": "4.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "Network solids are hard with very high melting points.",
+   "Metals conduct electricity.",
+   "Ionic solids have high melting points."
+  ]
+ },
+ {
+  "id": "ch_t5_p4_solution_representation",
+  "topic": "3.8",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "Ethanol is miscible with water and mixes uniformly.",
+   "Dissolving does not break the molecules into atoms.",
+   "Ethanol does not dissociate into these ions."
+  ]
+ },
+ {
+  "id": "ch_t5_p4_specific_heat",
+  "topic": "6.4",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "A smaller temperature change for the same heat means a larger specific heat.",
+   "The same heat with different temperature changes shows different specific heats.",
+   "A larger temperature change for the same energy means a smaller specific heat."
+  ]
+ },
+ {
+  "id": "ch_t5_p4_spontaneity_signs",
+  "topic": "9.3",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "At low temperature the favorable ΔH makes ΔG negative.",
+   "At high temperature the unfavorable −TΔS term makes ΔG positive.",
+   "A negative ΔS is unfavorable and its effect grows with temperature."
+  ]
+ },
+ {
+  "id": "ch_t5_p6_acid_strength_claim",
+  "topic": "8.3",
+  "skill": "6.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "A pH below 7 shows an acidic solution.",
+   "Both solutions are 0.10 M.",
+   "The pH of acetic acid is higher, not lower, than that of HCl."
+  ]
+ },
+ {
+  "id": "ch_t5_p6_buffer_claim",
+  "topic": "8.8",
+  "skill": "6.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "The amount of water is not the reason.",
+   "No precipitate forms when HCl and NaCl are mixed.",
+   "Conductivity is not the criterion for a buffer."
+  ]
+ },
+ {
+  "id": "ch_t5_p6_calorimetry_claim",
+  "topic": "6.4",
+  "skill": "6.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "Mass changes do not explain the temperature drop.",
+   "Any temperature change shows a transfer of energy.",
+   "Releasing energy would raise the temperature."
+  ]
+ },
+ {
+  "id": "ch_t5_p6_endothermic_claim",
+  "topic": "6.1",
+  "skill": "6.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "A gain of energy by the surroundings means ΔH < 0 for the reaction.",
+   "Energy is transferred, not produced.",
+   "An increase in the temperature of the surroundings shows energy released, not absorbed."
+  ]
+ },
+ {
+  "id": "ch_t5_p6_formation_claim",
+  "topic": "6.8",
+  "skill": "6.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "The two forms differ in enthalpy, so ΔH° is not zero.",
+   "Graphite is the reference form and has an enthalpy of formation of zero.",
+   "Only the standard-state form of the element has a zero enthalpy of formation, which is graphite for carbon."
+  ]
+ },
+ {
+  "id": "ch_t5_p6_hess_claim",
+  "topic": "6.9",
+  "skill": "6.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "The sign depends on the direction of the original reaction.",
+   "Reversal changes the sign and keeps the magnitude.",
+   "The sign of ΔH depends on the direction between states."
+  ]
+ },
+ {
+  "id": "ch_t5_p6_imf_claim",
+  "topic": "3.1",
+  "skill": "6.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "Boiling involves intermolecular forces, not covalent bond strength.",
+   "Both compounds are molecular.",
+   "The two compounds have the same formula and the same molar mass."
+  ]
+ },
+ {
+  "id": "ch_t5_p6_kmt_claim",
+  "topic": "3.5",
+  "skill": "6.E",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "Pressure increases because of collision frequency, not stronger attractions.",
+   "Compression does not change the number of particles.",
+   "At constant temperature the average speed does not change."
+  ]
+ },
+ {
+  "id": "ch_t5_p6_solubility_claim",
+  "topic": "3.10",
+  "skill": "6.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "Boiling points do not determine solubility.",
+   "Sodium chloride is ionic, not nonpolar.",
+   "Density is not the reason for the difference."
+  ]
+ },
+ {
+  "id": "ch_t5_p6_titration_claim",
+  "topic": "8.5",
+  "skill": "6.B",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "The initial pH of a strong acid solution is low.",
+   "The conjugate base of a strong acid is negligibly basic.",
+   "There is no excess base at the equivalence point."
+  ]
+ },
+ {
+  "id": "ch_t5_percent_composition",
+  "topic": "1.3",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "parser vs flat formula mass"
+  ],
+  "misconceptions": [
+   "Leaves out the subscript of the element.",
+   "Reports the fraction rather than the percent.",
+   "Divides by the molar mass of the element instead of the compound."
+  ]
+ },
+ {
+  "id": "ch_t5_percent_ionization",
+  "topic": "8.3",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy vs direct formula"
+  ],
+  "misconceptions": [
+   "Uses Ka as the hydrogen ion concentration.",
+   "Uses the pH value divided by the concentration.",
+   "Divides the formal concentration by the hydrogen ion concentration."
+  ]
+ },
+ {
+  "id": "ch_t5_ph_after_dilution",
+  "topic": "8.2",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact rational dilution then log vs direct"
+  ],
+  "misconceptions": [
+   "Divides the original molarity by the final volume in mL.",
+   "Reports the pH of the original strong acid solution without accounting for dilution.",
+   "Uses the ratio of the volumes without the original molarity."
+  ]
+ },
+ {
+  "id": "ch_t5_ph_weak_acid",
+  "topic": "8.3",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy square root vs direct formula"
+  ],
+  "misconceptions": [
+   "Forgets the square root and uses [H+] = Ka × c.",
+   "Reports the pOH rather than the pH.",
+   "Sets [H+] equal to Ka instead of solving for x."
+  ]
+ },
+ {
+  "id": "ch_t5_ph_weak_base",
+  "topic": "8.3",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy square root vs direct formula"
+  ],
+  "misconceptions": [
+   "Takes [H+] equal to the square root of Kb c and reports that pH.",
+   "Uses Kb directly as [OH−].",
+   "Treats the weak base as strong, so [OH−] equals the formal concentration."
+  ]
+ },
+ {
+  "id": "ch_t5_photon_energy_wavelength",
+  "topic": "3.12",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy rational vs float"
+  ],
+  "misconceptions": [
+   "Multiplies the wavelength by hc instead of dividing.",
+   "Uses E = h/λ and leaves out the speed of light.",
+   "Uses the wavelength in nanometers without converting to meters."
+  ]
+ },
+ {
+  "id": "ch_t5_poh_to_h",
+  "topic": "8.2",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy power vs float power"
+  ],
+  "misconceptions": [
+   "Uses [H+] = 10^(−pOH) as if pOH were the pH.",
+   "Uses 14 + pOH instead of 14 − pOH.",
+   "Reports [OH−] instead of [H+]."
+  ]
+ },
+ {
+  "id": "ch_t5_q_value",
+  "topic": "7.3",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact rational vs float"
+  ],
+  "misconceptions": [
+   "Includes only one reactant in the denominator.",
+   "Inverts the reaction quotient.",
+   "Ignores the coefficients as exponents."
+  ]
+ },
+ {
+  "id": "ch_t5_qsp_after_mixing",
+  "topic": "7.11",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact rational dilution vs float"
+  ],
+  "misconceptions": [
+   "Uses the initial concentrations and forgets that mixing dilutes each ion.",
+   "Dilutes only the cation concentration.",
+   "Adds the two diluted concentrations."
+  ]
+ },
+ {
+  "id": "ch_t5_rate_factor_order",
+  "topic": "5.2",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact integer power vs float"
+  ],
+  "misconceptions": [
+   "Multiplies the concentration factor by the order.",
+   "Adds the order to the concentration factor.",
+   "Takes the rate to change by the same factor as the concentration."
+  ]
+ },
+ {
+  "id": "ch_t5_rate_from_law",
+  "topic": "5.2",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact rational vs float"
+  ],
+  "misconceptions": [
+   "Uses the orders as coefficients instead of exponents.",
+   "Multiplies the concentrations without using the reaction orders as exponents.",
+   "Adds the orders and applies the total to each concentration."
+  ]
+ },
+ {
+  "id": "ch_t5_second_order_halflife",
+  "topic": "5.3",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact rational vs float"
+  ],
+  "misconceptions": [
+   "Uses the zero-order half-life, [A]0 / (2k).",
+   "Multiplies k by the initial concentration instead of inverting the product.",
+   "Uses the first-order half-life, ln 2 / k."
+  ]
+ },
+ {
+  "id": "ch_t5_stock_dilution_volume",
+  "topic": "3.7",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact rational V1 vs float formula"
+  ],
+  "misconceptions": [
+   "Multiplies the two molarities and divides by the final volume.",
+   "Divides the volume of the dilute solution by the molarity ratio the wrong way (V2 M1 / M2).",
+   "Subtracts the molarities and multiplies by the final volume."
+  ]
+ },
+ {
+  "id": "ch_t5_strong_base_ph",
+  "topic": "8.2",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy log vs math.log10"
+  ],
+  "misconceptions": [
+   "Takes the pH as −log of the base concentration.",
+   "Subtracts the pOH from 7 instead of 14.",
+   "Ignores the second hydroxide per formula unit."
+  ]
+ },
+ {
+  "id": "ch_t5_titration_equivalence_volume",
+  "topic": "8.5",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact rational vs float"
+  ],
+  "misconceptions": [
+   "Inverts the molarity ratio.",
+   "Ignores the 1:2 mole ratio between the acid and the base.",
+   "Multiplies the molarities and divides by the volume of acid."
+  ]
+ },
+ {
+  "id": "ch_t5_zero_order_time",
+  "topic": "5.3",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact rational difference vs float"
+  ],
+  "misconceptions": [
+   "Uses the second-order integrated rate law.",
+   "Uses the first-order integrated rate law.",
+   "Divides the initial concentration by the rate constant."
+  ]
+ },
+ {
   "id": "ch_testable_question",
   "topic": "3.13",
   "skill": "2.A",
@@ -2421,7 +4086,7 @@
   "calculator": "allowed",
   "stimulus": "table",
   "verifiedBy": [
-   "ranking of the liquids by the computed 25 \u00b0C vapor pressure vs the reverse ranking by boiling point (Trouton + Clausius\u2013Clapeyron)"
+   "ranking of the liquids by the computed 25 °C vapor pressure vs the reverse ranking by boiling point (Trouton + Clausius–Clapeyron)"
   ],
   "misconceptions": [
    "Confuses intermolecular forces with the covalent bonds inside molecules.",
@@ -2469,9 +4134,9 @@
    "measured viscosities vs the count of -OH groups (ties broken by molecular size); the same liquid wins"
   ],
   "misconceptions": [
-   "acetone has 0 \u2013OH groups per molecule, fewer than the 3 of glycerol, so its molecules attract each other less strongly and it flows more easily.",
-   "water has 2 \u2013OH groups per molecule, fewer than the 3 of glycerol, so its molecules attract each other less strongly and it flows more easily.",
-   "methanol has 1 \u2013OH group per molecule, fewer than the 3 of glycerol, so its molecules attract each other less strongly and it flows more easily."
+   "acetone has 0 –OH groups per molecule, fewer than the 3 of glycerol, so its molecules attract each other less strongly and it flows more easily.",
+   "water has 2 –OH groups per molecule, fewer than the 3 of glycerol, so its molecules attract each other less strongly and it flows more easily.",
+   "methanol has 1 –OH group per molecule, fewer than the 3 of glycerol, so its molecules attract each other less strongly and it flows more easily."
   ]
  },
  {
@@ -2499,7 +4164,7 @@
    "sympy solution of the quadratic x^2 + Ka x - Ka c = 0 vs bisection on the full charge balance including water"
   ],
   "misconceptions": [
-   "Takes the square root of Ka as [H\u207a], leaving out the initial concentration.",
+   "Takes the square root of Ka as [H⁺], leaving out the initial concentration.",
    "Reports the pOH of the solution.",
    "Uses the pKa of the acid as the pH of the solution."
   ]
@@ -2571,12 +4236,12 @@
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
-   "least squares of \u0394G\u00b0 against T vs the two-point slope"
+   "least squares of ΔG° against T vs the two-point slope"
   ],
   "misconceptions": [
    "Forgets to convert kJ to J.",
-   "Divides a single value of \u0394G\u00b0 by its temperature.",
-   "Reports \u0394S\u00b0 with the right magnitude but the wrong sign."
+   "Divides a single value of ΔG° by its temperature.",
+   "Reports ΔS° with the right magnitude but the wrong sign."
   ]
  },
  {
@@ -2586,12 +4251,12 @@
   "calculator": "allowed",
   "stimulus": "none",
   "verifiedBy": [
-   "least squares of \u0394G\u00b0 against T vs the two-point slope"
+   "least squares of ΔG° against T vs the two-point slope"
   ],
   "misconceptions": [
-   "Takes the \u0394G\u00b0 at 300 K as \u0394H\u00b0.",
-   "Subtracts the T\u0394S\u00b0 term from \u0394G\u00b0 instead of adding it.",
-   "Takes the \u0394G\u00b0 at 500 K as \u0394H\u00b0."
+   "Takes the ΔG° at 300 K as ΔH°.",
+   "Subtracts the TΔS° term from ΔG° instead of adding it.",
+   "Takes the ΔG° at 500 K as ΔH°."
   ]
  },
  {
@@ -2625,6 +4290,126 @@
   ]
  },
  {
+  "id": "chs_t5_equilibrium_table_set_q1",
+  "topic": "7.4",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact rational vs float"
+  ],
+  "misconceptions": [
+   "Uses the equilibrium concentration of A as the concentration of C.",
+   "Divides the change in A by 2.",
+   "Takes the equilibrium concentration of C equal to the initial concentration of B."
+  ]
+ },
+ {
+  "id": "chs_t5_equilibrium_table_set_q2",
+  "topic": "7.4",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact rational vs float"
+  ],
+  "misconceptions": [
+   "Does not square [C] in the numerator.",
+   "Uses the initial concentrations of A and B in the denominator.",
+   "Uses x as the concentration of C."
+  ]
+ },
+ {
+  "id": "chs_t5_hess_table_set_q1",
+  "topic": "6.9",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact rational vs float"
+  ],
+  "misconceptions": [
+   "Reports only the first value.",
+   "Adds the two values without reversing the second reaction.",
+   "Reverses the first reaction instead of the second."
+  ]
+ },
+ {
+  "id": "chs_t5_hess_table_set_q2",
+  "topic": "6.9",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact rational vs float"
+  ],
+  "misconceptions": [
+   "Uses the enthalpy change for the wrong reaction.",
+   "Changes the sign of the final enthalpy change.",
+   "Ignores the amount of A that reacts and reports ΔH° of the target reaction."
+  ]
+ },
+ {
+  "id": "chs_t5_ksp_table_set_q1",
+  "topic": "7.11",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact rational vs float"
+  ],
+  "misconceptions": [
+   "Divides one concentration by the other.",
+   "Adds the two concentrations instead of multiplying them.",
+   "Uses the Ksp value as the ion product."
+  ]
+ },
+ {
+  "id": "chs_t5_ksp_table_set_q2",
+  "topic": "7.11",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact rational vs float"
+  ],
+  "misconceptions": [
+   "Inverts the ratio and divides Ksp by Q.",
+   "Uses Q alone as the ratio.",
+   "Subtracts Ksp from Q instead of dividing Q by Ksp."
+  ]
+ },
+ {
+  "id": "chs_t5_metal_specific_heat_set_q1",
+  "topic": "6.4",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact rational vs float"
+  ],
+  "misconceptions": [
+   "Uses the specific heat of the metal in place of the specific heat of water.",
+   "Uses the temperature of the metal instead of the temperature change of the water.",
+   "Uses the mass of the metal and the temperature change of the water."
+  ]
+ },
+ {
+  "id": "chs_t5_metal_specific_heat_set_q2",
+  "topic": "6.4",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "exact rational vs float"
+  ],
+  "misconceptions": [
+   "Reports the specific heat of water.",
+   "Uses the final temperature instead of the temperature change of the metal.",
+   "Divides by the temperature change of the water instead of the temperature change of the metal."
+  ]
+ },
+ {
   "id": "chs_titration_set_q1",
   "topic": "8.5",
   "skill": "5.D",
@@ -2652,6 +4437,66 @@
    "Reports 7.00 for the equivalence point of any neutralization.",
    "Reports the pKa, the pH at the half-equivalence point, instead of the equivalence-point pH.",
    "Uses the initial pH of the acid."
+  ]
+ },
+ {
+  "id": "ch_t5i_ka_from_ph",
+  "topic": "8.3",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy exact ratio vs direct formula"
+  ],
+  "misconceptions": [
+   "Divides the initial concentration by [H⁺] squared.",
+   "Uses [H⁺] times the initial concentration.",
+   "Uses the pH value instead of [H⁺] in the expression."
+  ]
+ },
+ {
+  "id": "ch_t5i_p2_oxide_formula_procedure",
+  "topic": "1.3",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "A hot crucible produces air currents that make the mass reading inaccurate.",
+   "Extra water adds mass and defeats the purpose of drying.",
+   "A fixed time does not show that the sample is dry."
+  ]
+ },
+ {
+  "id": "ch_t5i_p4_evaporation_forces",
+  "topic": "3.1",
+  "skill": "4.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "Surface tension does not involve breaking bonds within molecules.",
+   "The liquids are at the same temperature, so their average kinetic energies are equal.",
+   "Weaker forces give a lower, not a higher, surface tension."
+  ]
+ },
+ {
+  "id": "ch_t5i_p4_heating_curve",
+  "topic": "3.3",
+  "skill": "4.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "Molecules in a liquid keep moving at 100 °C.",
+   "Condensation is a physical change and does not break bonds within molecules.",
+   "The temperature is constant, so the average kinetic energy is constant."
   ]
  }
 ]

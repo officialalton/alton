@@ -1,0 +1,35 @@
+{
+ "run": "csa-t5-mc3",
+ "subject": "ap_computer_science_a",
+ "generatedAt": "2026-10-22T03:39:25.128Z",
+ "totalCostUsd": 0.37,
+ "newSpendSinceBaseline": 0.37,
+ "cap": 50,
+ "calls": 30,
+ "candidates": 10,
+ "mcCandidates": 10,
+ "frqCandidates": 0,
+ "passedAll": 8,
+ "adopted": 5,
+ "mcAdopted": 5,
+ "frqAdopted": 0,
+ "reserve": 3,
+ "yield": 0.5,
+ "costPerAdopted": 0.073,
+ "callsPerAdopted": 6,
+ "duplicateRejected": 1,
+ "spotChecked": 0,
+ "wording": {
+  "llm": 0,
+  "template": 10
+ },
+ "rejectionReasons": {
+  "criterion_failed_scope_skill": 1,
+  "criterion_failed_distractor_explanation": 1,
+  "criterion_failed_exam_suitability": 1,
+  "instant_reject_out_of_scope_knowledge": 1,
+  "reference_pattern_mismatch": 1,
+  "duplicate_gate_near_duplicate": 1
+ },
+ "unfilledCells": []
+}

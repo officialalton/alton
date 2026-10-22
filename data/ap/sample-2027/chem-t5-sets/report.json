@@ -1,0 +1,37 @@
+{
+ "run": "chem-t5-sets",
+ "subject": "ap_chemistry",
+ "generatedAt": "2026-10-22T02:55:58.943Z",
+ "totalCostUsd": 0.68,
+ "newSpendSinceBaseline": 0.72,
+ "cap": 2.5,
+ "calls": 72,
+ "candidates": 24,
+ "mcCandidates": 24,
+ "frqCandidates": 0,
+ "passedAll": 6,
+ "adopted": 1,
+ "mcAdopted": 1,
+ "frqAdopted": 0,
+ "reserve": 2,
+ "yield": 0.042,
+ "costPerAdopted": 0.682,
+ "callsPerAdopted": 72,
+ "duplicateRejected": 0,
+ "spotChecked": 0,
+ "wording": {
+  "llm": 0,
+  "template": 24
+ },
+ "rejectionReasons": {
+  "criterion_failed_distractor_explanation": 12,
+  "set_item_N": 28,
+  "criterion_failed_stimulus_expression": 1,
+  "instant_reject_missing_condition": 1
+ },
+ "unfilledCells": [
+  "ap_chemistry-m02",
+  "ap_chemistry-m03",
+  "ap_chemistry-m04"
+ ]
+}

@@ -3133,5 +3133,215 @@
    "For [3, 2, 3, 1, 2] the result is [3, 2, 1], not [1, 2, 3]; the method does not sort.",
    "The method builds and returns a new list; the original list is not changed."
   ]
+ },
+ {
+  "id": "cs_circular_back",
+  "topic": "1.9",
+  "skill": "2.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "each candidate compiled and run with and without wrap-around"
+  ],
+  "misconceptions": [
+   "Moves forward instead of backward.",
+   "Does not wrap with the remainder, so the result can be n or larger.",
+   "The remainder of a negative number is negative in Java, so the result can be negative."
+  ]
+ },
+ {
+  "id": "cs_halving_steps",
+  "topic": "2.9",
+  "skill": "2.B",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "each candidate compiled and run for values with short and long sequences"
+  ],
+  "misconceptions": [
+   "Stops when the value is 2 or less, so it misses the final step.",
+   "Combines the odd update and the next halving into one step, so it counts fewer steps.",
+   "Never increments count inside the loop."
+  ]
+ },
+ {
+  "id": "cs_price_cents_round",
+  "topic": "1.7",
+  "skill": "2.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "each candidate compiled and run on prices with and without cents"
+  ],
+  "misconceptions": [
+   "Rounds to the nearest whole dollar because the division comes before the cast.",
+   "Casts dollars to int first, which drops the cents of the price.",
+   "Truncates instead of rounding to the nearest cent."
+  ]
+ },
+ {
+  "id": "cs_swap_halves",
+  "topic": "1.15",
+  "skill": "2.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "each candidate compiled and run on strings of length 0, 2, 4 and 6"
+  ],
+  "misconceptions": [
+   "Rebuilds the original string without swapping the halves.",
+   "Drops the first character of the second half.",
+   "Drops the last character of the first half."
+  ]
+ },
+ {
+  "id": "cs_valid_clock_time",
+  "topic": "2.5",
+  "skill": "2.B",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "each candidate compiled and run on boundary and out-of-range values"
+  ],
+  "misconceptions": [
+   "Mixes || and && so that out-of-range values can still produce true.",
+   "Rejects hour 0 and minute 0, which are valid.",
+   "Rejects the largest valid hour and minute."
+  ]
+ },
+ {
+  "id": "cs_array_max_from_trace",
+  "topic": "4.17",
+  "skill": "3.C",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python max"
+  ],
+  "misconceptions": [
+   "Believes the method returns the first value of the range.",
+   "Believes the method returns the smallest value instead of the largest.",
+   "Believes the base case is the first element of the range instead of the last element of the array. Running this version throws a run-time exception."
+  ]
+ },
+ {
+  "id": "cs_fib_calls_trace",
+  "topic": "4.16",
+  "skill": "3.C",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python recursion"
+  ],
+  "misconceptions": [
+   "Believes the call counter is not incremented in the recursive calls.",
+   "Believes the recursion stops one value earlier.",
+   "Believes the base case returns 1 for n = 0."
+  ]
+ },
+ {
+  "id": "cs_odd_digit_sum_trace",
+  "topic": "2.10",
+  "skill": "3.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python digit loop"
+  ],
+  "misconceptions": [
+   "Skips every other digit by removing two digits per pass.",
+   "Adds the digit to the total even when it is not odd.",
+   "Adds the number of odd digits instead of their values."
+  ]
+ },
+ {
+  "id": "cs_reverse_digits_trace",
+  "topic": "4.17",
+  "skill": "3.C",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python recursion"
+  ],
+  "misconceptions": [
+   "Believes the recursion stops before the last digit is used.",
+   "Believes the next digit is taken from the quotient instead of the remainder.",
+   "Believes the accumulator is added instead of shifted left before adding the digit."
+  ]
+ },
+ {
+  "id": "cs_selection_two_passes_trace",
+  "topic": "4.15",
+  "skill": "3.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python selection passes"
+  ],
+  "misconceptions": [
+   "Runs only one pass of the outer loop.",
+   "Selects the largest value of the remaining part instead of the smallest.",
+   "Starts each search at p instead of p + 1 but ignores the swap."
+  ]
+ },
+ {
+  "id": "cs_flag_scan_trace",
+  "topic": "2.11",
+  "skill": "3.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python scan"
+  ],
+  "misconceptions": [
+   "Believes the index is not advanced in the pass that sets found.",
+   "Believes the loop continues until the end of the array.",
+   "Believes the loop stops before the value that passes the threshold is added."
+  ]
+ },
+ {
+  "id": "cs_pair_count_trace",
+  "topic": "2.12",
+  "skill": "3.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python nested loops"
+  ],
+  "misconceptions": [
+   "Stops the inner loop one value early.",
+   "Starts the inner loop at i + 1, which skips pairs of equal values.",
+   "Believes the condition needs both tests to be true."
+  ]
+ },
+ {
+  "id": "cs_grade_chain_trace",
+  "topic": "2.4",
+  "skill": "3.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python chain"
+  ],
+  "misconceptions": [
+   "Believes the else-if chain keeps testing after a branch runs, so a score can add several letters.",
+   "Believes a score below every cutoff still adds a letter.",
+   "Believes the loop reads only the first four scores."
+  ]
+ },
+ {
+  "id": "cs_trim_until_char_trace",
+  "topic": "2.12",
+  "skill": "3.A",
+  "calculator": "not_allowed",
+  "stimulus": "text",
+  "verifiedBy": [
+   "javac+java output vs Python while loop"
+  ],
+  "misconceptions": [
+   "Believes the count is not increased in the pass that removes the character.",
+   "Believes the loop condition tests the first character of the string.",
+   "Believes the loop also removes the matching character. Running this version throws a run-time exception."
+  ]
  }
 ]

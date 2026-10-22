@@ -2,6 +2,8 @@
 // 이 스크립트는 공개 세트의 문항군(look-alike 군집 fam)·원형+토픽 키만 막고(원형 id 전체 차단 CHEM_BLOCK_ARCH 는 쓰지 않음) CH4,CH5 부족분을 센다. 읽기 전용·무료·DB 없음.
 //   npx tsx scripts/ap-generation/chem-structure-block.ts [--cases N] [--write-report <경로>] [--sets CH4,CH5]
 import { readFileSync, writeFileSync } from "node:fs";
+import { loadRaws, sameStructure } from "./structure-compare";
+const RAW = loadRaws();
 import { loadChemPool, type ChemItem } from "./chem-pool";
 import { LIB_SINGLES, LIB_SETS, solveChemSets, verifyChemAssignment, toReportSet, type ChemResult } from "./chem-assign";
 const arg = (n: string, d = "") => { const i = process.argv.indexOf(n); return i > 0 ? process.argv[i + 1] : d; };
@@ -26,7 +28,7 @@ const blockedKeys = new Set<string>([...pub, ...lookAlike.map((c) => c.key), ...
 void LIB_SINGLES; void LIB_SETS;
 const ids = arg("--sets", "CH4,CH5").split(",");
 const out: ChemResult[] = []; const bl = new Set(blockedKeys);
-for (const id of ids) { const one = solveChemSets([id], all, { timeMs: 120000, blocked: bl, preferExamPrep: true }); out.push(...one.out); for (const it of [...one.out[0].singles, ...one.out[0].sets, ...one.out[0].frq]) bl.add(it.key); }
+for (const id of ids) { const one = solveChemSets([id], all, { timeMs: 120000, blocked: bl, preferExamPrep: true }); out.push(...one.out); for (const it of [...one.out[0].singles, ...one.out[0].sets, ...one.out[0].frq]) { bl.add(it.key); for (const c of all) if (RAW.get(c.key) && RAW.get(it.key) && sameStructure(RAW.get(c.key)!, RAW.get(it.key)!)) bl.add(c.key); } } // 시험 사이 구조 동일 금지: 앞 시험에 쓴 문항군의 다른 변형도 막는다
 const bad = verifyChemAssignment(out, blockedKeys);
 console.log(`독립 검증기 위반: ${bad.length ? bad.join("; ") : "0"}`);
 for (const r of out) { console.log(`- ${r.id}: 단독 ${r.singles.length}+가상 ${r.virtual.length}, 세트 ${r.sets.length}+가상 ${r.virtualSets.length}, FRQ ${r.frq.length}+가상 ${r.frqVirtual.length}`); for (const v of r.virtual) console.log(`    가상 MC 단원 ${v.unit} P${v.practice} ${v.archetype} (${v.topic})`); r.virtualSets.forEach((v, i) => console.log(`    가상 세트 단원 ${v} ${r.virtualSetArchetypes[i]}`)); for (const v of r.frqVirtual) console.log(`    가상 FRQ ${v.type}`); }

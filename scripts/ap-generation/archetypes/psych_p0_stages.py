@@ -38,3 +38,6 @@ STAGE_T5_SETS2 = ['pss_t5b_u1_sleep_restriction', 'pss_t5b_u1_split_brain_compar
 
 # 3차: PS5 마지막 칸(단원 2 연구 방법)
 STAGE_T5_MC2 = ['ps_r5_misinformation_design', 'ps_r5_study_confound', 'ps_r5_test_reliability', 'ps_r5_test_validity', 'ps_r5_testing_effect_opdef']
+
+# 3차: PS5 단원 5 마지막 세트(t5c) — psych-t5-sets3 실행 대상
+STAGE_T5_SETS3 = ['pss_t5c_u5_coping_survey', 'pss_t5c_u5_exposure_trial', 'pss_t5c_u5_light_therapy']

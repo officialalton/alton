@@ -1,0 +1,1031 @@
+[
+ {
+  "candidateKey": "ap_chemistry-f01-k0",
+  "cellId": "ap_chemistry-f01",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "frq_bundle",
+  "keywordCode": "2.6",
+  "unitCode": "2",
+  "skillPrimary": "4.A",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "chf_short_resonance_bond_order",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Standard introductory resonance task on ozone. Draw two equivalent Lewis structures, average the bond order to 1.5, and conclude the bond length is intermediate between single and double. Few steps, trivial arithmetic, minimal reading, all within Unit 2 scope. No unfair difficulty sources.",
+  "payload": {
+   "archetype": "chf_short_resonance_bond_order",
+   "template": "short",
+   "topic": "2.6",
+   "extra_topics": [
+    "2.5",
+    "2.7"
+   ],
+   "skill": "4.A",
+   "representative_skill": "4.A",
+   "calculator": "allowed",
+   "title": "Resonance structures, bond order and bond length",
+   "stimulus": {
+    "kind": "text",
+    "description": "A student studies the species O₃, which has 18 valence electrons and is made of three O atoms. The central atom is bonded to every other atom.",
+    "data": {}
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Draw all of the Lewis structures of O₃ that obey the octet rule and show all valence electrons. Show that more than one acceptable structure exists.",
+     "points": 2,
+     "response_mode": "draw",
+     "skill_codes": [
+      "4.A",
+      "3.C"
+     ],
+     "model_answer": "Each of the 2 resonance forms has one O=O double bond and one O–O single bond, with the double bond in a different position in each of the two forms; all 18 valence electrons are shown with lone pairs on the outer atoms.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Draws a correct Lewis structure that accounts for all 18 valence electrons with one O=O double bond and one O–O single bond",
+       "required_elements": [
+        "18 valence electrons",
+        "lone pairs"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "omits lone pairs on the terminal atoms"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "diagram"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Shows the other resonance form(s), with the double bond in a different position (2 forms in total)",
+       "required_elements": [
+        "resonance forms",
+        "double bond position"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "draws the same structure twice"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "diagram"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Calculate the average bond order of the bonds from the central atom to the outer atoms.",
+     "points": 1,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.F"
+     ],
+     "model_answer": "Total bonds divided by the number of equivalent positions: (2 + 1)/2 = 1.50.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Calculates the average bond order of about 1.50",
+       "required_elements": [
+        "1.50"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "gives the bond order as 2 or 1 for every bond"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Predict how the length of the bonds from the central atom to the outer atoms compares with the length of a typical single bond and a typical double bond between the same two elements. Justify your answer.",
+     "points": 1,
+     "response_mode": "predict",
+     "skill_codes": [
+      "4.A",
+      "6.E"
+     ],
+     "model_answer": "The bond lengths are all equal and between those of a single bond and a double bond, because the electrons are delocalized over all the equivalent positions and the average bond order is between 1 and 2.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "States that the bonds are equal in length and between the single-bond and double-bond lengths because the average bond order lies between 1 and 2",
+       "required_elements": [
+        "between single and double",
+        "bond order between 1 and 2"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says one bond is shorter than the others"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    }
+   ],
+   "total_points": 4,
+   "est_minutes": 9,
+   "facts": [
+    "species=O₃",
+    "bo=1.5000"
+   ],
+   "expected_values": [
+    {
+     "part": "B",
+     "quantity": "average bond order",
+     "value": 1.5,
+     "unit": "",
+     "tolerance": 0.02
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "chf_short_resonance_bond_order",
+    "subject": "ap_chemistry",
+    "kind": "frq_bundle",
+    "concept": "Resonance forms of a polyatomic species, the average bond order, and the bond length compared with single and double bonds",
+    "topic": "2.6",
+    "skill": "4.A",
+    "student_thinking": [
+     "Draw every resonance form with all valence electrons",
+     "Average the bond order over the equivalent positions",
+     "Relate the bond order to the bond length"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the species is isolated and in the gas phase",
+      "evidence": "the stimulus names the species"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "species",
+      "valence electrons"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "the valence-electron count and the bond order from the number of resonance forms",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "4.A",
+       "3.C"
+      ],
+      "topics": [
+       "2.6"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "Each of the 2 resonance forms has one O=O double bond and one O–O single bond, with the double bond in a different position in each of the two forms; all 18 valence electrons are shown with lone pairs on the outer atoms."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Draws a correct Lewis structure that accounts for all 18 valence electrons with one O=O double bond and one O–O single bond",
+        "elements": [
+         "18 valence electrons",
+         "lone pairs"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Shows the other resonance form(s), with the double bond in a different position (2 forms in total)",
+        "elements": [
+         "resonance forms",
+         "double bond position"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "5.F"
+      ],
+      "topics": [
+       "2.6"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "Total bonds divided by the number of equivalent positions: (2 + 1)/2 = 1.50."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Calculates the average bond order of about 1.50",
+        "elements": [
+         "1.50"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "4.A",
+       "6.E"
+      ],
+      "topics": [
+       "2.6"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "The bond lengths are all equal and between those of a single bond and a double bond, because the electrons are delocalized over all the equivalent positions and the average bond order is between 1 and 2."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "States that the bonds are equal in length and between the single-bond and double-bond lengths because the average bond order lies between 1 and 2",
+        "elements": [
+         "between single and double",
+         "bond order between 1 and 2"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 4,
+    "judgment_demand": [
+     "representation_reading",
+     "justification"
+    ]
+   },
+   "seed": 14900,
+   "pack_id": "chf_short_resonance_bond_order-s14900"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "chf_short_resonance_bond_order",
+   "facts": [
+    "species=O₃",
+    "bo=1.5000"
+   ],
+   "seed": 14900
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard O3 resonance short FRQ (2/1/1 points). Chemistry is correct, rubric rows are consistent, and the load is appropriate. Minor weaknesses: \"all of the Lewis structures\" wording in Part A is slightly loose, and formal charge is not asked despite the topic name. Neither is disqualifying.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Resonance, bond order and bond length are within 2.6/2.5; per-part skills are reasonable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Answers are unique and correct; A1/A2 and B1 are consistent. C1 bundles several elements in one row, which is acceptable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Text stimulus is complete; drawing is answered on paper."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "N/A for FRQ; common errors are listed per row."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Light load, roughly 4 points in a few minutes; the calculator is barely needed."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard introductory resonance task on ozone. Draw two equivalent Lewis structures, average the bond order to 1.5, and conclude the bond length is intermediate between single and double. Few steps, trivial arithmetic, minimal reading, all within Unit 2 scope. No unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-f01-k1",
+  "cellId": "ap_chemistry-f01",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "frq_bundle",
+  "keywordCode": "2.6",
+  "unitCode": "2",
+  "skillPrimary": "4.A",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "chf_short_resonance_bond_order",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Classic AP resonance FRQ in three parts. Part A is drawing the Lewis structures for CO3 2- (one C=O and two C-O in three equivalent arrangements) with the correct electron count and charges. Part B is a simple average bond order of 4/3. Part C is a qualitative prediction that the bonds are intermediate in length, justified by delocalization. The concepts are core Unit 2 (2.5, 2.6) and the item stays within scope. Reading load is minimal and there is no long arithmetic. Part A has the most reasoning (electron counting, octet checking, recognizing equivalent structures), and Parts B and C each add one linking step. The item is not ambiguous and does not depend on out-of-scope knowledge, so it fits the exam_prep target for full mocks.",
+  "payload": {
+   "archetype": "chf_short_resonance_bond_order",
+   "template": "short",
+   "topic": "2.6",
+   "extra_topics": [
+    "2.5",
+    "2.7"
+   ],
+   "skill": "4.A",
+   "representative_skill": "4.A",
+   "calculator": "allowed",
+   "title": "Resonance structures, bond order and bond length",
+   "stimulus": {
+    "kind": "text",
+    "description": "A student studies the species CO₃²⁻, which has 24 valence electrons and is made of C and three O atoms. The central atom is bonded to every other atom.",
+    "data": {}
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Draw all of the Lewis structures of CO₃²⁻ that obey the octet rule and show all valence electrons. Show that more than one acceptable structure exists.",
+     "points": 2,
+     "response_mode": "draw",
+     "skill_codes": [
+      "4.A",
+      "3.C"
+     ],
+     "model_answer": "Each of the 3 resonance forms has one C=O double bond and two C–O single bonds, with the double bond in a different position in each of the three forms; all 24 valence electrons are shown with lone pairs on the outer atoms.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Draws a correct Lewis structure that accounts for all 24 valence electrons with one C=O double bond and two C–O single bonds",
+       "required_elements": [
+        "24 valence electrons",
+        "lone pairs"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "omits lone pairs on the terminal atoms"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "diagram"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Shows the other resonance form(s), with the double bond in a different position (3 forms in total)",
+       "required_elements": [
+        "resonance forms",
+        "double bond position"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "draws the same structure twice"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "diagram"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Calculate the average bond order of the bonds from the central atom to the outer atoms.",
+     "points": 1,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.F"
+     ],
+     "model_answer": "Total bonds divided by the number of equivalent positions: (2 + 2)/3 = 1.33.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Calculates the average bond order of about 1.33",
+       "required_elements": [
+        "1.33"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "gives the bond order as 2 or 1 for every bond"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Predict how the length of the bonds from the central atom to the outer atoms compares with the length of a typical single bond and a typical double bond between the same two elements. Justify your answer.",
+     "points": 1,
+     "response_mode": "predict",
+     "skill_codes": [
+      "4.A",
+      "6.E"
+     ],
+     "model_answer": "The bond lengths are all equal and between those of a single bond and a double bond, because the electrons are delocalized over all the equivalent positions and the average bond order is between 1 and 2.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "States that the bonds are equal in length and between the single-bond and double-bond lengths because the average bond order lies between 1 and 2",
+       "required_elements": [
+        "between single and double",
+        "bond order between 1 and 2"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says one bond is shorter than the others"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    }
+   ],
+   "total_points": 4,
+   "est_minutes": 9,
+   "facts": [
+    "species=CO₃²⁻",
+    "bo=1.3333"
+   ],
+   "expected_values": [
+    {
+     "part": "B",
+     "quantity": "average bond order",
+     "value": 1.3333333333333333,
+     "unit": "",
+     "tolerance": 0.02
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "chf_short_resonance_bond_order",
+    "subject": "ap_chemistry",
+    "kind": "frq_bundle",
+    "concept": "Resonance forms of a polyatomic species, the average bond order, and the bond length compared with single and double bonds",
+    "topic": "2.6",
+    "skill": "4.A",
+    "student_thinking": [
+     "Draw every resonance form with all valence electrons",
+     "Average the bond order over the equivalent positions",
+     "Relate the bond order to the bond length"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the species is isolated and in the gas phase",
+      "evidence": "the stimulus names the species"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "species",
+      "valence electrons"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "the valence-electron count and the bond order from the number of resonance forms",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "4.A",
+       "3.C"
+      ],
+      "topics": [
+       "2.6"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "Each of the 3 resonance forms has one C=O double bond and two C–O single bonds, with the double bond in a different position in each of the three forms; all 24 valence electrons are shown with lone pairs on the outer atoms."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Draws a correct Lewis structure that accounts for all 24 valence electrons with one C=O double bond and two C–O single bonds",
+        "elements": [
+         "24 valence electrons",
+         "lone pairs"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Shows the other resonance form(s), with the double bond in a different position (3 forms in total)",
+        "elements": [
+         "resonance forms",
+         "double bond position"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "5.F"
+      ],
+      "topics": [
+       "2.6"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "Total bonds divided by the number of equivalent positions: (2 + 2)/3 = 1.33."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Calculates the average bond order of about 1.33",
+        "elements": [
+         "1.33"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "4.A",
+       "6.E"
+      ],
+      "topics": [
+       "2.6"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "The bond lengths are all equal and between those of a single bond and a double bond, because the electrons are delocalized over all the equivalent positions and the average bond order is between 1 and 2."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "States that the bonds are equal in length and between the single-bond and double-bond lengths because the average bond order lies between 1 and 2",
+        "elements": [
+         "between single and double",
+         "bond order between 1 and 2"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 4,
+    "judgment_demand": [
+     "representation_reading",
+     "justification"
+    ]
+   },
+   "seed": 14901,
+   "pack_id": "chf_short_resonance_bond_order-s14901"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "chf_short_resonance_bond_order",
+   "facts": [
+    "species=CO₃²⁻",
+    "bo=1.3333"
+   ],
+   "seed": 14901
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Standard carbonate resonance short FRQ (2/1/1). The key is unique and the solver agreed. The scope is correct and the load is light. The drawing part needs no figure data.",
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Classic AP resonance FRQ in three parts. Part A is drawing the Lewis structures for CO3 2- (one C=O and two C-O in three equivalent arrangements) with the correct electron count and charges. Part B is a simple average bond order of 4/3. Part C is a qualitative prediction that the bonds are intermediate in length, justified by delocalization. The concepts are core Unit 2 (2.5, 2.6) and the item stays within scope. Reading load is minimal and there is no long arithmetic. Part A has the most reasoning (electron counting, octet checking, recognizing equivalent structures), and Parts B and C each add one linking step. The item is not ambiguous and does not depend on out-of-scope knowledge, so it fits the exam_prep target for full mocks.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-f01-k2",
+  "cellId": "ap_chemistry-f01",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "frq_bundle",
+  "keywordCode": "2.6",
+  "unitCode": "2",
+  "skillPrimary": "4.A",
+  "structure": "frq_multipart",
+  "calculator": "allowed",
+  "archetype": "chf_short_resonance_bond_order",
+  "wording": "template",
+  "reviewState": "rejected",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": false,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard multi-part resonance item. Part A requires constructing the octet-obeying Lewis structures and showing multiple equivalent resonance forms. Part B is a one-step average bond order (4/3). Part C links bond order to bond length with a justification (delocalization gives intermediate length). Concepts are core Unit 2 (2.5/2.6), the wording is clear, and the arithmetic is trivial. This is typical AP free-response-style content for full mocks and not advanced. Difficulty comes from legitimate conceptual reasoning only.",
+  "payload": {
+   "archetype": "chf_short_resonance_bond_order",
+   "template": "short",
+   "topic": "2.6",
+   "extra_topics": [
+    "2.5",
+    "2.7"
+   ],
+   "skill": "4.A",
+   "representative_skill": "4.A",
+   "calculator": "allowed",
+   "title": "Resonance structures, bond order and bond length",
+   "stimulus": {
+    "kind": "text",
+    "description": "A student studies the species NO₃⁻, which has 24 valence electrons and is made of N and three O atoms. The central atom is bonded to every other atom.",
+    "data": {}
+   },
+   "parts": [
+    {
+     "label": "A",
+     "prompt": "Draw all of the Lewis structures of NO₃⁻ that obey the octet rule and show all valence electrons. Show that more than one acceptable structure exists.",
+     "points": 2,
+     "response_mode": "draw",
+     "skill_codes": [
+      "4.A",
+      "3.C"
+     ],
+     "model_answer": "Each of the 3 resonance forms has one N=O double bond and two N–O single bonds, with the double bond in a different position in each of the three forms; all 24 valence electrons are shown with lone pairs on the outer atoms.",
+     "rubric_rows": [
+      {
+       "row_id": "A1",
+       "points": 1,
+       "criterion": "Draws a correct Lewis structure that accounts for all 24 valence electrons with one N=O double bond and two N–O single bonds",
+       "required_elements": [
+        "24 valence electrons",
+        "lone pairs"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "omits lone pairs on the terminal atoms"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "diagram"
+      },
+      {
+       "row_id": "A2",
+       "points": 1,
+       "criterion": "Shows the other resonance form(s), with the double bond in a different position (3 forms in total)",
+       "required_elements": [
+        "resonance forms",
+        "double bond position"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "draws the same structure twice"
+       ],
+       "requires_row_id": "A1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "diagram"
+      }
+     ]
+    },
+    {
+     "label": "B",
+     "prompt": "Calculate the average bond order of the bonds from the central atom to the outer atoms.",
+     "points": 1,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "5.F"
+     ],
+     "model_answer": "Total bonds divided by the number of equivalent positions: (2 + 2)/3 = 1.33.",
+     "rubric_rows": [
+      {
+       "row_id": "B1",
+       "points": 1,
+       "criterion": "Calculates the average bond order of about 1.33",
+       "required_elements": [
+        "1.33"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "gives the bond order as 2 or 1 for every bond"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "numeric"
+      }
+     ]
+    },
+    {
+     "label": "C",
+     "prompt": "Predict how the length of the bonds from the central atom to the outer atoms compares with the length of a typical single bond and a typical double bond between the same two elements. Justify your answer.",
+     "points": 1,
+     "response_mode": "predict",
+     "skill_codes": [
+      "4.A",
+      "6.E"
+     ],
+     "model_answer": "The bond lengths are all equal and between those of a single bond and a double bond, because the electrons are delocalized over all the equivalent positions and the average bond order is between 1 and 2.",
+     "rubric_rows": [
+      {
+       "row_id": "C1",
+       "points": 1,
+       "criterion": "States that the bonds are equal in length and between the single-bond and double-bond lengths because the average bond order lies between 1 and 2",
+       "required_elements": [
+        "between single and double",
+        "bond order between 1 and 2"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [
+        "says one bond is shorter than the others"
+       ],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false,
+       "kind": "justification"
+      }
+     ]
+    }
+   ],
+   "total_points": 4,
+   "est_minutes": 9,
+   "facts": [
+    "species=NO₃⁻",
+    "bo=1.3333"
+   ],
+   "expected_values": [
+    {
+     "part": "B",
+     "quantity": "average bond order",
+     "value": 1.3333333333333333,
+     "unit": "",
+     "tolerance": 0.02
+    }
+   ],
+   "reference_note": "ALTON reference answer for self-review — not official AP scoring",
+   "blueprint": {
+    "id": "chf_short_resonance_bond_order",
+    "subject": "ap_chemistry",
+    "kind": "frq_bundle",
+    "concept": "Resonance forms of a polyatomic species, the average bond order, and the bond length compared with single and double bonds",
+    "topic": "2.6",
+    "skill": "4.A",
+    "student_thinking": [
+     "Draw every resonance form with all valence electrons",
+     "Average the bond order over the equivalent positions",
+     "Relate the bond order to the bond length"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "the species is isolated and in the gas phase",
+      "evidence": "the stimulus names the species"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "species",
+      "valence electrons"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "the valence-electron count and the bond order from the number of resonance forms",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "A",
+      "skills": [
+       "4.A",
+       "3.C"
+      ],
+      "topics": [
+       "2.6"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "Each of the 3 resonance forms has one N=O double bond and two N–O single bonds, with the double bond in a different position in each of the three forms; all 24 valence electrons are shown with lone pairs on the outer atoms."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "A1",
+        "points": 1,
+        "criterion": "Draws a correct Lewis structure that accounts for all 24 valence electrons with one N=O double bond and two N–O single bonds",
+        "elements": [
+         "24 valence electrons",
+         "lone pairs"
+        ]
+       },
+       {
+        "row_id": "A2",
+        "points": 1,
+        "criterion": "Shows the other resonance form(s), with the double bond in a different position (3 forms in total)",
+        "elements": [
+         "resonance forms",
+         "double bond position"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "B",
+      "skills": [
+       "5.F"
+      ],
+      "topics": [
+       "2.6"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "Total bonds divided by the number of equivalent positions: (2 + 2)/3 = 1.33."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "B1",
+        "points": 1,
+        "criterion": "Calculates the average bond order of about 1.33",
+        "elements": [
+         "1.33"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "C",
+      "skills": [
+       "4.A",
+       "6.E"
+      ],
+      "topics": [
+       "2.6"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "The bond lengths are all equal and between those of a single bond and a double bond, because the electrons are delocalized over all the equivalent positions and the average bond order is between 1 and 2."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "C1",
+        "points": 1,
+        "criterion": "States that the bonds are equal in length and between the single-bond and double-bond lengths because the average bond order lies between 1 and 2",
+        "elements": [
+         "between single and double",
+         "bond order between 1 and 2"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 4,
+    "judgment_demand": [
+     "representation_reading",
+     "justification"
+    ]
+   },
+   "seed": 14902,
+   "pack_id": "chf_short_resonance_bond_order-s14902"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "chf_short_resonance_bond_order",
+   "facts": [
+    "species=NO₃⁻",
+    "bo=1.3333"
+   ],
+   "seed": 14902
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item fits topic 2.6 with spans into 2.5, is unambiguous, and is complete and well scoped as a 4-point short free-response question. The NO3- keys are correct: 3 resonance forms, bond order 4/3, and a length between single and double. The independent solver agrees. No instant-reject condition applies.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Resonance, bond order and bond length are the core of 2.6. Part A uses the allowed 2.5 Lewis diagram skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are unique and correct, and the rubric rows are consistent with the prompts. Part A's 2-point split (one structure, then the other forms) is reasonable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stimulus gives the species, the valence electron count and the connectivity. An empty data object is acceptable because the parts ask for a drawing. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to free response. The rubric lists a plausible common error for each row."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The question is a 2/1/1 split with light reading and trivial arithmetic. The calculator designation is consistent."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard multi-part resonance item. Part A requires constructing the octet-obeying Lewis structures and showing multiple equivalent resonance forms. Part B is a one-step average bond order (4/3). Part C links bond order to bond length with a justification (delocalization gives intermediate length). Concepts are core Unit 2 (2.5/2.6), the wording is clear, and the arithmetic is trivial. This is typical AP free-response-style content for full mocks and not advanced. Difficulty comes from legitimate conceptual reasoning only.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ }
+]

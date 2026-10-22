@@ -1,0 +1,47 @@
+{
+ "run": "chem-t5-frq5",
+ "subject": "ap_chemistry",
+ "generatorCommit": "e057cb539+dirty",
+ "gateVersion": "v2-code-first-final-2026-10-08",
+ "reviewerPromptHash": "43adcd3f3c8d",
+ "difficultyPromptHash": "9bda2250d42c",
+ "flags": {
+  "flatReview": true,
+  "subjectNotes": true,
+  "requireBlueprint": true,
+  "legacyItems": false,
+  "repair": false
+ },
+ "arm": "frozen v1-chem-t5-frq5",
+ "parserHash": "7528bbe8cdfc",
+ "models": {
+  "gen": "claude-sonnet-5-5",
+  "solve": "claude-opus-5-5",
+  "review": "claude-sonnet-5-5",
+  "difficulty": "claude-sonnet-5-5",
+  "spot": "claude-fable-5-1"
+ },
+ "policy": {
+  "firstCandidatesPerCell": 1,
+  "repairLimit": 1,
+  "codeChecksBeforeLlm": true,
+  "independentVerification": true,
+  "templateStop": {
+   "window": 4,
+   "maxSameReason": 2
+  },
+  "denominator": "first_candidates",
+  "manifestFile": "run_manifest.json"
+ },
+ "seeds": {
+  "first": [
+   14900
+  ],
+  "note": "seed0 = first seed tried per archetype; packs.json records pack_id = archetype-sSEED"
+ },
+ "frozenAt": "2026-10-22T04:08:31.914Z",
+ "generatorHash": "2f9f7996d025",
+ "frozenConfig": "config/ap-frozen/chem-t5-frq5.v1.json@v1-chem-t5-frq5",
+ "validity": "valid",
+ "repairDefinition": "none (repair not run in this round)"
+}

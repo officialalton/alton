@@ -15,9 +15,11 @@ FRQ = R.CHEM_STAGES["chem_frq"]
 ALL_MC = MC + SETS
 MC_SKILLS_OK = set(C.MC_SKILLS)  # 3.x 는 MC 에서 평가되지 않는다
 # 값이 pH·원자량처럼 한 단위가 작은 문항은 상대 8% 대신 절대 간격을 쓴다(chem_common.abs_opts 에 간격이 명시돼 있다)
-ABS_GAP = {"ch_strong_ph", "ch_weak_acid_ph", "ch_buffer_ph", "ch_average_atomic_mass", "ch_successive_ie", "ch_cell_potential", "ch_nernst", "ch_buret_data", "ch_beer_procedure", "ch_balance_combustion", "ch_particulate_limiting",
+ABS_GAP = {"ch_t5_buffer_after_base", "ch_t5_ph_weak_acid", "ch_t5_ph_weak_base", "ch_t5_ph_after_dilution", "ch_t5_strong_base_ph", "ch_t5_cell_potential_sum", "ch_t5_nernst_cell", "ch_t5_delta_g_from_e", "ch_t5_delta_g_hs", "ch_t5_delta_g_from_k", "ch_t5_buffer_ratio_for_ph", "ch_t5_isotope_abundance_from_avg", "chs_t5_hess_table_set_q1", "chs_t5_hess_table_set_q2", "chs_t5_metal_specific_heat_set_q1", "ch_strong_ph", "ch_weak_acid_ph", "ch_buffer_ph", "ch_average_atomic_mass", "ch_successive_ie", "ch_cell_potential", "ch_nernst", "ch_buret_data", "ch_beer_procedure", "ch_balance_combustion", "ch_particulate_limiting",
            "ch_mass_spec_peaks", "ch_lewis_lone_pairs", "chs_titration_set_q2", "ch_formal_charge", "ch_hess_law", "ch_bond_enthalpy", "ch_formation_enthalpy", "ch_calorimetry", "ch_cell_deltag", "ch_energy_profile", "ch_gibbs_k", "ch_ice_table", "ch_n_ph_strong_base", "ch_n_buffer_after_acid", "ch_n_halfway_titration_ph", "ch_n_entropy_reaction", "ch_n_gibbs_hs", "chs_gibbs_temperature_set_q1", "chs_gibbs_temperature_set_q2", "chs_calorimeter_dissolve_set_q1", "chs_calorimeter_dissolve_set_q2"}
 FRQ_FORM_1 = ["chf_long_kinetics", "chf_long_thermo", "chf_long_titration", "chf_short_bonding", "chf_short_equilibrium", "chf_short_pes", "chf_short_stoich"]
+FRQ_FORM_3 = ["chf_long_redox_titration", "chf_long_electrolysis", "chf_long_initial_rates", "chf_short_ionization_energy", "chf_short_precip_limiting", "chf_short_solid_types", "chf_short_ice_table"]
+FRQ_FORM_4 = ["chf_long_gravimetric", "chf_long_nernst_cell", "chf_long_mechanism_halflife", "chf_short_configuration_ions", "chf_short_empirical_formula", "chf_short_resonance_bond_order", "chf_short_weak_acid_ka"]
 FRQ_FORM_2 = ["chf_long_buffer", "chf_long_calorimetry", "chf_long_ksp", "chf_short_gas_mix", "chf_short_massspec", "chf_short_neutral", "chf_short_solution"]
 curriculum = json.load(open("../../../data/ap/curriculum-2027/ap_chemistry.json"))
 TOPICS = {t["code"] for u in curriculum["units"] for t in u["topics"]}
@@ -60,8 +62,8 @@ class Determinism(unittest.TestCase):
 
     def test_library_size_and_registration(self):
         self.assertGreaterEqual(len(MC), 90)
-        self.assertEqual(SETS, ["chs_calorimeter_dissolve_set", "chs_equilibrium_set", "chs_gibbs_temperature_set", "chs_rate_set", "chs_titration_set"])
-        self.assertEqual(FRQ, sorted(FRQ_FORM_1 + FRQ_FORM_2))
+        self.assertEqual(SETS, ["chs_calorimeter_dissolve_set", "chs_equilibrium_set", "chs_gibbs_temperature_set", "chs_rate_set", "chs_t5_equilibrium_table_set", "chs_t5_hess_table_set", "chs_t5_ksp_table_set", "chs_t5_metal_specific_heat_set", "chs_titration_set"])
+        self.assertEqual(FRQ, sorted(FRQ_FORM_1 + FRQ_FORM_2 + FRQ_FORM_3 + FRQ_FORM_4))
         self.assertEqual(len(set(MC + SETS + FRQ)), len(MC + SETS + FRQ))
 
 
@@ -322,13 +324,13 @@ class FrqStructure(unittest.TestCase):
                 self.assertIn("not official AP scoring", p["reference_note"])
 
     def test_exam_has_three_long_and_four_short_46_points(self):
-        for form in (FRQ_FORM_1, FRQ_FORM_2):
+        for form in (FRQ_FORM_1, FRQ_FORM_2, FRQ_FORM_3, FRQ_FORM_4):
             packs = [R.batch(n, 1, 0)[0] for n in form]
             self.assertEqual(sorted(p["template"] for p in packs), ["long"] * 3 + ["short"] * 4)
             self.assertEqual(sum(p["total_points"] for p in packs), 46)
 
     def test_frq_practice_shares_inside_official_ranges(self):
-        for form in (FRQ_FORM_1, FRQ_FORM_2):
+        for form in (FRQ_FORM_1, FRQ_FORM_2, FRQ_FORM_3, FRQ_FORM_4):
             packs = [R.batch(n, 1, 0)[0] for n in form]
             shares, tot = C.frq_point_shares(packs)
             self.assertEqual(tot, 46)

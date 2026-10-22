@@ -1,0 +1,277 @@
+[
+ {
+  "key": "ap_chemistry-f01-k0",
+  "cellId": "ap_chemistry-f01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "reference_pattern_mismatch",
+   "resembles_known_exam_item"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Both are nonpolar, so London dispersion forces are the only intermolecular forces. Butane has more electrons and a bigger electron cloud, which makes it more polarizable and gives it stronger LDFs.",
+     "final_answer": "Butane boils at 273 K, which is higher than propane at 231 K. Both molecules are nonpolar, so only London dispersion forces hold them together. Butane is larger, with more electrons and a more polarizable electron cloud (and more surface contact), so its dispersion forces are stronger. More energy is needed to overcome them, so its boiling point is higher.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "The hydrogen bond forms between the H on one ethanol's O and a lone pair on the O of the other ethanol.",
+     "final_answer": "CH3CH2–O–H ····· :O(H)–CH2CH3. The dashed line runs from the hydroxyl H of molecule 1 to a lone pair on the O of molecule 2, and the O–H···O atoms are close to a straight line.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Ethanol has an O–H bond, so it can hydrogen bond. Dimethyl ether has no H on its O, so it has only dipole-dipole forces and LDFs.",
+     "final_answer": "Ethanol has an H bonded directly to a very electronegative O atom, so its molecules form hydrogen bonds with each other. Dimethyl ether's H atoms are all bonded to C, so it cannot hydrogen bond with itself. It has only weaker dipole–dipole forces and London dispersion forces, which are similar to ethanol's because the two compounds have the same molar mass. Ethanol's hydrogen bonds are stronger, so more energy is needed to separate its molecules, and it boils at 351 K compared with 248 K for dimethyl ether.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": true,
+   "summary": "The item is a standard IMF and boiling-point question. It is correct in content, but its dominant demand is explanation, not representing data with graphs, scale or units. Only the 1-point drawing in part B fits the representation skill. The rubric rows rely on exact-phrase matching. The scenario (propane/butane, ethanol/dimethyl ether) is very close to a classic, widely used exam item. I fail it on skill fit and rubric brittleness.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "The target skill is 3.A (represent phenomena with graphs, scale, units). The dominant demand is explaining IMF trends in words (parts A and C are 6.E-style explanation). Only part B (a 1-point drawing) represents a phenomenon. Part B is tagged 3.A/3.B, but no graph, scale or units work is required. Per the instructions, each part is judged against its own tagged skill, and the parts are tagged 3.A/6.E. Even so, the 3.A tag does not match what A and C actually ask. This is a tagging mismatch, a moderate concern."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part B has a rubric problem. The row requires a dashed line from the O–H hydrogen to the oxygen of the second molecule, which is acceptable. The stem also says to \"show the atoms involved\", but the row does not require the molecules to be drawn in full. In Part A, A2's required elements (\"more polarizable\", \"London dispersion forces\") are rigid phrase matches. A student who writes \"larger electron cloud, stronger dispersion forces\" without \"polarizable\" could be denied. Part C's model answer says dimethyl ether has dipole–dipole forces, but the row requires \"stronger\", and it does not require the comparison to name the dimethyl ether forces. The key is defensible overall, but the rubric rows are brittle."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The blueprint key condition says boiling points are at 1 atm, with evidence from the table title. The table data has no title field, and the column header says \"Normal boiling point\", which implies 1 atm. This is acceptable. However, the data object includes \"x_label\" and \"y_label\" fields, which are meaningless for a plain table. The wording is otherwise clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. Common errors are listed per row."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is light, at 4 points and about 9 minutes. No calculator is needed, although it is designated \"allowed\". That is acceptable."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "In-scope 3.1 item with three short parts: table read plus LDF explanation (A), particle diagram of one hydrogen bond (B), and a hydrogen bonding vs dipole-dipole contrast (C). It needs concept application, one representation change, and a structural justification, but has no heavy computation, reading, or ambiguity. This matches a typical full-mock FR rather than basic recall or advanced extension.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_chemistry-f02-k0",
+  "cellId": "ap_chemistry-f02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_key_scoring",
+   "criterion_failed_distractor_explanation",
+   "instant_reject_missing_condition"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "MgO is made of Mg2+ cations and O2- anions arranged in a 3-D lattice. Strong electrostatic (Coulombic) attractions between the oppositely charged ions hold them in place. This is ionic bonding.",
+     "final_answer": "Mg2+ and O2- ions held in a lattice by strong Coulombic attractions between oppositely charged ions (ionic bonds)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Ag has a sea of delocalized valence electrons that can move freely through the lattice of Ag+ cations, so it conducts electricity. In solid MgO the ions are locked in fixed lattice positions, and the electrons are localized on the ions, so no charged species can move.",
+     "final_answer": "Solid Ag conducts electricity well; solid MgO does not. Ag has mobile delocalized electrons, while the ions in solid MgO are fixed in place and it has no free electrons.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Mg2+ and O2- have high charges (2+ and 2-) and small radii, so the Coulombic attraction between them is very strong. Melting MgO takes much more energy than overcoming the metallic bonding between Ag+ cations and the electron sea. Actual melting points: MgO about 2850 °C, Ag about 962 °C.",
+     "final_answer": "MgO has the higher melting point, because of the very strong attractions between its small, highly charged 2+ and 2- ions",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Part C's melting-point prediction needs unstated outside data (Ag vs MgO melting points) and a generic bond-strength argument that does not hold for all metals. The rubric common errors are mismatched, so the item fails.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 2.4 with 2.1 is in scope. Part A is mostly recall rather than prediction, but the skill tag is tolerable."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part C's key depends on recalled melting points of Ag and MgO; the stimulus gives no data. The parenthetical in the model answer admits outside facts are needed. The prediction is not derivable from the stimulus alone, because some metals melt higher than some ionic solids. The C1 rubric common error mentions a network solid that is not in the item."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is adequate for a descriptive item."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Common-error entries are mismatched or generic, for example the 'network solid' error in C1 and 'molar mass' in B2."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Load is reasonable for a short FRQ. The calculator designation is irrelevant but harmless."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item is qualitative recall and application of bonding models: MgO is an ionic lattice held by Coulombic attraction, Ag conducts through delocalized electrons while MgO ions are fixed, and MgO has the higher melting point because of strong 2+/2- ion attractions. It needs no computation, a single stimulus, and only one or two reasoning links per part. Its depth is standard, foundational Unit 2 content, which suits learning and practice more than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_chemistry-f02-k1",
+  "cellId": "ap_chemistry-f02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Covalent network solid: neutral Si and C atoms in an extended 3-D lattice, each atom covalently bonded to neighbors (tetrahedral).",
+     "final_answer": "Solid SiC is made of Si and C atoms. Each atom is held in place by covalent bonds (shared electron pairs) to four neighboring atoms, forming a continuous 3-D network.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Metals have a sea of delocalized electrons that can move; in SiC the electrons are localized in covalent bonds and there are no mobile ions or electrons.",
+     "final_answer": "Solid Fe conducts electricity well, but solid SiC is a poor conductor (it is a semiconductor or insulator). In Fe, the valence electrons are delocalized in a 'sea' around the Fe cations and can move when a voltage is applied. In SiC, the valence electrons are held in localized covalent bonds between specific atoms, and there are no free ions, so no charged particles can move freely.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Melting SiC means breaking many strong covalent bonds throughout the network. SiC melts or decomposes at about 2700 °C; Fe melts at about 1538 °C.",
+     "final_answer": "SiC has the higher melting point. To melt SiC, many strong, directional covalent bonds across the whole network must be broken. To melt Fe, the metal cations only have to overcome metallic attractions to the electron sea well enough to slide past each other, which takes less energy.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The short 4-point question (1/2/1) is acceptable. Parts cover species and bonding in a network solid, conductivity of a metal versus a network solid, and a melting-point prediction. All are within topics 2.4, 2.1 and 2.2, and the independent solver reached the same answers.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Each part fits solids and bonding in Unit 2. Part C is a prediction, which matches skill 2.B. Parts A and B are mostly describing and explaining. This is acceptable because the instructions say to judge each part against its own rubric rows and not to fail for mixed skills."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Each rubric row is a single 1-point claim or justification and is consistent with the model answers. B2 depends on B1, which is reasonable. Fe and SiC are real substances, so the expected answers are unambiguous."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus names both solids and their types, and there is no figure data to render. The wording is clear. The model answer for C includes a parenthetical note about Cu, Fe and Ag that reads oddly. It is harmless but could be removed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The listed common errors, such as discrete molecules with dispersion forces and molar mass as the explanation, are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The workload is light and involves no arithmetic. The four-point total is typical for a short question, and the 9-minute estimate is reasonable."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "The item is mostly recall and short explanation of solid types: covalent network solids are atoms joined by covalent bonds, metals conduct through delocalized electrons, and network solids have high melting points. It needs one or two reasoning steps, with no calculation, no data or graph reading and no representation changes. The prediction skill is satisfied by a straightforward property comparison. It is more suitable for basic learning practice than for a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "key": "ap_chemistry-f02-k2",
+  "cellId": "ap_chemistry-f02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_stimulus_expression"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Covalent network solid",
+     "final_answer": "Solid SiO₂ is made of Si and O atoms joined in a continuous 3‑D network. Each Si is bonded to 4 O atoms and each O to 2 Si atoms. Strong covalent bonds, made of shared electron pairs, hold the atoms in place.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Mobile delocalized electrons in metal; localized electrons in network",
+     "final_answer": "Solid Cu conducts electricity well, and solid SiO₂ does not, because it is an insulator. Cu is a lattice of Cu cations surrounded by a sea of delocalized valence electrons. These electrons can move freely through the solid and carry charge. In SiO₂ the electrons are held in localized covalent bonds between atoms. There are no ions or electrons free to move, so no current flows.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "SiO2 mp ~1700 °C vs Cu ~1085 °C",
+     "final_answer": "SiO₂ has the higher melting point. To melt SiO₂, many strong, directional Si–O covalent bonds throughout the network must be broken. In Cu, the metal cations can slide past one another while the metallic bonding is only partly weakened, so less energy is needed. (Measured values: SiO₂ ≈ 1700 °C, Cu ≈ 1085 °C.)",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is mostly sound chemistry. I fail it for the recall-only part A against skill 2.B, and for part C relying on unstated melting-point data with a muddled, overgeneralized parenthetical in the model answer.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "Part A is pure recall description, a weak fit for skill 2.B (predict or hypothesize). Part C asks for a prediction but depends on outside knowledge about melting points."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys are defensible for Cu versus SiO2. The rubric for A is loose about whether \"network\" must be stated."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The stimulus gives no melting-point data. The model answer's parenthetical about Cu, Fe and Ag melting lower than \"these solids\" is confusing and overgeneralized, since Fe and Ag are not in the stimulus."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Free response, so no distractors. The common_errors entries are reasonable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Four points in 1/2/1 parts, about 9 minutes, no arithmetic. This is appropriate for a short question."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Qualitative recall-and-explain item comparing a metallic solid (Cu) with a covalent network solid (SiO2). Part A is recall of particle type and bonding. Part B takes one conceptual step: delocalized mobile electrons in Cu versus localized electrons in SiO2. Part C is a prediction linking network covalent bonding to melting point. There is no computation, the reading load is minimal, and the wording is clear. The skill 2.B (predict) demand is modest.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 200
+  }
+ }
+]
