@@ -5906,6 +5906,88 @@
      "note": "explanation math rendered (no raw TeX tokens)"
     }
    }
+  },
+  {
+   "candidate_key": "csa-t5-frq9:ap_computer_science_a-f01-k0",
+   "checker_kind": "automated",
+   "content_hash": "17c1d20ebeef29f6f0b8c26d7da67878b957cf26d655e6d471e1a1e9d54b421a",
+   "problem_version_id": "c777f646-8447-43e7-aa1a-16ec9bcb3a6a",
+   "kind": "frq_bundle",
+   "viewport": "390x844",
+   "screenshot": "docs/ap/screen-evidence/t5-chem-csa/csa-t5-frq9_ap_computer_science_a-f01-k0-390x844.jpg",
+   "timestamp": "2026-10-22T07:35:01.404Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "2/2 FRQ parts visible"
+    },
+    "figure_rendered": {
+     "result": "na",
+     "note": "no figure/table required by this item (gate: no render spec)"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "pass",
+     "note": "typed into 2 part input(s), value retained"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
+  },
+  {
+   "candidate_key": "csa-t5-frq9:ap_computer_science_a-f01-k0",
+   "checker_kind": "automated",
+   "content_hash": "17c1d20ebeef29f6f0b8c26d7da67878b957cf26d655e6d471e1a1e9d54b421a",
+   "problem_version_id": "c777f646-8447-43e7-aa1a-16ec9bcb3a6a",
+   "kind": "frq_bundle",
+   "viewport": "1280x800",
+   "screenshot": "docs/ap/screen-evidence/t5-chem-csa/csa-t5-frq9_ap_computer_science_a-f01-k0-1280x800.jpg",
+   "timestamp": "2026-10-22T07:35:03.741Z",
+   "checker": "automated-playwright/151.0.7922.34 local student exam screen",
+   "checks": {
+    "options_visible": {
+     "result": "pass",
+     "note": "2/2 FRQ parts visible"
+    },
+    "figure_rendered": {
+     "result": "na",
+     "note": "no figure/table required by this item (gate: no render spec)"
+    },
+    "no_clipping": {
+     "result": "pass",
+     "note": "no horizontal page scroll; options/inputs/figures inside viewport or in a scroll wrapper"
+    },
+    "no_answer_before_submit": {
+     "result": "pass",
+     "note": "no explanation/correct-answer text on screen before submit"
+    },
+    "frq_input_works": {
+     "result": "pass",
+     "note": "typed into 2 part input(s), value retained"
+    },
+    "stimulus_no_raw_tex": {
+     "result": "pass",
+     "note": "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)"
+    },
+    "result_no_raw_tex": {
+     "result": "pass",
+     "note": "explanation math rendered (no raw TeX tokens)"
+    }
+   }
   }
  ],
  "generatedAt": "2026-10-22T04:31:56.295Z"
