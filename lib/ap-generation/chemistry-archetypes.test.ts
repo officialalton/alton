@@ -33,10 +33,10 @@ d("AP Chemistry P0 archetypes (Python generators, 2 seeds each)", () => {
   const out = (r.status === 0 ? JSON.parse(r.stdout) : { names: [], frq: [], packs: {}, frqPacks: {} }) as { names: string[]; frq: string[]; packs: Record<string, Pk[]>; frqPacks: Record<string, FrqPack[]> };
   const flat = (n: string) => out.packs[n].flatMap((p) => (p.items ?? [p]).map((q) => ({ ...q, stimulus: q.stimulus ?? p.stimulus })));
 
-  it("registers the singles and the 3 two-item sets, covers all 9 units, and the guide JSON lists the same ids", () => {
+  it("registers the singles and the 7 two-item sets, covers all 9 units, and the guide JSON lists the same ids", () => {
     expect(r.status).toBe(0);
     expect(out.names.filter((n) => n.startsWith("ch_")).length).toBeGreaterThanOrEqual(90);
-    expect(out.names.filter((n) => n.startsWith("chs_"))).toHaveLength(5);
+    expect(out.names.filter((n) => n.startsWith("chs_"))).toHaveLength(9);
     const ids = chemistryGuide.archetypes.map((a) => a.id);
     const expected = out.names.flatMap((n) => flat(n).slice(0, out.packs[n][0].items ? 2 : 1).map((q) => q.archetype));
     expect(ids).toEqual(expected);

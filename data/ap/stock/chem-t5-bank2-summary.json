@@ -1,0 +1,40 @@
+{
+ "runs": [
+  "chem-t5-bank2"
+ ],
+ "rows": 30,
+ "passed": 11,
+ "rejected": 19,
+ "passRate": 0.367,
+ "singles": {
+  "candidates": 30
+ },
+ "unitsPassed": {
+  "4": 5,
+  "6": 6
+ },
+ "figPassed": {
+  "none": 11
+ },
+ "figAll": {
+  "none": 30
+ },
+ "figPassRate": {
+  "none": "11/30"
+ },
+ "renderTypesPassed": {
+  "none": 11
+ },
+ "archetypesPassed": {
+  "ch_t5_p2_change_test": 2,
+  "ch_t5_p2_cold_pack_predict": 1,
+  "ch_t5_p2_heat_phase_procedure": 2,
+  "ch_t5_p4_limiting_model": 2,
+  "ch_t5_p4_redox_model": 1,
+  "ch_t5_p6_endothermic_claim": 1,
+  "ch_t5_p6_formation_claim": 2
+ },
+ "costUsd": {
+  "chem-t5-bank2": 0.8668
+ }
+}
