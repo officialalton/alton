@@ -1,0 +1,926 @@
+[
+ {
+  "candidateKey": "ap_chemistry-m01-k0",
+  "cellId": "ap_chemistry-m01",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "7.10",
+  "unitCode": "7",
+  "skillPrimary": "5.F",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_t5m_q_after_volume_change",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Student must recognize that doubling volume halves each concentration, compute Q with the new values (Q=8), compare to Kc, and link Q>Kc to a shift toward the side with more gas moles. Distractors target common errors (wrong Q, wrong direction, confusing Kc with Q). Arithmetic is simple and wording is clear; the stem's equilibrium check (Q=4 initially) is consistent with Kc. Within Unit 7.10 scope.",
+  "payload": {
+   "archetype": "ch_t5m_q_after_volume_change",
+   "topic": "7.10",
+   "skill": "5.F",
+   "calculator": "allowed",
+   "stem": "The reaction A(g) + B(g) ⇌ C(g) is at equilibrium in a closed container at constant temperature, with [A] = 0.5 M, [B] = 0.2 M, and [C] = 0.4 M and Kc = 4. The volume of the container is suddenly increased to twice its original value, and the temperature does not change. Which statement correctly compares the reaction quotient Q with Kc immediately after the change and gives the direction of the shift?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Q = 8 is larger than Kc = 4, so the net reaction shifts toward the reactant, the side with more gas molecules.",
+     "why": "Every concentration is multiplied by 0.5, so Q = 8 against Kc = 4 gives Q/Kc = 2; Q is larger than Kc, so the net change moves toward the reactant, which is the side with more moles of gas.",
+     "value": null
+    },
+    {
+     "text": "Q = 2 is smaller than Kc = 4, so the net reaction shifts toward the product until Q equals Kc again.",
+     "why": "Assumes Q scales linearly with the concentration change and ignores the exponents, so both the value and the direction come out wrong.",
+     "value": null
+    },
+    {
+     "text": "Q is still equal to Kc = 4 because Kc depends only on temperature, so the mixture stays at equilibrium and there is no shift.",
+     "why": "Believes that a constant K means Q cannot change, so volume changes cause no shift.",
+     "value": null
+    },
+    {
+     "text": "Q = 8 is larger than Kc = 4, so the net reaction shifts toward the product, the side with fewer gas molecules, until Q equals Kc.",
+     "why": "Reads Q > K backward and picks the opposite direction.",
+     "value": null
+    }
+   ],
+   "key_index": 0,
+   "est_seconds": 105,
+   "facts": [
+    "rxn=A(g) + B(g) ⇌ C(g)",
+    "K=4",
+    "Q=8"
+   ],
+   "blueprint": {
+    "id": "ch_t5m_q_after_volume_change",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "decide the direction of a shift after a sudden volume change by recomputing Q from the new concentrations and comparing it with K",
+    "topic": "7.10",
+    "skill": "5.F",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: decide the direction of a shift after a sudden volume change by recomputing Q from the new concentrations and comparing it with K",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Assumes Q scales linearly with the concentration change and ignores the exponents, so both the value and the direction come out wrong."
+     },
+     {
+      "id": "m2",
+      "description": "Believes that a constant K means Q cannot change, so volume changes cause no shift."
+     },
+     {
+      "id": "m3",
+      "description": "Reads Q > K backward and picks the opposite direction."
+     }
+    ],
+    "verification": {
+     "independent_path": "recompute Q from the scaled concentrations vs Q = K·f^(Δn_gas) from the coefficients",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "find how every concentration changes, form Q from the new values, and compare it with K to name the direction"
+   },
+   "seed": 15500,
+   "pack_id": "ch_t5m_q_after_volume_change-s15500",
+   "explanation_en": "The correct answer is Q = 8 is larger than Kc = 4, so the net reaction shifts toward the reactant, the side with more gas molecules.. Every concentration is multiplied by 0.5, so Q = 8 against Kc = 4 gives Q/Kc = 2; Q is larger than Kc, so the net change moves toward the reactant, which is the side with more moles of gas.\nQ = 2 is smaller than Kc = 4, so the net reaction shifts toward the product until Q equals Kc again. is incorrect: Assumes Q scales linearly with the concentration change and ignores the exponents, so both the value and the direction come out wrong.\nQ is still equal to Kc = 4 because Kc depends only on temperature, so the mixture stays at equilibrium and there is no shift. is incorrect: Believes that a constant K means Q cannot change, so volume changes cause no shift.\nQ = 8 is larger than Kc = 4, so the net reaction shifts toward the product, the side with fewer gas molecules, until Q equals Kc. is incorrect: Reads Q > K backward and picks the opposite direction."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_t5m_q_after_volume_change",
+   "facts": [
+    "rxn=A(g) + B(g) ⇌ C(g)",
+    "K=4",
+    "Q=8"
+   ],
+   "seed": 15500
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 7.10: recompute Q after a volume change and compare it with K. This matches skill 5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Q = 8 > Kc = 4, so the shift is toward reactants. This is the unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "All values and conditions are in the stem. No stimulus is needed. The phrase 'toward the reactant' is slightly awkward but not ambiguous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option encodes a distinct misconception, and the explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The time and arithmetic load are appropriate."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A correct, clean item with a unique key and distinct distractors. The only flaw is the minor wording issue on 'the reactant'."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must recognize that doubling volume halves each concentration, compute Q with the new values (Q=8), compare to Kc, and link Q>Kc to a shift toward the side with more gas moles. Distractors target common errors (wrong Q, wrong direction, confusing Kc with Q). Arithmetic is simple and wording is clear; the stem's equilibrium check (Q=4 initially) is consistent with Kc. Within Unit 7.10 scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-m01-k1",
+  "cellId": "ap_chemistry-m01",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "7.10",
+  "unitCode": "7",
+  "skillPrimary": "5.F",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_t5m_q_after_volume_change",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Solver must see that doubling volume halves each concentration, recompute Q with the A → B + C stoichiometry (Q = 0.025), compare it with Kc, and link Q < Kc to a shift toward products, the side with more gas moles. Distractors target common errors: a wrong direction with the right Q, a wrong Q, and confusing Kc with Q. The arithmetic is simple and the reading load is low. The concept depth and multi-step reasoning fit a full AP mock.",
+  "payload": {
+   "archetype": "ch_t5m_q_after_volume_change",
+   "topic": "7.10",
+   "skill": "5.F",
+   "calculator": "allowed",
+   "stem": "The reaction A(g) ⇌ B(g) + C(g) is at equilibrium in a closed container at constant temperature, with [A] = 0.5 M, [B] = 0.1 M, and [C] = 0.25 M and Kc = 0.05. The volume of the container is suddenly increased to twice its original value, and the temperature does not change. Which statement correctly compares the reaction quotient Q with Kc immediately after the change and gives the direction of the shift?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Q = 0.025 is smaller than Kc = 0.05, so the net reaction shifts toward the reactant, the side with fewer gas molecules, until Q equals Kc.",
+     "why": "Reads Q < K backward and picks the opposite direction.",
+     "value": null
+    },
+    {
+     "text": "Q = 0.1 is larger than Kc = 0.05, so the net reaction shifts toward the reactant until Q equals Kc again.",
+     "why": "Assumes Q scales linearly with the concentration change and ignores the exponents, so both the value and the direction come out wrong.",
+     "value": null
+    },
+    {
+     "text": "Q is still equal to Kc = 0.05 because Kc depends only on temperature, so the mixture stays at equilibrium and there is no shift.",
+     "why": "Believes that a constant K means Q cannot change, so volume changes cause no shift.",
+     "value": null
+    },
+    {
+     "text": "Q = 0.025 is smaller than Kc = 0.05, so the net reaction shifts toward the product, the side with more gas molecules.",
+     "why": "Every concentration is multiplied by 0.5, so Q = 0.025 against Kc = 0.05 gives Q/Kc = 0.5; Q is smaller than Kc, so the net change moves toward the product, which is the side with more moles of gas.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 105,
+   "facts": [
+    "rxn=A(g) ⇌ B(g) + C(g)",
+    "K=0.05",
+    "Q=0.025"
+   ],
+   "blueprint": {
+    "id": "ch_t5m_q_after_volume_change",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "decide the direction of a shift after a sudden volume change by recomputing Q from the new concentrations and comparing it with K",
+    "topic": "7.10",
+    "skill": "5.F",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: decide the direction of a shift after a sudden volume change by recomputing Q from the new concentrations and comparing it with K",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Reads Q < K backward and picks the opposite direction."
+     },
+     {
+      "id": "m2",
+      "description": "Assumes Q scales linearly with the concentration change and ignores the exponents, so both the value and the direction come out wrong."
+     },
+     {
+      "id": "m3",
+      "description": "Believes that a constant K means Q cannot change, so volume changes cause no shift."
+     }
+    ],
+    "verification": {
+     "independent_path": "recompute Q from the scaled concentrations vs Q = K·f^(Δn_gas) from the coefficients",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "find how every concentration changes, form Q from the new values, and compare it with K to name the direction"
+   },
+   "seed": 15501,
+   "pack_id": "ch_t5m_q_after_volume_change-s15501",
+   "explanation_en": "The correct answer is Q = 0.025 is smaller than Kc = 0.05, so the net reaction shifts toward the product, the side with more gas molecules.. Every concentration is multiplied by 0.5, so Q = 0.025 against Kc = 0.05 gives Q/Kc = 0.5; Q is smaller than Kc, so the net change moves toward the product, which is the side with more moles of gas.\nQ = 0.025 is smaller than Kc = 0.05, so the net reaction shifts toward the reactant, the side with fewer gas molecules, until Q equals Kc. is incorrect: Reads Q < K backward and picks the opposite direction.\nQ = 0.1 is larger than Kc = 0.05, so the net reaction shifts toward the reactant until Q equals Kc again. is incorrect: Assumes Q scales linearly with the concentration change and ignores the exponents, so both the value and the direction come out wrong.\nQ is still equal to Kc = 0.05 because Kc depends only on temperature, so the mixture stays at equilibrium and there is no shift. is incorrect: Believes that a constant K means Q cannot change, so volume changes cause no shift."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_t5m_q_after_volume_change",
+   "facts": [
+    "rxn=A(g) ⇌ B(g) + C(g)",
+    "K=0.05",
+    "Q=0.025"
+   ],
+   "seed": 15501
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Recompute Q after a volume change and compare it with K; this is squarely 7.10 and 5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Q = 0.025 < K, so the shift is toward products. D is the unique correct option. The initial data are consistent with Kc = 0.05."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clear, and it states constant temperature and that the volume change is sudden."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option maps to a distinct misconception and is explained. Option B's explanation is slightly loose but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, light on arithmetic, calculator use is unnecessary but allowed, and the time is typical."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, with a unique key and a good fit to 7.10 and 5.F. Distractors are distinct, and the only blemish is a slightly loose explanation for option B."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Solver must see that doubling volume halves each concentration, recompute Q with the A → B + C stoichiometry (Q = 0.025), compare it with Kc, and link Q < Kc to a shift toward products, the side with more gas moles. Distractors target common errors: a wrong direction with the right Q, a wrong Q, and confusing Kc with Q. The arithmetic is simple and the reading load is low. The concept depth and multi-step reasoning fit a full AP mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-m01-k2",
+  "cellId": "ap_chemistry-m01",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "7.10",
+  "unitCode": "7",
+  "skillPrimary": "5.F",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_t5m_q_after_volume_change",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Requires choosing Q vs Kc, recognizing that doubling the volume halves each concentration, computing Q = 0.05 with simple numbers, and linking Q < Kc to a shift toward the side with more gas moles. Distractors target common misconceptions (Kc constant means no shift; wrong direction; wrong Q). Moderate reasoning depth, light arithmetic and reading, fully in scope for topic 7.10.",
+  "payload": {
+   "archetype": "ch_t5m_q_after_volume_change",
+   "topic": "7.10",
+   "skill": "5.F",
+   "calculator": "allowed",
+   "stem": "The reaction A(g) ⇌ B(g) + C(g) is at equilibrium in a closed container at constant temperature, with [A] = 0.3 M, [B] = 0.15 M, and [C] = 0.2 M and Kc = 0.1. The volume of the container is suddenly increased to twice its original value, and the temperature does not change. Which statement correctly compares the reaction quotient Q with Kc immediately after the change and gives the direction of the shift?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "Q = 0.05 is smaller than Kc = 0.1, so the net reaction shifts toward the reactant, the side with fewer gas molecules, until Q equals Kc.",
+     "why": "Reads Q < K backward and picks the opposite direction.",
+     "value": null
+    },
+    {
+     "text": "Q is still equal to Kc = 0.1 because Kc depends only on temperature, so the mixture stays at equilibrium and there is no shift.",
+     "why": "Believes that a constant K means Q cannot change, so volume changes cause no shift.",
+     "value": null
+    },
+    {
+     "text": "Q = 0.2 is larger than Kc = 0.1, so the net reaction shifts toward the reactant until Q equals Kc again.",
+     "why": "Assumes Q scales linearly with the concentration change and ignores the exponents, so both the value and the direction come out wrong.",
+     "value": null
+    },
+    {
+     "text": "Q = 0.05 is smaller than Kc = 0.1, so the net reaction shifts toward the product, the side with more gas molecules.",
+     "why": "Every concentration is multiplied by 0.5, so Q = 0.05 against Kc = 0.1 gives Q/Kc = 0.5; Q is smaller than Kc, so the net change moves toward the product, which is the side with more moles of gas.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 105,
+   "facts": [
+    "rxn=A(g) ⇌ B(g) + C(g)",
+    "K=0.1",
+    "Q=0.05"
+   ],
+   "blueprint": {
+    "id": "ch_t5m_q_after_volume_change",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "decide the direction of a shift after a sudden volume change by recomputing Q from the new concentrations and comparing it with K",
+    "topic": "7.10",
+    "skill": "5.F",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: decide the direction of a shift after a sudden volume change by recomputing Q from the new concentrations and comparing it with K",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Reads Q < K backward and picks the opposite direction."
+     },
+     {
+      "id": "m2",
+      "description": "Believes that a constant K means Q cannot change, so volume changes cause no shift."
+     },
+     {
+      "id": "m3",
+      "description": "Assumes Q scales linearly with the concentration change and ignores the exponents, so both the value and the direction come out wrong."
+     }
+    ],
+    "verification": {
+     "independent_path": "recompute Q from the scaled concentrations vs Q = K·f^(Δn_gas) from the coefficients",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "find how every concentration changes, form Q from the new values, and compare it with K to name the direction"
+   },
+   "seed": 15502,
+   "pack_id": "ch_t5m_q_after_volume_change-s15502",
+   "explanation_en": "The correct answer is Q = 0.05 is smaller than Kc = 0.1, so the net reaction shifts toward the product, the side with more gas molecules.. Every concentration is multiplied by 0.5, so Q = 0.05 against Kc = 0.1 gives Q/Kc = 0.5; Q is smaller than Kc, so the net change moves toward the product, which is the side with more moles of gas.\nQ = 0.05 is smaller than Kc = 0.1, so the net reaction shifts toward the reactant, the side with fewer gas molecules, until Q equals Kc. is incorrect: Reads Q < K backward and picks the opposite direction.\nQ is still equal to Kc = 0.1 because Kc depends only on temperature, so the mixture stays at equilibrium and there is no shift. is incorrect: Believes that a constant K means Q cannot change, so volume changes cause no shift.\nQ = 0.2 is larger than Kc = 0.1, so the net reaction shifts toward the reactant until Q equals Kc again. is incorrect: Assumes Q scales linearly with the concentration change and ignores the exponents, so both the value and the direction come out wrong."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_t5m_q_after_volume_change",
+   "facts": [
+    "rxn=A(g) ⇌ B(g) + C(g)",
+    "K=0.1",
+    "Q=0.05"
+   ],
+   "seed": 15502
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Recomputing Q after a volume change and comparing it with K is squarely topic 7.10 and skill 5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Initial Q = 0.1 = Kc, so the system starts at equilibrium. After doubling the volume Q = 0.05 < Kc, so the shift is toward the products. D is the unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem gives all values and conditions (constant temperature, sudden volume doubling) clearly."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three wrong options encode distinct misconceptions (direction reversed, K constant so no shift, linear scaling of Q), and the explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 105 seconds, with light arithmetic and a calculator allowed. Option D is slightly longer but not an obvious giveaway."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item. Q = 0.05 < Kc after the volume doubles, so the shift is toward the products. The key is unique, the distractors are distinct and explained, and the scope matches 7.10 and 5.F."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires choosing Q vs Kc, recognizing that doubling the volume halves each concentration, computing Q = 0.05 with simple numbers, and linking Q < Kc to a shift toward the side with more gas moles. Distractors target common misconceptions (Kc constant means no shift; wrong direction; wrong Q). Moderate reasoning depth, light arithmetic and reading, fully in scope for topic 7.10.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-m02-k0",
+  "cellId": "ap_chemistry-m02",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "7.7",
+  "unitCode": "7",
+  "skillPrimary": "5.F",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_t5m_small_k_equilibrium",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Requires setting up an ICE table for A ⇌ B + C, choosing the small-x approximation, solving x = sqrt(Kc*0.1), and linking the result to the 5% validity check. Distractors reflect common errors (wrong stoichiometric factor, ignoring initial concentration, equating product concentration with Kc). Arithmetic is clean and reading is short, so difficulty comes from the concept and reasoning rather than unfair sources. This is typical of a mock-exam item on 7.7.",
+  "payload": {
+   "archetype": "ch_t5m_small_k_equilibrium",
+   "topic": "7.7",
+   "skill": "5.F",
+   "calculator": "allowed",
+   "stem": "At a certain temperature the reaction A(g) ⇌ B(g) + C(g) has Kc = 6.4×10⁻⁹. A closed container starts with [A] = 0.1 M and no B or C. Which statement gives the equilibrium concentration of B and a correct reason the simplification used to find it is valid?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "[B] ≈ 5.1×10⁻⁵ M, found from the same simplified expression after multiplying x by 2 although B has a coefficient of 1, which is valid because Kc is so small.",
+     "why": "Mishandles the coefficient when converting the change x into the equilibrium concentration.",
+     "value": null
+    },
+    {
+     "text": "[B] ≈ 8.0×10⁻⁵ M, found by taking the square root of Kc alone, which is valid because Kc is so small that the initial concentration does not matter.",
+     "why": "Drops the initial concentration from the expression, treating the square root of Kc as the answer.",
+     "value": null
+    },
+    {
+     "text": "[B] ≈ 2.5×10⁻⁵ M, found from Kc = x²/(0.1 − x) ≈ x²/0.1, which is valid because x is only about 0.025% of the initial concentration.",
+     "why": "With x as the change, Kc = x²/(0.1 − x) ≈ x²/0.1 gives x ≈ 2.5×10⁻⁵ M (the quadratic gives 2.5×10⁻⁵ M, the same to two figures), so [B] = x = 2.5×10⁻⁵ M; x is 0.0253% of 0.1 M, below the 5% rule, so dropping x from the subtraction is justified.",
+     "value": null
+    },
+    {
+     "text": "[B] ≈ 6.4×10⁻⁹ M, because a very small Kc means the equilibrium concentration of the product is approximately equal to Kc itself.",
+     "why": "Treats the numerical value of Kc as a concentration instead of a ratio of concentrations.",
+     "value": null
+    }
+   ],
+   "key_index": 2,
+   "est_seconds": 115,
+   "facts": [
+    "K=6.4e-09",
+    "c0=0.1",
+    "x=2.53e-05"
+   ],
+   "blueprint": {
+    "id": "ch_t5m_small_k_equilibrium",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "find an equilibrium concentration with a very small K by dropping x from the initial concentration and check that the approximation is valid",
+    "topic": "7.7",
+    "skill": "5.F",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: find an equilibrium concentration with a very small K by dropping x from the initial concentration and check that the approximation is valid",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Mishandles the coefficient when converting the change x into the equilibrium concentration."
+     },
+     {
+      "id": "m2",
+      "description": "Drops the initial concentration from the expression, treating the square root of Kc as the answer."
+     },
+     {
+      "id": "m3",
+      "description": "Treats the numerical value of Kc as a concentration instead of a ratio of concentrations."
+     }
+    ],
+    "verification": {
+     "independent_path": "exact quadratic solution of the ICE expression vs the simplified square-root approximation",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "set up the ICE change, simplify because K is tiny, solve for x, apply the coefficient, and check the 5% condition"
+   },
+   "seed": 15500,
+   "pack_id": "ch_t5m_small_k_equilibrium-s15500",
+   "explanation_en": "The correct answer is [B] ≈ 2.5×10⁻⁵ M, found from Kc = x²/(0.1 − x) ≈ x²/0.1, which is valid because x is only about 0.025% of the initial concentration.. With x as the change, Kc = x²/(0.1 − x) ≈ x²/0.1 gives x ≈ 2.5×10⁻⁵ M (the quadratic gives 2.5×10⁻⁵ M, the same to two figures), so [B] = x = 2.5×10⁻⁵ M; x is 0.0253% of 0.1 M, below the 5% rule, so dropping x from the subtraction is justified.\n[B] ≈ 5.1×10⁻⁵ M, found from the same simplified expression after multiplying x by 2 although B has a coefficient of 1, which is valid because Kc is so small. is incorrect: Mishandles the coefficient when converting the change x into the equilibrium concentration.\n[B] ≈ 8.0×10⁻⁵ M, found by taking the square root of Kc alone, which is valid because Kc is so small that the initial concentration does not matter. is incorrect: Drops the initial concentration from the expression, treating the square root of Kc as the answer.\n[B] ≈ 6.4×10⁻⁹ M, because a very small Kc means the equilibrium concentration of the product is approximately equal to Kc itself. is incorrect: Treats the numerical value of Kc as a concentration instead of a ratio of concentrations."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_t5m_small_k_equilibrium",
+   "facts": [
+    "K=6.4e-09",
+    "c0=0.1",
+    "x=2.53e-05"
+   ],
+   "seed": 15500
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Small-K ICE approximation with 5% check; fits 7.7 and 5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "x=2.53e-5 M, 0.025% of 0.1 M; C is the unique correct choice. A and B have wrong values."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; all data are in the stem. Wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct misconception (coefficient error, dropping [A]0, K treated as concentration); the explanation covers all three."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Light arithmetic, about 115 s, calculator use is consistent. The correct option is somewhat longer, which is a minor point."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, unique key (2.5e-5 M with a valid 5% check). Distractors are distinct and the item is in scope. Minor point: the key option is the longest."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires setting up an ICE table for A ⇌ B + C, choosing the small-x approximation, solving x = sqrt(Kc*0.1), and linking the result to the 5% validity check. Distractors reflect common errors (wrong stoichiometric factor, ignoring initial concentration, equating product concentration with Kc). Arithmetic is clean and reading is short, so difficulty comes from the concept and reasoning rather than unfair sources. This is typical of a mock-exam item on 7.7.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-m02-k1",
+  "cellId": "ap_chemistry-m02",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "7.7",
+  "unitCode": "7",
+  "skillPrimary": "5.F",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_t5m_small_k_equilibrium",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard 7.7 ICE-table problem with the small-x approximation. The student sets up Kc = x²/(0.25 − x), simplifies, takes a square root, and checks the 5% criterion. Distractors target common errors: wrong stoichiometric factor, ignoring the initial concentration, and equating [B] with Kc. The justification-evaluation step adds modest depth. The arithmetic is light and the wording is clear, with no out-of-scope content.",
+  "payload": {
+   "archetype": "ch_t5m_small_k_equilibrium",
+   "topic": "7.7",
+   "skill": "5.F",
+   "calculator": "allowed",
+   "stem": "At a certain temperature the reaction A(g) ⇌ B(g) + C(g) has Kc = 1.6×10⁻⁸. A closed container starts with [A] = 0.25 M and no B or C. Which statement gives the equilibrium concentration of B and a correct reason the simplification used to find it is valid?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "[B] ≈ 1.3×10⁻⁴ M, found from the same simplified expression after multiplying x by 2 although B has a coefficient of 1, which is valid because Kc is so small.",
+     "why": "Mishandles the coefficient when converting the change x into the equilibrium concentration.",
+     "value": null
+    },
+    {
+     "text": "[B] ≈ 1.3×10⁻⁴ M, found by taking the square root of Kc alone, which is valid because Kc is so small that the initial concentration does not matter.",
+     "why": "Drops the initial concentration from the expression, treating the square root of Kc as the answer.",
+     "value": null
+    },
+    {
+     "text": "[B] ≈ 1.6×10⁻⁸ M, because a very small Kc means the equilibrium concentration of the product is approximately equal to Kc itself.",
+     "why": "Treats the numerical value of Kc as a concentration instead of a ratio of concentrations.",
+     "value": null
+    },
+    {
+     "text": "[B] ≈ 6.3×10⁻⁵ M, found from Kc = x²/(0.25 − x) ≈ x²/0.25, which is valid because x is only about 0.025% of the initial concentration.",
+     "why": "With x as the change, Kc = x²/(0.25 − x) ≈ x²/0.25 gives x ≈ 6.3×10⁻⁵ M (the quadratic gives 6.3×10⁻⁵ M, the same to two figures), so [B] = x = 6.3×10⁻⁵ M; x is 0.0253% of 0.25 M, below the 5% rule, so dropping x from the subtraction is justified.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 115,
+   "facts": [
+    "K=1.6e-08",
+    "c0=0.25",
+    "x=6.325e-05"
+   ],
+   "blueprint": {
+    "id": "ch_t5m_small_k_equilibrium",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "find an equilibrium concentration with a very small K by dropping x from the initial concentration and check that the approximation is valid",
+    "topic": "7.7",
+    "skill": "5.F",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: find an equilibrium concentration with a very small K by dropping x from the initial concentration and check that the approximation is valid",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Mishandles the coefficient when converting the change x into the equilibrium concentration."
+     },
+     {
+      "id": "m2",
+      "description": "Drops the initial concentration from the expression, treating the square root of Kc as the answer."
+     },
+     {
+      "id": "m3",
+      "description": "Treats the numerical value of Kc as a concentration instead of a ratio of concentrations."
+     }
+    ],
+    "verification": {
+     "independent_path": "exact quadratic solution of the ICE expression vs the simplified square-root approximation",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "set up the ICE change, simplify because K is tiny, solve for x, apply the coefficient, and check the 5% condition"
+   },
+   "seed": 15501,
+   "pack_id": "ch_t5m_small_k_equilibrium-s15501",
+   "explanation_en": "The correct answer is [B] ≈ 6.3×10⁻⁵ M, found from Kc = x²/(0.25 − x) ≈ x²/0.25, which is valid because x is only about 0.025% of the initial concentration.. With x as the change, Kc = x²/(0.25 − x) ≈ x²/0.25 gives x ≈ 6.3×10⁻⁵ M (the quadratic gives 6.3×10⁻⁵ M, the same to two figures), so [B] = x = 6.3×10⁻⁵ M; x is 0.0253% of 0.25 M, below the 5% rule, so dropping x from the subtraction is justified.\n[B] ≈ 1.3×10⁻⁴ M, found from the same simplified expression after multiplying x by 2 although B has a coefficient of 1, which is valid because Kc is so small. is incorrect: Mishandles the coefficient when converting the change x into the equilibrium concentration.\n[B] ≈ 1.3×10⁻⁴ M, found by taking the square root of Kc alone, which is valid because Kc is so small that the initial concentration does not matter. is incorrect: Drops the initial concentration from the expression, treating the square root of Kc as the answer.\n[B] ≈ 1.6×10⁻⁸ M, because a very small Kc means the equilibrium concentration of the product is approximately equal to Kc itself. is incorrect: Treats the numerical value of Kc as a concentration instead of a ratio of concentrations."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_t5m_small_k_equilibrium",
+   "facts": [
+    "K=1.6e-08",
+    "c0=0.25",
+    "x=6.325e-05"
+   ],
+   "seed": 15501
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 7.7, small-K ICE approximation with a 5% check, matches skill 5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "x = 6.3e-5 M, 0.025% of 0.25 M. Option D is the unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed, and the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct misconceptions (coefficient error, dropping the initial concentration, treating Kc as a concentration). The explanation addresses each one. A and B share the same value but arise from different errors."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The time and calculator load are typical, and the arithmetic is light."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and suitable. The key was checked directly (x ≈ 6.3×10⁻⁵ M, 0.025% of 0.25 M). Each distractor encodes a distinct misconception and is explained."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard 7.7 ICE-table problem with the small-x approximation. The student sets up Kc = x²/(0.25 − x), simplifies, takes a square root, and checks the 5% criterion. Distractors target common errors: wrong stoichiometric factor, ignoring the initial concentration, and equating [B] with Kc. The justification-evaluation step adds modest depth. The arithmetic is light and the wording is clear, with no out-of-scope content.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "candidateKey": "ap_chemistry-m02-k2",
+  "cellId": "ap_chemistry-m02",
+  "apSubjectCode": "ap_chemistry",
+  "kind": "mc",
+  "keywordCode": "7.7",
+  "unitCode": "7",
+  "skillPrimary": "5.F",
+  "structure": "standalone",
+  "calculator": "allowed",
+  "archetype": "ch_t5m_small_k_equilibrium",
+  "wording": "template",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Single-equilibrium ICE setup with the small-x approximation, a square-root solve, and a percent-ionization-style validity check, all within 7.7 scope. The answer options pair a numeric result with its justification, which adds one reasoning step. Distractors reflect plausible errors: ignoring the initial concentration, doubling x, and equating [B] with Kc. Arithmetic is short and the wording is clear, so the difficulty is conceptual rather than coming from unfair sources.",
+  "payload": {
+   "archetype": "ch_t5m_small_k_equilibrium",
+   "topic": "7.7",
+   "skill": "5.F",
+   "calculator": "allowed",
+   "stem": "At a certain temperature the reaction A(g) ⇌ B(g) + C(g) has Kc = 1.6×10⁻⁸. A closed container starts with [A] = 0.25 M and no B or C. Which statement gives the equilibrium concentration of B and a correct reason the simplification used to find it is valid?",
+   "stimulus": {
+    "kind": "none",
+    "description": "",
+    "data": {}
+   },
+   "options": [
+    {
+     "text": "[B] ≈ 1.3×10⁻⁴ M, found by taking the square root of Kc alone, which is valid because Kc is so small that the initial concentration does not matter.",
+     "why": "Drops the initial concentration from the expression, treating the square root of Kc as the answer.",
+     "value": null
+    },
+    {
+     "text": "[B] ≈ 1.3×10⁻⁴ M, found from the same simplified expression after multiplying x by 2 although B has a coefficient of 1, which is valid because Kc is so small.",
+     "why": "Mishandles the coefficient when converting the change x into the equilibrium concentration.",
+     "value": null
+    },
+    {
+     "text": "[B] ≈ 1.6×10⁻⁸ M, because a very small Kc means the equilibrium concentration of the product is approximately equal to Kc itself.",
+     "why": "Treats the numerical value of Kc as a concentration instead of a ratio of concentrations.",
+     "value": null
+    },
+    {
+     "text": "[B] ≈ 6.3×10⁻⁵ M, found from Kc = x²/(0.25 − x) ≈ x²/0.25, which is valid because x is only about 0.025% of the initial concentration.",
+     "why": "With x as the change, Kc = x²/(0.25 − x) ≈ x²/0.25 gives x ≈ 6.3×10⁻⁵ M (the quadratic gives 6.3×10⁻⁵ M, the same to two figures), so [B] = x = 6.3×10⁻⁵ M; x is 0.0253% of 0.25 M, below the 5% rule, so dropping x from the subtraction is justified.",
+     "value": null
+    }
+   ],
+   "key_index": 3,
+   "est_seconds": 115,
+   "facts": [
+    "K=1.6e-08",
+    "c0=0.25",
+    "x=6.325e-05"
+   ],
+   "blueprint": {
+    "id": "ch_t5m_small_k_equilibrium",
+    "subject": "ap_chemistry",
+    "kind": "mc",
+    "concept": "find an equilibrium concentration with a very small K by dropping x from the initial concentration and check that the approximation is valid",
+    "topic": "7.7",
+    "skill": "5.F",
+    "student_thinking": [
+     "Decide which chemical relationship or representation applies: find an equilibrium concentration with a very small K by dropping x from the initial concentration and check that the approximation is valid",
+     "Carry out or interpret the result and match it against the four options"
+    ],
+    "structure": "standalone",
+    "response_mode": "select",
+    "calculator": "allowed",
+    "key_conditions": [
+     {
+      "condition": "every quantity needed is given in the stem or stimulus",
+      "evidence": "stem and stimulus values"
+     }
+    ],
+    "material": {
+     "type": "none",
+     "must_include": []
+    },
+    "misconceptions": [
+     {
+      "id": "m1",
+      "description": "Drops the initial concentration from the expression, treating the square root of Kc as the answer."
+     },
+     {
+      "id": "m2",
+      "description": "Mishandles the coefficient when converting the change x into the equilibrium concentration."
+     },
+     {
+      "id": "m3",
+      "description": "Treats the numerical value of Kc as a concentration instead of a ratio of concentrations."
+     }
+    ],
+    "verification": {
+     "independent_path": "exact quadratic solution of the ICE expression vs the simplified square-root approximation",
+     "method": "sympy/exact + independent numeric path"
+    },
+    "judgment_demand": "set up the ICE change, simplify because K is tiny, solve for x, apply the coefficient, and check the 5% condition"
+   },
+   "seed": 15502,
+   "pack_id": "ch_t5m_small_k_equilibrium-s15502",
+   "explanation_en": "The correct answer is [B] ≈ 6.3×10⁻⁵ M, found from Kc = x²/(0.25 − x) ≈ x²/0.25, which is valid because x is only about 0.025% of the initial concentration.. With x as the change, Kc = x²/(0.25 − x) ≈ x²/0.25 gives x ≈ 6.3×10⁻⁵ M (the quadratic gives 6.3×10⁻⁵ M, the same to two figures), so [B] = x = 6.3×10⁻⁵ M; x is 0.0253% of 0.25 M, below the 5% rule, so dropping x from the subtraction is justified.\n[B] ≈ 1.3×10⁻⁴ M, found by taking the square root of Kc alone, which is valid because Kc is so small that the initial concentration does not matter. is incorrect: Drops the initial concentration from the expression, treating the square root of Kc as the answer.\n[B] ≈ 1.3×10⁻⁴ M, found from the same simplified expression after multiplying x by 2 although B has a coefficient of 1, which is valid because Kc is so small. is incorrect: Mishandles the coefficient when converting the change x into the equilibrium concentration.\n[B] ≈ 1.6×10⁻⁸ M, because a very small Kc means the equilibrium concentration of the product is approximately equal to Kc itself. is incorrect: Treats the numerical value of Kc as a concentration instead of a ratio of concentrations."
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "ch_t5m_small_k_equilibrium",
+   "facts": [
+    "K=1.6e-08",
+    "c0=0.25",
+    "x=6.325e-05"
+   ],
+   "seed": 15502
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 7.7 small-K ICE approximation, skill 5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "x=6.3e-5 M, 0.025% <5%; unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; all data in stem; wording clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct named misconceptions, each explained. Minor awkward phrasing in key explanation (double period, 'same to two figures')."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Light calculation, about 115 s, calculator allowed. Key option is slightly longer, a mild cue."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, well-scoped item with distinct distractors. Only cosmetic explanation wording issues remain."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Single-equilibrium ICE setup with the small-x approximation, a square-root solve, and a percent-ionization-style validity check, all within 7.7 scope. The answer options pair a numeric result with its justification, which adds one reasoning step. Distractors reflect plausible errors: ignoring the initial concentration, doubling x, and equating [B] with Kc. Arithmetic is short and the wording is clear, so the difficulty is conceptual rather than coming from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ }
+]

@@ -1,0 +1,326 @@
+[
+ {
+  "key": "ap_chemistry-m01-k0",
+  "cellId": "ap_chemistry-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "Q = 8 > Kc = 4; shifts toward reactants",
+     "brief_reasoning": "At the start, Q = 0.4/(0.5×0.2) = 4, which matches Kc. Doubling the volume halves every concentration, so Q = 0.2/(0.25×0.1) = 8. Since Q > Kc, the net reaction shifts toward the reactants, the side with more gas molecules.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 7.10: recompute Q after a volume change and compare it with K. This matches skill 5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Q = 8 > Kc = 4, so the shift is toward reactants. This is the unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "All values and conditions are in the stem. No stimulus is needed. The phrase 'toward the reactant' is slightly awkward but not ambiguous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option encodes a distinct misconception, and the explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The time and arithmetic load are appropriate."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A correct, clean item with a unique key and distinct distractors. The only flaw is the minor wording issue on 'the reactant'."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must recognize that doubling volume halves each concentration, compute Q with the new values (Q=8), compare to Kc, and link Q>Kc to a shift toward the side with more gas moles. Distractors target common errors (wrong Q, wrong direction, confusing Kc with Q). Arithmetic is simple and wording is clear; the stem's equilibrium check (Q=4 initially) is consistent with Kc. Within Unit 7.10 scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_chemistry-m01-k1",
+  "cellId": "ap_chemistry-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Halving all concentrations gives Q=(0.05)(0.125)/0.25=0.025<Kc=0.05, so net shift to products (more gas moles).",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "D"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Recompute Q after a volume change and compare it with K; this is squarely 7.10 and 5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Q = 0.025 < K, so the shift is toward products. D is the unique correct option. The initial data are consistent with Kc = 0.05."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clear, and it states constant temperature and that the volume change is sudden."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option maps to a distinct misconception and is explained. Option B's explanation is slightly loose but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, light on arithmetic, calculator use is unnecessary but allowed, and the time is typical."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, with a unique key and a good fit to 7.10 and 5.F. Distractors are distinct, and the only blemish is a slightly loose explanation for option B."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Solver must see that doubling volume halves each concentration, recompute Q with the A → B + C stoichiometry (Q = 0.025), compare it with Kc, and link Q < Kc to a shift toward products, the side with more gas moles. Distractors target common errors: a wrong direction with the right Q, a wrong Q, and confusing Kc with Q. The arithmetic is simple and the reading load is low. The concept depth and multi-step reasoning fit a full AP mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_chemistry-m01-k2",
+  "cellId": "ap_chemistry-m01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "First check the starting data: Q = (0.15)(0.2)/0.3 = 0.1, which equals Kc, so the mixture is at equilibrium. Doubling the volume halves every concentration, so Q = (0.075)(0.1)/0.15 = 0.05. Since Q is less than Kc, the net reaction shifts toward the products, which is the side with more gas molecules.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Recomputing Q after a volume change and comparing it with K is squarely topic 7.10 and skill 5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Initial Q = 0.1 = Kc, so the system starts at equilibrium. After doubling the volume Q = 0.05 < Kc, so the shift is toward the products. D is the unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem gives all values and conditions (constant temperature, sudden volume doubling) clearly."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three wrong options encode distinct misconceptions (direction reversed, K constant so no shift, linear scaling of Q), and the explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 105 seconds, with light arithmetic and a calculator allowed. Option D is slightly longer but not an obvious giveaway."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item. Q = 0.05 < Kc after the volume doubles, so the shift is toward the products. The key is unique, the distractors are distinct and explained, and the scope matches 7.10 and 5.F."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires choosing Q vs Kc, recognizing that doubling the volume halves each concentration, computing Q = 0.05 with simple numbers, and linking Q < Kc to a shift toward the side with more gas moles. Distractors target common misconceptions (Kc constant means no shift; wrong direction; wrong Q). Moderate reasoning depth, light arithmetic and reading, fully in scope for topic 7.10.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "ap_chemistry-m02-k0",
+  "cellId": "ap_chemistry-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "[B] ≈ 2.5×10⁻⁵ M",
+     "brief_reasoning": "x²/0.1 = 6.4e-9 → x ≈ 2.5e-5 M, which is about 0.025% of 0.1 M, so neglecting x is valid.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Small-K ICE approximation with 5% check; fits 7.7 and 5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "x=2.53e-5 M, 0.025% of 0.1 M; C is the unique correct choice. A and B have wrong values."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; all data are in the stem. Wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct misconception (coefficient error, dropping [A]0, K treated as concentration); the explanation covers all three."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Light arithmetic, about 115 s, calculator use is consistent. The correct option is somewhat longer, which is a minor point."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, unique key (2.5e-5 M with a valid 5% check). Distractors are distinct and the item is in scope. Minor point: the key option is the longest."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires setting up an ICE table for A ⇌ B + C, choosing the small-x approximation, solving x = sqrt(Kc*0.1), and linking the result to the 5% validity check. Distractors reflect common errors (wrong stoichiometric factor, ignoring initial concentration, equating product concentration with Kc). Arithmetic is clean and reading is short, so difficulty comes from the concept and reasoning rather than unfair sources. This is typical of a mock-exam item on 7.7.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_chemistry-m02-k1",
+  "cellId": "ap_chemistry-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "[B] ≈ 6.3×10⁻⁵ M",
+     "brief_reasoning": "x² ≈ Kc·0.25 = 4.0×10⁻⁹, so x ≈ 6.3×10⁻⁵ M. That is 0.025% of 0.25 M, so the approximation is valid.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 7.7, small-K ICE approximation with a 5% check, matches skill 5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "x = 6.3e-5 M, 0.025% of 0.25 M. Option D is the unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed, and the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors encode distinct misconceptions (coefficient error, dropping the initial concentration, treating Kc as a concentration). The explanation addresses each one. A and B share the same value but arise from different errors."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The time and calculator load are typical, and the arithmetic is light."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and suitable. The key was checked directly (x ≈ 6.3×10⁻⁵ M, 0.025% of 0.25 M). Each distractor encodes a distinct misconception and is explained."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard 7.7 ICE-table problem with the small-x approximation. The student sets up Kc = x²/(0.25 − x), simplifies, takes a square root, and checks the 5% criterion. Distractors target common errors: wrong stoichiometric factor, ignoring the initial concentration, and equating [B] with Kc. The justification-evaluation step adds modest depth. The arithmetic is light and the wording is clear, with no out-of-scope content.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "ap_chemistry-m02-k2",
+  "cellId": "ap_chemistry-m02",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "x^2/0.25=1.6e-8 → x=6.3e-5 M; 6.3e-5/0.25 ≈ 0.025%, so approximation valid.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "[B] ≈ 6.3×10⁻⁵ M"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 7.7 small-K ICE approximation, skill 5.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "x=6.3e-5 M, 0.025% <5%; unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; all data in stem; wording clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct named misconceptions, each explained. Minor awkward phrasing in key explanation (double period, 'same to two figures')."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Light calculation, about 115 s, calculator allowed. Key option is slightly longer, a mild cue."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, well-scoped item with distinct distractors. Only cosmetic explanation wording issues remain."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Single-equilibrium ICE setup with the small-x approximation, a square-root solve, and a percent-ionization-style validity check, all within 7.7 scope. The answer options pair a numeric result with its justification, which adds one reasoning step. Distractors reflect plausible errors: ignoring the initial concentration, doubling x, and equating [B] with Kc. Arithmetic is short and the wording is clear, so the difficulty is conceptual rather than coming from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ }
+]
