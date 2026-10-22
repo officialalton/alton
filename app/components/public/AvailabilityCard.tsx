@@ -34,7 +34,7 @@ export default function AvailabilityCard({ data }: { data: LandingAvailability }
               {data.ap.map((a) => (
                 <li key={a.subject} className="flex items-baseline justify-between gap-3">
                   <span className="text-[14.5px] font-semibold">{a.label}</span>
-                  <span className="p-mono text-[12px] text-[var(--p-slate)] text-right">{plural(a.sets, "set")}</span>
+                  <span className="p-mono text-[12px] text-[var(--p-slate)] text-right whitespace-nowrap shrink-0">{plural(a.sets, "set")}</span>
                 </li>
               ))}
             </ul>
