@@ -18,3 +18,8 @@
 4. 정리 대상 테스트 응시는 이번 작업에서 새로 만들지 않았다.
 
 ## 미반영 비용: 없음(이번 작업 유료 호출 0).
+
+## 추가 기록 — 결함 후보 제외 (2026-10-22, 화면 증거 단계에서 발견)
+- 화면 점검에서 `stimulus_no_raw_tex`(`$...\text{ %}$`의 `%`가 LaTeX 주석이 되어 원문 수식이 학생 화면에 보임) 실패 3건: `chem-ch3-mc:ap_chemistry-m63-k2`, `chem-t5-mc:ap_chemistry-m20-k0`, `chem-t5-mc2:ap_chemistry-m18-k2`. 이 후보는 관리자 ③에서 "허용되지 않는 건너뜀"이라 배치 전체 적재를 중단시키므로 `chem-t5-mc`·`chem-t5-mc2`의 pass-keys에서 뺐다(내용 수정은 하지 않았다 — 고치려면 `\%`로 바꾼 새 해시와 증거 재생성이 필요).
+- 변환 시 표준 렌더링 검증 실패(지문이 그림을 가리키는데 그림 없음) 3건: `chem-ch3-mc:ap_chemistry-m51-k0`, `chem-t5-bank:ap_chemistry-m33-k1`, `chem-t5-bank2:ap_chemistry-m07-k0`. 증거가 없어 건너뜀으로 처리된다.
+- 위 6건과 오너 판단 보류 2건(`chem-s2-f3:f01-k2`, `chem-ch3-mc:m13-k0`), 내용 대조로 확인한 쌍둥이 2건(`chem-t5-bank:m46-k0`는 공개 Exam 3의 에탄올 입자 그림 문항과 같은 문항, `chem-s2-m-b:m22-k0`는 공개 Exam 1·2의 탄산·질산 이온 결합 길이 평가 문항과 같은 틀)은 `data/ap/stock/blocked-chem-defects-20261022.json`로 CH4·CH5 배정에서 제외했다(`chem-structure-block.ts --extra-block`).
