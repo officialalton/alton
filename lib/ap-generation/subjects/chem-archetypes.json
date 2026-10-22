@@ -4498,5 +4498,95 @@
    "Condensation is a physical change and does not break bonds within molecules.",
    "The temperature is constant, so the average kinetic energy is constant."
   ]
+ },
+ {
+  "id": "ch_t5j_ammonium_ph",
+  "topic": "8.3",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy exact Ka and pH vs direct formula"
+  ],
+  "misconceptions": [
+   "Treats the salt as neutral and reports pH 7.00.",
+   "Uses the concentration as [H⁺].",
+   "Uses Kb directly as if the cation were a weak base."
+  ]
+ },
+ {
+  "id": "ch_t5j_equivalence_ph",
+  "topic": "8.5",
+  "skill": "5.F",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "sympy exact Kb and pH vs direct formula"
+  ],
+  "misconceptions": [
+   "Reports the pOH instead of the pH.",
+   "Reports the pH of a neutral solution, 7.00, because the acid and base have reacted completely.",
+   "Uses Ka in place of Kb when finding the hydroxide ion concentration."
+  ]
+ },
+ {
+  "id": "ch_t5j_ka_from_titration_table",
+  "topic": "8.5",
+  "skill": "5.D",
+  "calculator": "allowed",
+  "stimulus": "table",
+  "verifiedBy": [
+   "pKa = pH at half-equivalence read from the table vs Henderson–Hasselbalch fit"
+  ],
+  "misconceptions": [
+   "Takes the pH at the last listed volume before the equivalence point as the pKa.",
+   "Reports the pKa itself instead of Ka.",
+   "Takes the pH at the first listed volume as the pKa."
+  ]
+ },
+ {
+  "id": "ch_t5j_p2_standard_solution_procedure",
+  "topic": "3.7",
+  "skill": "2.C",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "This makes 0.0100 M HCl, which is ten times too dilute.",
+   "This produces a solution that is far more concentrated than 0.100 M.",
+   "This makes about 110 mL of solution, so the concentration is below 0.100 M, and the volumes are not measured accurately."
+  ]
+ },
+ {
+  "id": "ch_t5j_p4_displacement_model",
+  "topic": "4.9",
+  "skill": "4.A",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "The blue color comes from Cu²⁺ ions, and no silver was on the strip at the start.",
+   "Nitrate ions are spectators and electrons are not gained when Cu²⁺ forms.",
+   "Forming Ag atoms from Ag⁺ ions requires a gain of electrons, so it is reduction."
+  ]
+ },
+ {
+  "id": "ch_t5j_p6_ionization_anomaly",
+  "topic": "1.7",
+  "skill": "6.D",
+  "calculator": "allowed",
+  "stimulus": "none",
+  "verifiedBy": [
+   "fixed fact bank checked against CED"
+  ],
+  "misconceptions": [
+   "The outermost electrons of sulfur are in the 3p subshell, as in phosphorus.",
+   "Sulfur has 16 protons and phosphorus has 15, so sulfur has the larger nuclear charge.",
+   "A smaller radius generally raises, not lowers, the ionization energy."
+  ]
  }
 ]

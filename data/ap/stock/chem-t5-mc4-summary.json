@@ -1,0 +1,42 @@
+{
+ "runs": [
+  "chem-t5-mc4"
+ ],
+ "rows": 18,
+ "passed": 14,
+ "rejected": 4,
+ "passRate": 0.778,
+ "singles": {
+  "candidates": 18
+ },
+ "unitsPassed": {
+  "1": 2,
+  "3": 2,
+  "4": 2,
+  "8": 8
+ },
+ "figPassed": {
+  "none": 14
+ },
+ "figAll": {
+  "none": 18
+ },
+ "figPassRate": {
+  "none": "14/18"
+ },
+ "renderTypesPassed": {
+  "none": 11,
+  "ap_table": 3
+ },
+ "archetypesPassed": {
+  "ch_t5j_p6_ionization_anomaly": 2,
+  "ch_t5j_p2_standard_solution_procedure": 2,
+  "ch_t5j_p4_displacement_model": 2,
+  "ch_t5j_ka_from_titration_table": 3,
+  "ch_t5j_ammonium_ph": 3,
+  "ch_t5j_equivalence_ph": 2
+ },
+ "costUsd": {
+  "chem-t5-mc4": 0.7106
+ }
+}

@@ -1,0 +1,31 @@
+{
+ "run": "chem-t5-mc4",
+ "subject": "ap_chemistry",
+ "generatedAt": "2026-10-22T06:33:32.322Z",
+ "totalCostUsd": 0.62,
+ "newSpendSinceBaseline": 0.71,
+ "cap": 50,
+ "calls": 54,
+ "candidates": 18,
+ "mcCandidates": 18,
+ "frqCandidates": 0,
+ "passedAll": 14,
+ "adopted": 6,
+ "mcAdopted": 6,
+ "frqAdopted": 0,
+ "reserve": 8,
+ "yield": 0.333,
+ "costPerAdopted": 0.104,
+ "callsPerAdopted": 9,
+ "duplicateRejected": 3,
+ "spotChecked": 0,
+ "wording": {
+  "llm": 0,
+  "template": 18
+ },
+ "rejectionReasons": {
+  "duplicate_gate_near_duplicate": 3,
+  "criterion_failed_distractor_explanation": 1
+ },
+ "unfilledCells": []
+}

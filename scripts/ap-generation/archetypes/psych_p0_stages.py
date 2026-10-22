@@ -41,3 +41,12 @@ STAGE_T5_MC2 = ['ps_r5_misinformation_design', 'ps_r5_study_confound', 'ps_r5_te
 
 # 3차: PS5 단원 5 마지막 세트(t5c) — psych-t5-sets3 실행 대상
 STAGE_T5_SETS3 = ['pss_t5c_u5_coping_survey', 'pss_t5c_u5_exposure_trial', 'pss_t5c_u5_light_therapy']
+
+# PS5 마지막 세트 대체(진료 접수 기록 자료): psych-t5-sets4 실행 대상
+STAGE_T5_SETS4 = ['pss_t5d_u5_worry_intake']
+
+STAGE_T5_SETS5 = ['pss_t5d_u5_worry_intake']
+
+STAGE_T5_SETS6 = ['pss_t5d_u5_worry_intake']
+
+STAGE_T5_SETS7 = ['pss_t5d_u5_worry_intake']

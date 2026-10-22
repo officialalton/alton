@@ -1,0 +1,61 @@
+[
+ {
+  "key": "ap_computer_science_a-f01-k0",
+  "cellId": "ap_computer_science_a-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Ceiling division by 60.",
+     "final_answer": "public static int hoursCharged(int minutes) { return (minutes + 59) / 60; }",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "Use hoursCharged, tiered fee, cap at 20.",
+     "final_answer": "public static int totalFee(int minutes) { int h = hoursCharged(minutes); int fee; if (h <= 2) fee = 4 * h; else fee = 8 + 3 * (h - 2); return Math.min(fee, 20); }",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a sound two-part FRQ that fits the Methods and Control Structures question type. Part (a) is rounding up with integer arithmetic and part (b) is a tiered fee with a cap that reuses hoursCharged. The skill is 2.A (writing code) and the topics are within the allowed span of 2.4, 1.9 and 2.5. The stimulus gives clear preconditions and examples. The independent solver's alternatives, (minutes + 59) / 60 and Math.min, are valid. Rubric rows are 1 point each with one behavior and common errors are listed. Tests cover boundaries (0, 59, 60, 61, 120, 121 for hours; 0, 125, 181, 300, 480 for the fee). The bundle totals 7 points, not the 9 of a full four-question FRQ, but each part is a legitimate 1-point-row grain, so I did not fail it on that. Two minor notes: the rubric rows A1 and B1 each combine two ideas, and hoursCharged is only labeled as a hint toward topic 2.4. Neither is a material flaw.",
+   "scope_skill": {
+    "pass": true,
+    "notes": "Dominant demand is writing code for a conditional algorithm with a helper call. Nested or tiered conditionals appear in part (b). No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The reference and the alternative solution both pass the tests. The rubric accepts equivalent solutions, such as ceiling division or Math.min, via the required elements."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The class skeleton, preconditions and examples are complete and clearly worded."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. The common_errors lists in the rubric cover realistic mistakes."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The task load is typical of an AP FRQ part. No calculator is needed and the arithmetic is minimal."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Two-part FRQ-style method-writing task. Part (a) needs the ceiling-division idiom, via integer arithmetic or a conditional on minutes % 60, with correct handling of 0 and exact multiples of 60. Part (b) needs tiered selection (nested or chained if) plus a cap, and must reuse hoursCharged. The difficulty comes from legitimate levers: an integer-division subtlety and boundary handling at the tier edge (2 hours) and the cap. Arithmetic and reading are light, and everything is within Unit 2 scope (2.3, 2.4, 2.5, plus method calls from 1.9).",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ }
+]
