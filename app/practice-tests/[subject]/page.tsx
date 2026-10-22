@@ -83,7 +83,7 @@ export default async function SubjectPage({ params }: Props) {
             </tbody>
           </table>
         </div>
-        <ul className="sm:hidden list-none m-0 p-0 flex flex-col gap-3" aria-label="Exam format by section">
+        <ul className="sm:hidden list-none flex flex-col gap-3" style={{ margin: 0, padding: 0 }} aria-label="Exam format by section">
           {m.rows.map((r) => (
             <li key={r.label} className="border border-[var(--p-line)] p-4 flex flex-col gap-1">
               <strong className="text-[15px]">{r.label}</strong>
