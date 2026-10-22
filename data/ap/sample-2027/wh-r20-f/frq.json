@@ -1,0 +1,391 @@
+[
+ {
+  "id": "wh4_saq2",
+  "spec": {
+   "id": "wh4_saq2",
+   "exam": "WH4",
+   "template": "saq2",
+   "era": 3,
+   "units": [
+    6
+   ],
+   "focus": "Japan's adoption of a written constitution and an elected lower house under the Meiji government, and the limits placed on that assembly (use only well-established facts: the Meiji Restoration of 1868, the 1889 constitution, the Imperial Diet)",
+   "sources": [
+    {
+     "id": "txt-meiji-constitution-1889",
+     "context": "The Meiji Emperor issued this speech and Japan's first modern constitution in February 1889, about two decades after the Meiji Restoration of 1868."
+    }
+   ],
+   "seed": 4902
+  },
+  "payload": {
+   "schema_version": "whap-frq-1",
+   "task_type": "saq",
+   "template": "saq2",
+   "era": 3,
+   "units": [
+    6
+   ],
+   "title": "The Meiji Constitution of 1889: An Elected Assembly Within Imperial Limits",
+   "prompt": {
+    "scenario": "In the period c. 1868 to c. 1900, the Meiji government of Japan carried out wide-ranging reforms after the Meiji Restoration of 1868. In 1889 it issued a written constitution that created the Imperial Diet, a national legislature with an elected lower house, while keeping strong powers in the hands of the emperor and his government.",
+    "task": "Using the excerpt, answer (a), (b), and (c).",
+    "requirements": [
+     "Each part must be answered with a specific, historically accurate statement.",
+     "Part A must rely on what the excerpt says.",
+     "Parts B and C must use evidence beyond the excerpt from the years named in each part."
+    ],
+    "parts": [
+     {
+      "label": "A",
+      "prompt": "Briefly describe ONE way the excerpt shows the emperor keeping authority over the constitutional system he announces.",
+      "points": 1
+     },
+     {
+      "label": "B",
+      "prompt": "Briefly explain ONE specific historical development in Japan in the period 1868 to 1890 that helps explain why the Meiji government created a constitution and an elected assembly. Do not use the Imperial Rescript mentioned in the excerpt as your answer.",
+      "points": 1
+     },
+     {
+      "label": "C",
+      "prompt": "Briefly explain ONE similarity OR ONE difference between Japan's constitutional reform of 1889 and constitutional reform in the Ottoman Empire in the period 1839 to 1900.",
+      "points": 1
+     }
+    ]
+   },
+   "sources": [
+    {
+     "id": "A",
+     "kind": "primary_text",
+     "title": "Imperial Speech on the promulgation of the Constitution of the Empire of Japan, 1889 (excerpt)",
+     "attribution": "Meiji Emperor of Japan (English translation in The Constitution of Japan: With the Laws Appertaining Thereto, and the Imperial Oath and Speech, 1889), 1889 (promulgated February 11, 1889). Wikisource (English Wikisource transcription of the 1889 English-language edition). Reuse: public domain in the United States (published before 1929). excerpted (2 segments joined by [...]); text extracted from the Wikisource page (revision 13263409) and whitespace normalized; no wording changed.",
+     "context": "The Meiji Emperor issued this speech and Japan's first modern constitution in February 1889, about two decades after the Meiji Restoration of 1868.",
+     "real_data": true,
+     "source_registry_id": "txt-meiji-constitution-1889",
+     "source_sha256": "8834d4f1bd8b53a0f816ae51a5f2238bb63a9d6c73a557ad04af32bee9dc47ca",
+     "body": "Having, by virtue of the glories of Our Ancestors, ascended the throne of a lineal succession unbroken for ages eternal; desiring to promote the welfare of, and to give development to, the moral and intellectual faculties of Our beloved subjects, the very same that have been favoured with the benevolent care and affectionate vigilance of Our Ancestors; and hoping to maintain the prosperity of the State, in concert with Our people and with their support, We hereby promulgate, in pursuance of Our Imperial Rescript of the 12th day of the 10th month of the 14th year of Meiji, a fundamental law of State, to exhibit the principles by which We are to be guided in Our conduct, and to point out to what Our descendants and Our subjects and their descendants are forever to conform. The rights of sovereignty of the State, We have inherited from Our Ancestors, and We shall bequeath them to Our descendants. Neither We nor they shall in future fail to wield them, in accordance with the provisions of the Constitution hereby granted. We now declare to respect and protect the security of the rights and of the property of Our people, and to secure to them the complete enjoyment of the same, within the extent of the provisions of the present Constitution and of the law. [...] The Imperial Diet shall first be convoked for the 23rd year of Meiji, and the time of its opening shall be the date when the present Constitution comes into force. When in the future it may become necessary to amend any of the provisions of the present Constitution, We or Our succcessors shall assume the initiative right, and submit a project for the same to the Imperial Diet. The Imperial Diet shall pass its vote upon it, according to the conditions imposed by the present Constitution, and in no otherwise shall Our descendants or Our subjects be permitted to attempt any alteration thereof.",
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry txt-meiji-constitution-1889"
+     }
+    }
+   ],
+   "rubric": {
+    "rubric_id": "whap-v1",
+    "total_points": 3,
+    "rows": [
+     {
+      "row_id": "a",
+      "name": "Part A",
+      "max": 1,
+      "descriptors": {
+       "0": "The response does not describe a feature of the excerpt that shows imperial authority, or it misreads the excerpt (for example, saying the people or the Diet wrote the constitution).",
+       "1": "The response accurately describes one way the excerpt shows the emperor keeping authority, tied to what the speech actually says."
+      },
+      "task_specific": "Describes a feature of the speech showing that the emperor keeps authority, such as the claim that sovereignty is inherited from imperial ancestors, the presentation of the constitution as something the emperor grants, rights protected only within the limits of the constitution and the law, or the emperor alone holding the right to propose amendments."
+     },
+     {
+      "row_id": "b",
+      "name": "Part B",
+      "max": 1,
+      "descriptors": {
+       "0": "The response names no relevant development, uses only the 1881 Rescript, gives an inaccurate development, or does not connect the development to the constitution or the assembly.",
+       "1": "The response explains one accurate, specific development from 1868 to 1890 and shows how it helps account for the constitution or the elected assembly."
+      },
+      "task_specific": "Explains a specific development in Japan from 1868 to 1890, other than the 1881 Imperial Rescript, that helps explain the adoption of a constitution and an elected assembly, such as the Freedom and People's Rights Movement, the goal of revising the unequal treaties, Ito Hirobumi's study of European (especially German) constitutions, or the 1868 Charter Oath's promise of deliberative assemblies."
+     },
+     {
+      "row_id": "c",
+      "name": "Part C",
+      "max": 1,
+      "descriptors": {
+       "0": "The response gives no accurate comparison, describes only one state, or makes an inaccurate claim about Ottoman reform.",
+       "1": "The response explains one accurate similarity or difference between the Japanese and Ottoman constitutional reforms in the named period."
+      },
+      "task_specific": "Explains an accurate similarity or difference with the Ottoman constitutional reform of 1876 or the Tanzimat era, such as both constitutions being granted by a monarch, both being shaped in part by Western pressure and models, or the contrast that Abdulhamid II suspended the Ottoman constitution and parliament in 1878 while the Imperial Diet kept meeting after 1890."
+     }
+    ],
+    "scoring_notes": [
+     "Each part is scored on its own; a response can earn 0 to 3 points.",
+     "In Part A, a quotation alone does not earn the point; the response must say how the quoted words show imperial authority.",
+     "In Part B, responses that describe the limited voting rights or the appointed House of Peers describe the system created rather than a cause; credit them only if they explain why the government designed the assembly this way, such as following a German model that kept power with the monarch.",
+     "In Part C, the comparison must address both states; a correct statement about Japan alone earns no point.",
+     "ALTON reference — not official AP scoring"
+    ]
+   },
+   "expected_features": {
+    "defensible_theses": [],
+    "contextualization_ideas": [
+     "Western pressure after the arrival of Commodore Perry in 1853 and the unequal treaties that followed.",
+     "Meiji state-building reforms such as the abolition of the domains in 1871 and universal military conscription in 1873.",
+     "Constitutional movements elsewhere in the nineteenth century, including the Ottoman Tanzimat and the 1876 constitution."
+    ],
+    "outside_evidence": [
+     "Freedom and People's Rights Movement",
+     "Itagaki Taisuke and the founding of political parties in the 1880s",
+     "Ito Hirobumi's study of European constitutions",
+     "Charter Oath of 1868",
+     "Revision of the unequal treaties",
+     "Ottoman constitution of 1876 and its suspension in 1878"
+    ],
+    "reasoning_types": [
+     "Sourcing and analysis of a primary text",
+     "Causation",
+     "Comparison"
+    ],
+    "doc_uses": [
+     {
+      "source_id": "Imperial Speech on the promulgation of the Constitution, 1889",
+      "usable_for": "Showing that the constitution was presented as a grant from the emperor, with sovereignty rooted in the imperial line and amendment power reserved to the throne.",
+      "sourcing": "An official speech issued in the emperor's name when the constitution was promulgated, read here in the 1889 official English translation; the emperor's point of view shows in his language of ancestral sovereignty and of rights 'granted' within limits."
+     }
+    ],
+    "saq_answers": {
+     "a": [
+      "The speech says the emperor inherited the rights of sovereignty from his ancestors and will pass them to his descendants, so authority comes from the imperial line and not from the people.",
+      "The emperor calls the document the constitution 'hereby granted,' presenting it as a gift from the throne and not as an agreement with his subjects.",
+      "The emperor promises to protect his subjects' rights and property only 'within the extent of the provisions of the present Constitution and of the law,' so those rights have limits set from above.",
+      "Only the emperor or his successors may propose amendments, and the Diet may only vote on them, so the elected body cannot start changes to the constitution."
+     ],
+     "b": [
+      "The Freedom and People's Rights Movement of the 1870s and 1880s, led by figures such as Itagaki Taisuke, petitioned for an elected national assembly and pushed the government to set up representative institutions on its own terms.",
+      "The Meiji government wanted to revise the unequal treaties signed with Western powers in the 1850s and 1860s, and a Western-style constitution and legislature helped show that Japan was a modern state that deserved equal treatment.",
+      "In the early 1880s Ito Hirobumi studied European constitutions, especially in Germany, and the German model of a strong monarch with a limited parliament shaped the 1889 constitution.",
+      "The Charter Oath of 1868 promised that deliberative assemblies would be established and that matters would be decided by public discussion, which gave reformers grounds to demand a national assembly."
+     ],
+     "c": [
+      "Similarity: the Ottoman constitution of 1876 and the Meiji constitution of 1889 were both issued by monarchs from above, not won by a popular revolution, and both kept major powers with the ruler.",
+      "Similarity: both reforms came as states facing Western pressure tried to strengthen themselves by adopting European-style legal and political institutions, as with the Ottoman Tanzimat reforms and the Meiji reforms.",
+      "Difference: Sultan Abdulhamid II suspended the Ottoman constitution and closed parliament in 1878, while Japan's Imperial Diet first met in 1890 and kept meeting through the rest of the century.",
+      "Difference: the Ottoman constitutional period of the 1870s ended quickly and gave way to Abdulhamid II's personal rule, while in Japan the constitution stayed in force and parties in the elected lower house kept clashing with the government over budgets."
+     ]
+    },
+    "common_pitfalls": [
+     "Saying the Meiji constitution created a democracy with popular sovereignty; the excerpt places sovereignty in the imperial line.",
+     "Using the 1881 rescript in Part B, which the excerpt already refers to.",
+     "Describing the Diet as fully elected; only the lower house was elected.",
+     "Giving events after 1890 in Part B or outside 1839 to 1900 in Part C.",
+     "Writing about Ottoman reform alone in Part C without comparing it to Japan.",
+     "Quoting the excerpt in Part A without explaining how the words show imperial authority."
+    ],
+    "facts": [
+     "The Meiji Restoration of 1868 restored formal political authority to the emperor and ended the Tokugawa shogunate.",
+     "The Charter Oath of 1868 promised deliberative assemblies.",
+     "An imperial rescript of 1881 promised a national assembly by 1890.",
+     "The Constitution of the Empire of Japan was promulgated on February 11, 1889.",
+     "The Imperial Diet first met in 1890 (the 23rd year of Meiji).",
+     "The Diet had two houses: an elected House of Representatives and a House of Peers made up largely of nobles and appointed members.",
+     "Voting for the lower house was limited to adult men who paid a high level of direct taxes, about 1 percent of the population in the first election.",
+     "Under the constitution ministers were responsible to the emperor, not to the Diet, and the emperor held supreme command of the army and navy.",
+     "Ito Hirobumi led the drafting of the constitution and drew on German constitutional models.",
+     "The Ottoman constitution was issued in 1876 and suspended by Abdulhamid II in 1878."
+    ]
+   },
+   "samples": [],
+   "provenance": {
+    "kind": "alton_authored_from_real_sources",
+    "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
+   }
+  },
+  "fact": []
+ },
+ {
+  "id": "wh4_saq3",
+  "spec": {
+   "id": "wh4_saq3",
+   "exam": "WH4",
+   "template": "saq3",
+   "era": 2,
+   "units": [
+    4
+   ],
+   "focus": "The Protestant Reformation and the spread of printed ideas in 16th-century Europe, beginning with Luther's Ninety-five Theses of 1517 (do not claim that Luther nailed the theses to a church door; keep every example to Europe)",
+   "sources": [
+    {
+     "id": "txt-luther-1517",
+     "context": "Martin Luther, a German monk and professor of theology, wrote these statements in 1517 for a public academic debate about indulgences, certificates the Catholic Church granted that were said to reduce punishment for sins."
+    }
+   ],
+   "seed": 4903
+  },
+  "payload": {
+   "schema_version": "whap-frq-1",
+   "task_type": "saq",
+   "template": "saq3",
+   "era": 2,
+   "units": [
+    4
+   ],
+   "title": "Luther's Ninety-five Theses and the Spread of Reformation Ideas in Sixteenth-Century Europe",
+   "prompt": {
+    "scenario": "In the period c. 1450 to c. 1750, new religious ideas challenged the authority of the Catholic Church in Europe, starting with Martin Luther's 1517 arguments about indulgences. Printed texts helped carry these ideas well beyond the universities.",
+    "task": "Using the excerpt, answer (a), (b), and (c).",
+    "requirements": [
+     "Part A must rely on what the excerpt actually says.",
+     "Parts B and C must use specific historical evidence from Europe within the years named in each part.",
+     "Parts B and C must go beyond the content of the excerpt."
+    ],
+    "parts": [
+     {
+      "label": "A",
+      "prompt": "Briefly describe ONE criticism of the sale of indulgences that Luther makes in the excerpt.",
+      "points": 1
+     },
+     {
+      "label": "B",
+      "prompt": "Briefly explain ONE historical development in Europe between 1450 and 1530 that helps explain why ideas like those in the excerpt spread widely beyond an academic debate.",
+      "points": 1
+     },
+     {
+      "label": "C",
+      "prompt": "Briefly explain ONE way that the Catholic Church or a Catholic ruler in Europe responded to the spread of Protestant ideas between 1517 and 1600.",
+      "points": 1
+     }
+    ]
+   },
+   "sources": [
+    {
+     "id": "A",
+     "kind": "primary_text",
+     "title": "Disputation of Doctor Martin Luther on the Power and Efficacy of Indulgences (the Ninety-five Theses), theses 27-28, 36-37 and 43-44 (excerpt)",
+     "attribution": "Martin Luther (English translation in Works of Martin Luther, eds. Adolph Spaeth, L. D. Reed, Henry Eyster Jacobs et al.), 1517 (Latin original); translation published Philadelphia: A. J. Holman Company, 1915, vol. 1. Project Gutenberg eBook #274. Reuse: public domain in the United States (published before 1929). excerpted (3 segments joined by [...]); whitespace normalized; no wording changed.",
+     "context": "Martin Luther, a German monk and professor of theology, wrote these statements in 1517 for a public academic debate about indulgences, certificates the Catholic Church granted that were said to reduce punishment for sins.",
+     "real_data": true,
+     "source_registry_id": "txt-luther-1517",
+     "source_sha256": "eefeed9c463ffe18853f094c9081d6260f8937ed237d1861e5052d10a0c624c9",
+     "body": "27. They preach man who say that so soon as the penny jingles into the money-box, the soul flies out [of purgatory]. 28. It is certain that when the penny jingles into the money-box, gain and avarice can be increased, but the result of the intercession of the Church is in the power of God alone. [...] 36. Every truly repentant Christian has a right to full remission of penalty and guilt, even without letters of pardon. [...] 43. Christians are to be taught that he who gives to the poor or lends to the needy does a better work than buying pardons; 44. Because love grows by works of love, and man becomes better; but by pardons man does not grow better, only more free from penalty.",
+     "provenance": {
+      "kind": "real_historical_source",
+      "real_data": true,
+      "note": "registry txt-luther-1517"
+     }
+    }
+   ],
+   "rubric": {
+    "rubric_id": "whap-v1",
+    "total_points": 3,
+    "rows": [
+     {
+      "row_id": "a",
+      "name": "Part A",
+      "max": 1,
+      "descriptors": {
+       "0": "The response does not describe a criticism found in the excerpt, only restates the context line, or credits Luther with a claim the excerpt does not make.",
+       "1": "The response accurately describes one criticism of indulgence sales that appears in the excerpt."
+      },
+      "task_specific": "The response describes a criticism Luther actually makes in the excerpt. Examples: preachers who promise that a payment frees a soul from purgatory are teaching human ideas, not God's; the sales increase greed (gain and avarice); only God decides what the Church's intercession achieves; a truly repentant Christian receives remission without letters of pardon; giving to the poor is a better work than buying pardons; pardons do not make a person better, they only free the person from penalty."
+     },
+     {
+      "row_id": "b",
+      "name": "Part B",
+      "max": 1,
+      "descriptors": {
+       "0": "The response gives no accurate development from the stated years, names one without linking it to the spread of ideas, or only repeats the excerpt.",
+       "1": "The response explains one accurate development from 1450 to 1530 and how it helped ideas like Luther's spread beyond an academic debate."
+      },
+      "task_specific": "The response explains a specific development in Europe from 1450 to 1530 that helped Luther's ideas reach a wide audience, such as the printing press with movable type, the quick reprinting of the theses and of Luther's German-language pamphlets, his German translation of the New Testament (1522), protection from Frederick the Wise of Saxony, or resentment in German lands over money sent to Rome, including the indulgence campaign tied to rebuilding St. Peter's Basilica. The response must connect the development to the spread of the ideas."
+     },
+     {
+      "row_id": "c",
+      "name": "Part C",
+      "max": 1,
+      "descriptors": {
+       "0": "The response gives no accurate Catholic response, falls outside 1517 to 1600 or outside Europe, or describes a Protestant action instead.",
+       "1": "The response accurately explains one way the Catholic Church or a Catholic ruler in Europe responded to Protestant ideas between 1517 and 1600."
+      },
+      "task_specific": "The response explains a specific Catholic response in Europe from 1517 to 1600, such as Luther's excommunication (1521) and condemnation at the Diet of Worms (1521), the Council of Trent (1545 to 1563) restating Catholic doctrine and reforming clergy training, the founding of the Jesuits (approved 1540) for education and missionary work, the Index of Prohibited Books, the Roman Inquisition, Charles V's wars against Protestant princes ending in the Peace of Augsburg (1555), or Catholic violence against Huguenots in the French Wars of Religion, including the St. Bartholomew's Day Massacre (1572)."
+     }
+    ],
+    "scoring_notes": [
+     "Each part earns 0 or 1 point, and each part is scored on its own.",
+     "Do not award or deduct points for claims about Luther nailing the theses to a church door. That claim is disputed and does not count as evidence.",
+     "In Part B, a response that only says 'the printing press existed' must also explain how printing spread the ideas, for example through fast, cheap copies and pamphlets in German.",
+     "In Part C, the Peace of Augsburg can earn the point if the response presents it as part of a Catholic emperor's attempt to deal with the Protestant princes, or as the settlement that let each ruler choose the faith of his territory.",
+     "ALTON reference — not official AP scoring"
+    ]
+   },
+   "expected_features": {
+    "defensible_theses": [],
+    "contextualization_ideas": [
+     "Before 1517 there was already criticism of Church wealth and clerical abuses, and humanist scholars such as Erasmus were calling for a return to the scriptures.",
+     "The Holy Roman Empire was divided politically, so princes and cities could protect religious reformers from emperor and pope."
+    ],
+    "outside_evidence": [
+     "Printing with movable type",
+     "German-language pamphlets and the 1522 New Testament",
+     "Frederick the Wise's protection of Luther",
+     "Diet of Worms, 1521",
+     "Council of Trent",
+     "Society of Jesus",
+     "Peace of Augsburg, 1555",
+     "French Wars of Religion"
+    ],
+    "reasoning_types": [
+     "Sourcing and reading of a primary text (Part A)",
+     "Causation: why the ideas spread (Part B)",
+     "Causation and effects: how Catholics responded to Protestant challenges (Part C)"
+    ],
+    "doc_uses": [
+     {
+      "source_id": "Ninety-five Theses excerpt",
+      "usable_for": "Identifying Luther's theological and moral objections to indulgence sales, including greed, God's sole power over the soul, the sufficiency of true repentance, and the superior value of charity.",
+      "sourcing": "Written in Latin in 1517 by a German monk and theology professor as propositions for an academic disputation; the English translation was published in 1915. Square brackets come from the translator."
+     }
+    ],
+    "saq_answers": {
+     "a": [
+      "Luther argues that preachers who say a soul leaves purgatory as soon as a coin drops into the box are teaching human ideas, not God's truth.",
+      "Luther claims that money paid for indulgences can increase greed and avarice, while only God decides what the Church's intercession achieves.",
+      "Luther asserts that a truly repentant Christian has a right to full remission of penalty and guilt even without letters of pardon, so buying them is unnecessary.",
+      "Luther says that giving to the poor or lending to the needy is a better work than buying pardons, because pardons only free a person from penalty and do not make the person better."
+     ],
+     "b": [
+      "The printing press with movable type, developed in Mainz in the mid-1400s, let printers turn out many cheap copies of the theses and of Luther's later pamphlets, so his arguments reached readers across the German lands within weeks and months.",
+      "Luther wrote many pamphlets in German instead of Latin, and in 1522 he published a German New Testament. Printed vernacular texts let ordinary townspeople read his ideas or hear them read aloud.",
+      "Frederick the Wise, Elector of Saxony, protected Luther after the Diet of Worms in 1521 and sheltered him at Wartburg Castle, so Luther could keep writing and publishing.",
+      "Many Germans already resented money flowing to Rome. The indulgence campaign of 1517, which raised funds partly for rebuilding St. Peter's Basilica, gave Luther's criticism a receptive audience."
+     ],
+     "c": [
+      "Pope Leo X excommunicated Luther in 1521, and at the Diet of Worms that year Emperor Charles V declared him an outlaw and banned his writings.",
+      "The Council of Trent (1545 to 1563) reaffirmed Catholic teachings such as the role of good works and the seven sacraments, and it ordered seminaries to improve the training of priests.",
+      "The Society of Jesus, approved by the pope in 1540, founded schools and sent preachers to win back areas that had turned Protestant, for example in parts of the Holy Roman Empire and Poland.",
+      "Charles V fought the Protestant princes of the Schmalkaldic League. The conflict ended with the Peace of Augsburg in 1555, which let each prince choose whether his territory would be Catholic or Lutheran."
+     ]
+    },
+    "common_pitfalls": [
+     "Saying Luther nailed the theses to a church door, which the question does not accept as evidence.",
+     "In Part A, describing thesis 37 or other theses that do not appear in the excerpt, or just restating the context line.",
+     "In Part B, repeating the excerpt's own content instead of naming an outside development that explains how the ideas spread.",
+     "In Part C, describing a Protestant development such as Calvin in Geneva or Henry VIII's break with Rome instead of a Catholic response.",
+     "Using examples outside Europe, such as Jesuit missions in Asia or the Americas, which do not meet the European focus of Part C.",
+     "Using events after 1600, such as the Thirty Years' War, for Part C.",
+     "Assuming that Luther meant from the start to break away from the Catholic Church. The excerpt is framed as a debate about indulgences."
+    ],
+    "facts": [
+     "Luther wrote the Ninety-five Theses in 1517 in Latin as propositions for academic debate about indulgences.",
+     "Johann Tetzel, a Dominican friar, preached the indulgence that Luther objected to in 1517.",
+     "Johannes Gutenberg developed printing with movable type in Mainz in the mid-1400s.",
+     "Luther was excommunicated in 1521 and condemned at the Diet of Worms in 1521.",
+     "Luther's German New Testament appeared in 1522.",
+     "The Council of Trent met from 1545 to 1563.",
+     "The Jesuit order received papal approval in 1540.",
+     "The Peace of Augsburg of 1555 let rulers in the Holy Roman Empire choose Lutheranism or Catholicism for their territories.",
+     "The St. Bartholomew's Day Massacre of Huguenots took place in 1572, and the Edict of Nantes in 1598 granted Huguenots limited toleration."
+    ]
+   },
+   "samples": [],
+   "provenance": {
+    "kind": "alton_authored_from_real_sources",
+    "note": "Prompts, rubric text, expected answers and sample responses are ALTON-authored practice material; every source is a real historical document, image or dataset (see sources[].source_registry_id)."
+   }
+  },
+  "fact": [
+   {
+    "where": "pack",
+    "kind": "other",
+    "detail": "not_checked"
+   }
+  ]
+ }
+]
